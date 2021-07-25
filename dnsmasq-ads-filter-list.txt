@@ -2,7 +2,6 @@ address=/3dns-2.adobe.com/127.0.0.1
 address=/3dns-3.adobe.com/127.0.0.1
 address=/4009997658.com/127.0.0.1
 address=/a.applvn.com/127.0.0.1
-address=/aadjust.com/127.0.0.1
 address=/acroipm.adobe.com/127.0.0.1
 address=/acs.youku.com/127.0.0.1
 address=/act.vip.iqiyi.com/127.0.0.1
