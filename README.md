@@ -1,5 +1,6 @@
 # dnsmasq_ads_filter
 #请直接编辑 dnsmasq-ads-filter-list.txt，编辑完后更新至 Github。
+#本清单主要过滤小米系电视/盒子/手机的广告。
 
 merlin-自定义dnsmasq过滤广告
 
