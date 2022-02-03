@@ -127,6 +127,7 @@ address=/googleads.g.doubleclick.net/127.0.0.1
 address=/gslb.hpplay.cn/127.0.0.1
 address=/gvod.aiseejapp.atianqi.com/127.0.0.1
 address=/h5.hpplay.com.cn/127.0.0.1
+address=/h5.tv.mi.com/127.0.0.1
 address=/hpplay.cdn.cibn.cc/127.0.0.1
 address=/imdns.hpplay.cn/127.0.0.1
 address=/imp.ad.xelements.cn/127.0.0.1
