@@ -1,5 +1,5 @@
-#不建议将XX.market.xiaomi.com 及 XX.market.mi-img.com 列入，会影响MIUI小部件的使用。
 #不建议将api.io.mi.com 列入，会影响米家互联的使用。
+#不建议将XX.market.xiaomi.com 及 XX.market.mi-img.com 列入，会影响MIUI小部件的使用。
 address=/3dns-2.adobe.com/127.0.0.1
 address=/3dns-3.adobe.com/127.0.0.1
 address=/4009997658.com/127.0.0.1
@@ -111,6 +111,7 @@ address=/daup.map.baidu.com/127.0.0.1
 address=/de.pandora.xiaomi.com/127.0.0.1
 address=/devicemgr.hpplay.cn/127.0.0.1
 address=/df.tanx.com/127.0.0.1
+address=/diagnosis.ad.xiaomi.com/127.0.0.1
 address=/dig.bdurl.net/127.0.0.1
 address=/dm.pstatp.com/127.0.0.1
 address=/dvb.pandora.xiaomi.com/127.0.0.1
@@ -194,6 +195,7 @@ address=/prod-ms.applovin.com/127.0.0.1
 address=/publisher-config.unityads.unity.cn/127.0.0.1
 address=/px.ucweb.com/127.0.0.1
 address=/pyk.cr-nielsen.com/127.0.0.1
+address=/qtsftl.m.cn.miaozhen.com/127.0.0.1
 address=/r.browser.miui.com/127.0.0.1
 address=/rp.hpplay.cn/127.0.0.1
 address=/rps.hpplay.cn/127.0.0.1
@@ -205,6 +207,7 @@ address=/sayhi.360.cn/127.0.0.1
 address=/scc.ssacdn.com/127.0.0.1
 address=/sdfp.snssdk.com/127.0.0.1
 address=/sdkauth.hpplay.cn/127.0.0.1
+address=/sdkconfig.ad.xiaomi.com/127.0.0.1
 address=/secure.chn.imrworldwide.com/127.0.0.1
 address=/sf1-be-pack.pglstatp-toutiao.com/127.0.0.1
 address=/sf1-fe-tos.pglstatp-toutiao.com/127.0.0.1
