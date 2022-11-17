@@ -1,6 +1,6 @@
-
-#不建议将api.io.mi.com 列入，会影响米家互联的使用。
-#不建议将XX.market.xiaomi.com 及 XX.market.mi-img.com 列入，会影响MIUI小部件的使用。
+# 不建议将api.io.mi.com 列入，会影响米家互联的使用。
+# 不建议将XX.market.xiaomi.com 及 XX.market.mi-img.com 列入
+# 会影响MIUI小部件的使用。
 address=/3dns-2.adobe.com/127.0.0.1
 address=/3dns-3.adobe.com/127.0.0.1
 address=/4009997658.com/127.0.0.1
@@ -73,8 +73,8 @@ address=/alert.kuyun.com/127.0.0.1
 address=/ali-ad.a.yximgs.com/127.0.0.1
 address=/alog.umeng.com/127.0.0.1
 address=/analytics.rayjump.com/127.0.0.1
-address=/api-access.pangolin-sdk-toutiao-b.com/127.0.0.1
-address=/api-access.pangolin-sdk-toutiao.com/127.0.0.1
+address=/pangolin-sdk-toutiao-b.com/127.0.0.1
+address=/apangolin-sdk-toutiao.com/127.0.0.1
 address=/api.ad.xiaomi.com/127.0.0.1
 address=/api.cupid.ptqy.gitv.tv/127.0.0.1
 address=/api.fd.mob.com/127.0.0.1
@@ -108,8 +108,6 @@ address=/bds.snssdk.com/127.0.0.1
 address=/bss.pandora.xiaomi.com/127.0.0.1
 address=/c.l.qq.com/127.0.0.1
 address=/cctv.adsunion.com/127.0.0.1
-address=/cdn-creatives-tencent-prd.unityads.unitychina.cn/127.0.0.1
-address=/cdn-store-icons-tencent-prd.unityads.unitychina.cn/127.0.0.1
 address=/centertime.ksyun.com/127.0.0.1
 address=/chartboost.com/127.0.0.1
 address=/cm.cn.miaozhen.com/127.0.0.1
@@ -137,7 +135,7 @@ address=/et.tanx.com/127.0.0.1
 address=/extlog.snssdk.com/127.0.0.1
 address=/file.xmpush.xiaomi.com/127.0.0.1
 address=/g.dtv.cn.miaozhan.com/127.0.0.1
-address=/g.pandora.xiaomi.com127.0.0.1
+address=/g.pandora.xiaomi.com/127.0.0.1
 address=/gallery.pandora.xiaomi.com/127.0.0.1
 address=/gifshow.com/127.0.0.1
 address=/googleads.g.doubleclick.net/127.0.0.1
@@ -163,7 +161,6 @@ address=/js-ad.a.yximgs.com/127.0.0.1
 address=/kuyun.com/127.0.0.1
 address=/kwimgs.com/127.0.0.1
 address=/leboapi.hpplay.com.cn/127.0.0.1
-address=/log-api.pangolin-sdk-toutiao-b.com/127.0.0.1
 address=/log-api.pangolin-sdk-toutiao.com/127.0.0.1
 address=/log.mmstat.com/127.0.0.1
 address=/log.snssdk.com/127.0.0.1
@@ -210,7 +207,6 @@ address=/pd.ads.cn.miaozhen.com/127.0.0.1
 address=/pic7.iqiyipic.com/127.0.0.1
 address=/pin.hpplay.cn/127.0.0.1
 address=/prod-ms.applovin.com/127.0.0.1
-address=/publisher-config.unityads.unity.cn/127.0.0.1
 address=/puma-api.ptqy.gitv.tv/127.0.0.1
 address=/px.ucweb.com/127.0.0.1
 address=/pyk.cr-nielsen.com/127.0.0.1
