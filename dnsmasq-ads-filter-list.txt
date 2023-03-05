@@ -84,7 +84,6 @@ address=/ali-ad.a.yximgs.com/127.0.0.1
 address=/alog.umeng.com/127.0.0.1
 address=/amdc.m.taobao.com/127.0.0.1
 address=/analytics.rayjump.com/127.0.0.1
-address=/apangolin-sdk-toutiao.com/127.0.0.1
 address=/api.ad.xiaomi.com/127.0.0.1
 address=/api.cupid.ptqy.gitv.tv/127.0.0.1
 address=/api.fd.mob.com/127.0.0.1
