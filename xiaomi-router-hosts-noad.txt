@@ -168,6 +168,8 @@
 127.0.0.1 h-adashx.ut.taobao.com
 127.0.0.1 h5.hpplay.com.cn
 127.0.0.1 h5.tv.mi.com
+127.0.0.1 h5.ptmi.gitv.tv
+127.0.0.1 ptmi.gitv.tv
 127.0.0.1 hotupgrade.hpplay.cn
 127.0.0.1 hpplay.cdn.cibn.cc
 127.0.0.1 image.hpplay.cn
