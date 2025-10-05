@@ -4,10 +4,10 @@
 # XX.market.xiaomi.com 影响MIUI小部件
 127.0.0.1 3dns-2.adobe.com
 127.0.0.1 3dns-3.adobe.com
+127.0.0.1 4009997658.com
+127.0.0.1 519332DA.rtc.youme.im
 127.0.0.1 86file.megajoy.com
 127.0.0.1 86get.joy.cn
-127.0.0.1 519332DA.rtc.youme.im
-127.0.0.1 4009997658.com
 127.0.0.1 a.applvn.com
 127.0.0.1 a.cctv.com
 127.0.0.1 a.cntv.cn
@@ -163,10 +163,10 @@
 127.0.0.1 gs.getui.com
 127.0.0.1 gslb.hpplay.cn
 127.0.0.1 gvod.aiseejapp.atianqi.com
+127.0.0.1 h5.ptmi.gitv.tv
 127.0.0.1 h5.hpplay.com.cn
 127.0.0.1 h5.tv.mi.com
 127.0.0.1 h-adashx.ut.taobao.com
-127.0.0.1 hotupgrade.hpplay.
 127.0.0.1 hotupgrade.hpplay.cn
 127.0.0.1 hpplay.cdn.cibn.cc
 127.0.0.1 image.hpplay.cn
