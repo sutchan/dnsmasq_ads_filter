@@ -237,6 +237,58 @@
         
         .preset-tag:hover { background: #d1d5db; }
         .preset-tag.active { background: #667eea; color: #fff; }
+        
+        .settings-panel {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .settings-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .settings-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .settings-item label {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .settings-item input[type="text"],
+        .settings-item input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        
+        .settings-item input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 16px 0;
+        }
     </style>
 </head>
 <body>
