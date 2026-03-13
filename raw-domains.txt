@@ -1,0 +1,36 @@
+# 原始域名清单
+# 格式：每行一个域名，# 开头为注释
+# 此文件为唯一数据源，通过 hosts-manager.html 生成其他格式
+
+# 小米系广告域名
+ad.mi.com
+ad1.mi.com
+ad2.mi.com
+analytics.mi.com
+app.chat.xiaomi.net
+bduzb.xiaomi.com
+cdn.bigdata.xiaomi.com
+data.mistat.xiaomi.com
+dsp.xiaomi.com
+gamecenter.xiaomi.com
+gslb.xiaomi.com
+hotoday.xiaomi.com
+migc.g.mi.com
+mis.g.mi.com
+mmm.xiaomi.com
+panservice.xiaomi.com
+sdkconfig.ad.xiaomi.com
+security.xiaomi.com
+stat.xiaomi.com
+tuisong.xiaomi.com
+
+# 通用广告域名
+ad.example.com
+ads.example.com
+advertising.com
+analytics.example.com
+banner.example.com
+click.example.com
+doubleclick.net
+googlesyndication.com
+pagead2.googlesyndication.com
