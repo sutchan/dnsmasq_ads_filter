@@ -297,10 +297,6 @@
                 
                 <div class="checkbox-group">
                     <label class="checkbox-item">
-                        <input type="checkbox" id="addTimestamp" checked>
-                        添加时间戳
-                    </label>
-                    <label class="checkbox-item">
                         <input type="checkbox" id="blockIPv6" checked>
                         阻止 IPv6
                     </label>
@@ -436,8 +432,11 @@
             return /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(domain);
         }
         
+        const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
+        const projectName = 'dnsmasq_ads_filter';
+        const version = '1.0.0';
+        
         function generateRules() {
-            const addTimestamp = document.getElementById('addTimestamp').checked;
             const blockIPv6 = document.getElementById('blockIPv6').checked;
             
             const uniqueDomains = [...new Set(domains)].sort();
@@ -448,13 +447,41 @@
             let dnsmasqContent = '';
             let hostsContent = '';
             
-            if (addTimestamp) {
-                dnsmasqContent += `# update date: ${dateStr}\n`;
-                hostsContent += `# update date: ${dateStr}\n`;
-            }
+            dnsmasqContent += `# ===============================================\n`;
+            dnsmasqContent += `# ${projectName} - Dnsmasq Ad Block List\n`;
+            dnsmasqContent += `# ===============================================\n`;
+            dnsmasqContent += `#\n`;
+            dnsmasqContent += `# Description: Router-level ad blocking filter for Xiaomi devices\n`;
+            dnsmasqContent += `#              and general advertising/tracking domains\n`;
+            dnsmasqContent += `#\n`;
+            dnsmasqContent += `# Version: ${version}\n`;
+            dnsmasqContent += `# Update: ${dateStr}\n`;
+            dnsmasqContent += `# Domains: ${uniqueDomains.length} unique domains\n`;
+            dnsmasqContent += `#\n`;
+            dnsmasqContent += `# Usage:\n`;
+            dnsmasqContent += `#   - Merlin: Software Center -> DNS Settings -> Custom dnsmasq\n`;
+            dnsmasqContent += `#   - OpenWrt: Services -> DHCP and DNS -> Resolvfile\n`;
+            dnsmasqContent += `#\n`;
+            dnsmasqContent += `# Project: ${projectUrl}\n`;
+            dnsmasqContent += `#\n`;
+            dnsmasqContent += `# ===============================================\n\n`;
             
-            dnsmasqContent += '# Dnsmasq Ad Block List\n';
-            hostsContent += '# Xiaomi Router Hosts Block List\n';
+            hostsContent += `# ===============================================\n`;
+            hostsContent += `# ${projectName} - Xiaomi Router Hosts Block List\n`;
+            hostsContent += `# ===============================================\n`;
+            hostsContent += `#\n`;
+            hostsContent += `# Description: Router-level ad blocking hosts file\n`;
+            hostsContent += `#              for Xiaomi routers and general use\n`;
+            hostsContent += `#\n`;
+            hostsContent += `# Version: ${version}\n`;
+            hostsContent += `# Update: ${dateStr}\n`;
+            hostsContent += `# Domains: ${uniqueDomains.length} unique domains\n`;
+            hostsContent += `#\n`;
+            hostsContent += `# Usage: Import to Xiaomi router ad blocking settings\n`;
+            hostsContent += `#\n`;
+            hostsContent += `# Project: ${projectUrl}\n`;
+            hostsContent += `#\n`;
+            hostsContent += `# ===============================================\n\n`;
             
             uniqueDomains.forEach(domain => {
                 dnsmasqContent += `address=/${domain}/0.0.0.0\n`;
