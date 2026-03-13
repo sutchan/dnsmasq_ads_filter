@@ -563,7 +563,35 @@ address=/new.domain.com/127.0.0.1`;
             xiaomiDomains = parseXiaomiContent(xiaomiContent);
             
             updateStats();
-            renderDomains();
+            async function autoLoadFiles() {
+            try {
+                const [dnsmasqRes, xiaomiRes] = await Promise.all([
+                    fetch('dnsmasq-ads-filter-list.txt'),
+                    fetch('xiaomi-router-hosts-noad.txt')
+                ]);
+                
+                if (dnsmasqRes.ok) {
+                    const dnsmasqContent = await dnsmasqRes.text();
+                    dnsmasqDomains = parseDnsmasqContent(dnsmasqContent);
+                }
+                
+                if (xiaomiRes.ok) {
+                    const xiaomiContent = await xiaomiRes.text();
+                    xiaomiDomains = parseXiaomiContent(xiaomiContent);
+                }
+                
+                if (dnsmasqDomains.size > 0 || xiaomiDomains.size > 0) {
+                    updateStats();
+                    renderDomains();
+                    showToast(`自动加载成功！Dnsmasq: ${dnsmasqDomains.size} 个, 小米: ${xiaomiDomains.size} 个`);
+                }
+            } catch (e) {
+                console.log('自动加载文件失败，将使用空白数据');
+            }
+        }
+
+        autoLoadFiles();
+        renderDomains();
             showToast('示例数据加载成功！');
         }
 
