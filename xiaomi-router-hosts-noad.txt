@@ -1,3 +1,4 @@
+# update date：2026.3.13
 # api.io.mi.com 影响米家互联的使用。
 # connectivitycheck.gstatic.com 影响 GooglePlay
 # XX.market.mi-img.com 影响MIUI小部件
