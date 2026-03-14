@@ -198,14 +198,19 @@ function syncScroll() {
     const textarea = document.getElementById('sourceInput');
     const lineNumbers = document.getElementById('lineNumbers');
     if (!textarea || !lineNumbers) return;
-    lineNumbers.scrollTop = textarea.scrollTop;
+    const scrollTop = textarea.scrollTop;
+    const lineHeight = 19.5;
+    lineNumbers.scrollTop = scrollTop;
+    lineNumbers.style.transform = `translateY(-${scrollTop}px)`;
 }
 
 function syncOutputScroll() {
     const outputPreview = document.getElementById('outputPreview');
     const outputLineNumbers = document.getElementById('outputLineNumbers');
     if (!outputPreview || !outputLineNumbers) return;
-    outputLineNumbers.scrollTop = outputPreview.scrollTop;
+    const scrollTop = outputPreview.scrollTop;
+    outputLineNumbers.scrollTop = scrollTop;
+    outputLineNumbers.style.transform = `translateY(-${scrollTop}px)`;
 }
 
 function clearAll() {
@@ -217,7 +222,7 @@ function clearAll() {
     parseSource();
     document.getElementById('outputPreview').textContent = '// 生成的规则将显示在这里';
     updateOutputLineNumbers();
-    document.getElementById('mergeInfo').textContent = translations.mergeInfo;
+    document.getElementById('mergeInfo').textContent = getTranslations().mergeInfo;
 }
 
 function toggleTheme() {
@@ -256,8 +261,7 @@ function switchLang() {
 
 function updateLang() {
     const lang = localStorage.getItem('lang') || 'zh';
-    translations = getTranslations();
-    const trans = translations[lang] || translations.zh;
+    const trans = getTranslations();
 
     document.querySelector('h1').textContent = trans.title;
     document.querySelector('.subtitle').textContent = trans.subtitle;
@@ -281,4 +285,29 @@ function updateLang() {
             el.textContent = trans[key];
         }
     });
+
+    const usageToggle = document.getElementById('usageToggle');
+    const usageGuide = document.getElementById('usageGuide');
+    const usageToggleText = document.getElementById('usageToggleText');
+    if (usageToggle && usageGuide) {
+        const isExpanded = usageGuide.classList.contains('visible');
+        if (isExpanded) {
+            usageToggleText.textContent = trans.usageTitle;
+        }
+    }
+}
+
+function toggleUsage() {
+    const usageToggle = document.getElementById('usageToggle');
+    const usageGuide = document.getElementById('usageGuide');
+    const usageToggleText = document.getElementById('usageToggleText');
+    const trans = getTranslations();
+
+    if (!usageToggle || !usageGuide) return;
+
+    usageToggle.classList.toggle('expanded');
+    usageGuide.classList.toggle('visible');
+
+    const isExpanded = usageGuide.classList.contains('visible');
+    usageToggleText.textContent = trans.usageTitle;
 }

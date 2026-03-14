@@ -1,0 +1,179 @@
+// assets/css/editor.css v1.0.2
+// Editor and Code Display Styles
+
+.subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.stats-compact {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat-badge {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.875rem;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.editor-container {
+    display: flex;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    height: 300px;
+    margin-bottom: 12px;
+}
+
+.editor-container:focus-within {
+    border-color: var(--accent-color);
+}
+
+.editor-container .line-numbers {
+    padding: 12px 8px;
+    background: var(--bg-panel);
+    color: var(--text-secondary);
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: right;
+    user-select: none;
+    min-width: 40px;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.editor-container .line-numbers::-webkit-scrollbar {
+    display: none;
+}
+
+.editor-container textarea {
+    border: none;
+    border-radius: 0;
+    flex: 1;
+    overflow: auto;
+    line-height: 1.5;
+    padding: 12px;
+    background: transparent;
+    color: var(--text-primary);
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    resize: none;
+}
+
+.editor-container textarea:focus {
+    outline: none;
+}
+
+.editor-container textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.output-container {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #1e293b;
+    margin-bottom: 12px;
+    height: 240px;
+}
+
+[data-theme="dark"] .output-container {
+    background: #0f172a;
+}
+
+.output-container .line-numbers {
+    background: #0f172a;
+    border-right: 1px solid #334155;
+    padding: 14px 8px;
+    color: #64748b;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: right;
+    user-select: none;
+    min-width: 36px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.output-container .line-numbers::-webkit-scrollbar {
+    display: none;
+}
+
+[data-theme="dark"] .output-container .line-numbers {
+    background: #0f172a;
+    border-right-color: #1e293b;
+}
+
+.output-preview {
+    flex: 1;
+    background: transparent;
+    color: #e2e8f0;
+    padding: 14px;
+    border-radius: 0;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+[data-theme="dark"] .output-preview {
+    background: #0f172a;
+}
+
+.output-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.merge-info {
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+    .stats-compact { flex-wrap: wrap; }
+    .stat-badge { padding: 6px 12px; }
+    .editor-actions, .output-actions { flex-wrap: wrap; }
+    .line-numbers { display: none; }
+    textarea { min-height: 200px; }
+}

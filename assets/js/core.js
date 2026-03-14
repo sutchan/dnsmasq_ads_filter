@@ -8,7 +8,6 @@ let customDns = [];
 let currentFormat = 'dnsmasq';
 let outputContent = { dnsmasq: '', hosts: '' };
 let isLangZh = true;
-let translations = {};
 
 const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
 
@@ -50,14 +49,6 @@ function getOutputContent() {
 
 function setOutputContent(content) {
     outputContent = content;
-}
-
-function setTranslations(trans) {
-    translations = trans;
-}
-
-function getTranslations() {
-    return translations;
 }
 
 function isLangChinese() {

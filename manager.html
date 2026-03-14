@@ -23,7 +23,9 @@
     <script src="assets/js/core.js" defer></script>
     <script src="assets/js/parser.js" defer></script>
     <script src="assets/js/generator.js" defer></script>
-    <script src="assets/js/ui.js" defer></script>
+    <script src="assets/js/ui-urls.js" defer></script>
+    <script src="assets/js/ui-editor.js" defer></script>
+    <script src="assets/js/ui-controls.js" defer></script>
     <script src="assets/js/app.js" defer></script>
 </head>
 <body>
@@ -178,6 +180,41 @@
         </main>
 
         <footer class="app-footer" id="about-panel">
+            <button class="usage-toggle" id="usageToggle" onclick="toggleUsage()">
+                <span id="usageToggleText">📖 使用说明</span>
+                <svg class="toggle-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="usage-guide" id="usageGuide">
+                <div class="usage-steps">
+                    <div class="usage-step">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <span class="step-title" data-i18n="usageStep1">1. 输入或导入域名</span>
+                            <span class="step-desc" data-i18n="usageStep1Desc">在左侧文本框输入域名列表，或从预设源（AdGuard、EasyList等）导入，或直接粘贴 URL 获取域名</span>
+                        </div>
+                    </div>
+                    <div class="usage-step">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <span class="step-title" data-i18n="usageStep2">2. 配置生成选项</span>
+                            <span class="step-desc" data-i18n="usageStep2Desc">选择输出格式（Dnsmasq/Hosts），设置目标 IP 地址，可选去重、排序、添加注释等</span>
+                        </div>
+                    </div>
+                    <div class="usage-step">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <span class="step-title" data-i18n="usageStep3">3. 生成并下载规则</span>
+                            <span class="step-desc" data-i18n="usageStep3Desc">点击"生成规则"按钮，预览效果后下载到本地，或复制到剪贴板</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="usage-tip">
+                    <span class="tip-label" data-i18n="usageTip">💡 提示</span>
+                    <span class="tip-content" data-i18n="usageTipContent">生成的规则可直接用于路由器广告过滤，支持华硕、梅林、OpenWrt 等固件</span>
+                </div>
+            </div>
             <div class="footer-content">
                 <a href="https://github.com/sutchan/dnsmasq_ads_filter" target="_blank" class="footer-link">
                     dnsmasq_ads_filter

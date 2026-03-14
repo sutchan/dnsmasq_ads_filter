@@ -66,7 +66,18 @@ const i18n = {
         toastNoValidUrls: '没有有效的 URL',
         toastFiles: '个文件',
         toastSorted: '域名已排序',
-        sortBtn: '↕ 排序'
+        sortBtn: '↕ 排序',
+        usageTitle: '📖 使用说明',
+        usageStep1: '1. 输入或导入域名',
+        usageStep1Desc: '在左侧文本框输入域名列表，或从预设源（AdGuard、EasyList等）导入，或直接粘贴 URL 获取域名',
+        usageStep2: '2. 配置生成选项',
+        usageStep2Desc: '选择输出格式（Dnsmasq/Hosts），设置目标 IP 地址，可选去重、排序、添加注释等',
+        usageStep3: '3. 生成并下载规则',
+        usageStep3Desc: '点击"生成规则"按钮，预览效果后下载到本地，或复制到剪贴板',
+        usageTip: '💡 提示',
+        usageTipContent: '生成的规则可直接用于路由器广告过滤，支持华硕、梅林、OpenWrt 等固件',
+        usageCollapse: '收起说明',
+        usageExpand: '展开说明'
     },
     en: {
         title: '🛡️ DNS Ad Blocklist Generator',
@@ -135,7 +146,18 @@ const i18n = {
         toastNoValidUrls: 'No valid URLs',
         toastFiles: 'files',
         toastSorted: 'Domains sorted',
-        sortBtn: '↕ Sort'
+        sortBtn: '↕ Sort',
+        usageTitle: '📖 How to Use',
+        usageStep1: '1. Input or Import Domains',
+        usageStep1Desc: 'Enter domain list in the left text box, or import from preset sources (AdGuard, EasyList, etc.), or paste a URL to fetch domains',
+        usageStep2: '2. Configure Generation Options',
+        usageStep2Desc: 'Select output format (Dnsmasq/Hosts), set target IP address, optionally deduplicate, sort, add comments',
+        usageStep3: '3. Generate & Download Rules',
+        usageStep3Desc: 'Click "Generate Rules" button, preview the result, download to local, or copy to clipboard',
+        usageTip: '💡 Tip',
+        usageTipContent: 'Generated rules can be used directly for router ad blocking, supporting ASUS, Merlin, OpenWrt firmwares',
+        usageCollapse: 'Hide Guide',
+        usageExpand: 'Show Guide'
     }
 };
 

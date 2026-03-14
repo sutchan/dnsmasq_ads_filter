@@ -1,0 +1,116 @@
+// assets/css/layout.css v1.0.2
+// Layout and Container Styles
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container { max-width: 1000px; margin: 0 auto; }
+
+.app-header {
+    margin-bottom: 16px;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.section-header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex-shrink: 0;
+}
+
+.section-header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.app-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.8rem;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.footer-version {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    body { padding: 12px; }
+    .panel { padding: 16px; }
+    h1 { font-size: 1.25rem; }
+    .header-main { flex-wrap: wrap; gap: 8px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .section-header .header-actions { width: 100%; justify-content: space-between; }
+    .usage-step { flex-direction: column; gap: 8px; }
+    .step-number { width: 20px; height: 20px; font-size: 0.65rem; }
+    .usage-tip { flex-direction: column; gap: 4px; }
+}

@@ -8,7 +8,6 @@
 - [ ] 通过 `manager.html` 生成新规则
 - [ ] 更新 `dnsmasq.conf`
 - [ ] 更新 `hosts.txt`
-- [ ] 更新 README 版本日期
 
 ## 定期任务
 
@@ -22,6 +21,7 @@
 - [ ] 递增版本号 (SemVer)
 - [ ] 更新 CHANGELOG.md
 - [ ] 更新输出文件版本号
+- [ ] 更新 README 版本号
 - [ ] 创建 GitHub Release
 
 ## 开发任务

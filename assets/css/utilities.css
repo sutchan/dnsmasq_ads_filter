@@ -1,0 +1,80 @@
+// assets/css/utilities.css v1.0.2
+// Utility Classes - Buttons, Toast, Helpers
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-color);
+}
+
+.btn { flex: 1; justify-content: center; }
+
+@media (max-width: 768px) {
+    .btn { flex: 1; justify-content: center; }
+    .btn-sm { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+    .btn-sm { width: 100%; justify-content: center; }
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 12px 24px;
+    background: var(--success-color);
+    color: white;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s;
+    z-index: 1000;
+    font-size: 0.875rem;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.error { background: var(--error-color); }

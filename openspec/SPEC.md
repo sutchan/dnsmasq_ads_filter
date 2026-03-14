@@ -1,274 +1,230 @@
-# 项目管理规范
+# dnsmasq_ads_filter 项目规范
 
 ## 1. 项目概述
 
-- **项目名称**: dnsmasq_ads_filter
-- **项目类型**: 广告过滤规则库
-- **核心功能**: 基于 dnsmasq 的广告过滤规则，用于路由器级别屏蔽广告
-- **目标用户**: 使用梅林固件/OpenWrt/小米/华硕/TP-Link 等路由器的用户
-- **项目地址**: https://github.com/sutchan/dnsmasq_ads_filter
-- **当前版本**: v1.0.2
+| 属性 | 值 |
+|------|-----|
+| 项目名称 | dnsmasq_ads_filter |
+| 项目类型 | DNS 广告过滤规则库 |
+| 核心功能 | 基于 dnsmasq/hosts 的路由器广告过滤 |
+| 目标用户 | 使用梅林/OpenWrt/小米/华硕/TP-Link 等路由器的用户 |
+| 项目地址 | https://github.com/sutchan/dnsmasq_ads_filter |
+| 当前版本 | v1.0.2 |
+| 拦截域名 | 356+ |
 
 ## 2. 文件结构
 
 ```
 dnsmasq_ads_filter/
-├── README.md                           # 英文说明文档
-├── README.zh-CN.md                     # 中文说明文档
-├── domains.txt                         # 原始域名清单（唯一数据源）
-├── dnsmasq.conf                        # Dnsmasq 过滤列表（生成）
-├── hosts.txt                           # Hosts 文件（生成）
-├── manager.html                        # Web 管理界面
-├── .gitignore                          # Git 忽略配置
-├── CHANGELOG.md                        # 变更日志
-├── assets/                            # 资源目录
+├── README.md                      # 英文说明文档
+├── README.zh-CN.md                # 中文说明文档
+├── domains.txt                    # 原始域名清单（唯一数据源）
+├── dnsmasq.conf                  # Dnsmasq 过滤列表
+├── hosts.txt                      # Hosts 文件
+├── manager.html                   # Web 管理界面
+├── CHANGELOG.md                  # 变更日志
+├── .gitignore                    # Git 忽略配置
+├── assets/                       # 资源目录
 │   ├── js/
-│   │   ├── app.js                     # 主逻辑
-│   │   ├── i18n.js                    # 国际化模块
-│   │   └── utils.js                   # 工具函数
+│   │   ├── app.js               # 主逻辑
+│   │   ├── i18n.js              # 国际化模块
+│   │   ├── utils.js             # 工具函数
+│   │   ├── core.js              # 核心状态管理
+│   │   ├── parser.js            # 域名解析
+│   │   ├── generator.js          # 规则生成
+│   │   └── ui.js                # UI 交互
 │   └── css/
-│       └── styles.css                  # 样式文件
-└── openspec/                           # 项目规范文档
-    ├── SPEC.md                         # 项目规范
-    ├── TASKS.md                        # 任务清单
-    └── CHECKLIST.md                    # 质量检查清单
+│       ├── styles.css            # 样式入口
+│       ├── variables.css         # CSS 变量
+│       ├── layout.css            # 布局样式
+│       ├── components.css        # 组件样式
+│       ├── editor.css            # 编辑器样式
+│       └── utilities.css         # 工具类
+└── openspec/                     # 项目规范文档
+    ├── SPEC.md                   # 项目规范（本文件）
+    ├── TASKS.md                  # 任务清单
+    └── CHECKLIST.md              # 质量检查清单
 ```
 
 ## 3. 核心工作流程
 
-### 3.1 单一数据源原则
-
 ```
-domains.txt (唯一数据源)
-        ↓
-  manager.html (Web 管理工具)
-        ↓
-   ┌────────────┴────────────┐
-   ↓                         ↓
-dnsmasq.conf              hosts.txt
-(Dnsmasq 格式)            (Hosts 格式)
-```
-
-### 3.2 原始域名格式 (domains.txt)
-
-- 每行一个域名
-- `#` 开头为注释
-- 支持通配符格式 `*.example.com`
-- 支持特殊前缀：
-  - `+` 白名单域名（允许解析）
-  - `!` 注释域名（显示但不断言）
-  - `@` 自定义 DNS 指向（如 `@example.com=0.0.0.0`）
-
-**示例**:
-```
-# 小米广告域名
-ad.mi.com
-analytics.mi.com
-
-# 白名单域名
-+api.io.mi.com
-
-# 注释域名（不影响解析）
-!connectivitycheck.gstatic.com
-
-# 自定义 DNS 指向
-@example.com=192.168.1.1
+┌─────────────────────────────────────────────────────────┐
+│                    单一数据源原则                        │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+                   ┌───────────────┐
+                   │ domains.txt   │
+                   │ (唯一数据源)  │
+                   └───────────────┘
+                           │
+                           ▼
+                   ┌───────────────┐
+                   │ manager.html  │
+                   │ (Web 管理工具)│
+                   └───────────────┘
+                           │
+            ┌──────────────┴──────────────┐
+            ▼                                 ▼
+   ┌─────────────────┐           ┌─────────────────┐
+   │   dnsmasq.conf  │           │    hosts.txt    │
+   │  (Dnsmasq 格式) │           │   (Hosts 格式)  │
+   └─────────────────┘           └─────────────────┘
 ```
 
-### 3.3 Dnsmasq 格式 (dnsmasq.conf)
+## 4. 域名格式规范
 
-```
-address=/域名/IP
-```
+### 4.1 原始域名格式 (domains.txt)
 
-**示例**:
-```
-address=/ad.mi.com/0.0.0.0
-address=/ad.mi.com/::
-```
+| 前缀 | 说明 | 示例 |
+|------|------|------|
+| 无 | 黑名单，阻止解析 | `ad.example.com` |
+| `+` | 白名单，允许解析 | `+api.example.com` |
+| `!` | 注释域名，显示用 | `!example.com` |
+| `@` | 自定义 DNS 指向 | `@example.com=192.168.1.1` |
 
-### 3.4 Hosts 格式 (hosts.txt)
+### 4.2 Dnsmasq 格式 (dnsmasq.conf)
 
-```
-IP 域名
-```
-
-**示例**:
-```
-0.0.0.0 ad.mi.com
-:: ad.mi.com
+```dnsmasq
+address=/domain/0.0.0.0
+address=/domain/::
 ```
 
-## 4. Web 管理工具 (manager.html)
+### 4.3 Hosts 格式 (hosts.txt)
 
-### 4.1 功能特性
+```hosts
+0.0.0.0 domain
+:: domain
+```
+
+## 5. Web 管理工具功能
+
+### 5.1 输入功能
 
 | 功能 | 说明 |
 |------|------|
 | URL 导入 | 从远程 URL 获取域名列表 |
 | 预设源 | AdGuard、EasyList、NeoHosts、小米广告 |
 | 手动编辑 | 直接在文本框编辑域名 |
-| 格式生成 | Dnsmasq / Hosts / 混合输出 |
-| IPv6 阻止 | 可选阻止 IPv6 广告 |
-| 自动去重 | 合并重复域名 |
-| 通配符处理 | 自动移除 `*.` 前缀 |
-| 头部注释 | 生成包含项目信息的文件头 |
+| 本地加载 | 加载本地 domains.txt 文件 |
+
+### 5.2 输出功能
+
+| 功能 | 说明 |
+|------|------|
+| Dnsmasq 格式 | `address=/domain/IP` |
+| Hosts 格式 | `IP domain` |
+| 混合输出 | 同时输出两种格式 |
+| 头部注释 | 自动生成项目信息头 |
 | 一键下载 | 下载生成的文件 |
 | 剪贴板复制 | 复制生成的内容 |
-| 主题切换 | 亮色/暗色主题 |
-| 语言切换 | 中文/英文 |
 
-### 4.2 设置选项
+### 5.3 选项设置
 
-**生成设置**:
-- 项目名称 (默认: `dnsmasq_ads_filter`)
-- 版本号 (默认: `1.0.2`)
-- IPv4 目标 IP (默认: `0.0.0.0`)
-- IPv6 目标 IP (默认: `::`)
-- Dnsmasq 文件名 (默认: `dnsmasq.conf`)
-- Hosts 文件名 (默认: `hosts.txt`)
+| 设置项 | 默认值 |
+|--------|--------|
+| 项目名称 | dnsmasq_ads_filter |
+| 版本号 | 1.0.2 |
+| IPv4 目标 IP | 0.0.0.0 |
+| IPv6 目标 IP | :: |
+| 添加头部注释 | 开启 |
+| 阻止 IPv6 | 开启 |
+| 自动去重 | 开启 |
+| 移除通配符前缀 | 开启 |
 
-**选项开关**:
-- [x] 添加头部注释
-- [x] 阻止 IPv6
-- [x] 自动去重
-- [x] 移除通配符前缀
+## 6. 维护流程
 
-### 4.3 使用流程
-
-1. 打开 `manager.html`
-2. 选择输入方式:
-   - 从 URL 导入
-   - 选择预设源
-   - 直接编辑域名
-3. 配置生成选项
-4. 点击"生成规则"
-5. 预览结果或直接下载
-
-### 4.4 头部注释格式
-
-生成的清单文件包含以下头部信息:
-
-```
-# ===============================================
-# {projectName} - Dnsmasq Ad Block List
-# ===============================================
-#
-# Description: Router-level ad blocking filter
-#
-# Version: {version}
-# Update: {date}
-# Domains: {count} unique domains
-#
-# Usage:
-#   - Merlin: Software Center -> DNS Settings
-#   - OpenWrt: Services -> DHCP and DNS
-#
-# Project: {projectUrl}
-#
-# ===============================================
-```
-
-## 5. 维护流程
-
-### 5.1 新增规则
+### 6.1 新增规则
 
 1. 编辑 `domains.txt`，添加新域名
 2. 打开 `manager.html`
-3. 自动加载 `domains.txt` 或手动输入
+3. 加载 `domains.txt` 或手动输入
 4. 配置输出选项
 5. 点击"生成规则"
 6. 下载更新后的文件
 
-### 5.2 同步更新
+### 6.2 同步更新
 
 1. 访问公开域名列表 URL
 2. 导入到管理工具
 3. 合并去重
 4. 下载更新后的文件
 
-### 5.3 更新周期
+### 6.3 更新周期
 
-- 建议每2周检查一次规则有效性
+- 每2周检查一次规则有效性
 - 重要广告域名应及时更新
 
-## 6. Git 提交规范
+## 7. 路由器兼容列表
+
+| 路由器/固件 | 支持格式 | 说明 |
+|-------------|----------|------|
+| Merlin (华硕) | Dnsmasq | 软件中心 → DNS 设置 |
+| OpenWrt | Dnsmasq | 服务 → DHCP 和 DNS |
+| 小米路由器 | Hosts | 广告拦截设置 |
+| 华硕路由器 | Hosts | 自定义 hosts |
+| TP-Link | Hosts | 自定义 hosts |
+
+## 8. Git 提交规范
 
 ```
-feat: 添加xx域名过滤
-fix: 修复xx规则
-docs: 更新README
-chore: 更新web管理工具
+feat:     添加 xx 域名过滤
+fix:      修复 xx 规则
+docs:     更新文档
+chore:    更新 Web 管理工具
 refactor: 优化规则生成逻辑
 ```
 
-## 7. 测试验证
+## 9. 版本管理
 
-### 7.1 梅林固件测试
-
-1. 登录路由器后台
-2. 进入软件中心 → 科学上网 → DNS设置
-3. 粘贴过滤规则
-4. 重启 dnsmasq 服务
-5. 测试目标广告是否被拦截
-
-### 7.2 小米路由器测试
-
-1. 登录小米路由器管理后台
-2. 进入广告拦截设置
-3. 导入 hosts 文件
-4. 重启网络服务
-5. 验证广告拦截效果
-
-### 7.3 OpenWrt 测试
-
-1. 登录 OpenWrt 后台
-2. 进入服务 → DHCP 和 DNS
-3. 在 Resolvfile 中添加规则
-4. 重启 DNS 服务
-5. 验证广告拦截效果
-
-## 8. 版本管理
-
-使用 SemVer 格式: `v1.0.2`
+使用 [SemVer](https://semver.org/) 格式: `v1.0.2`
 
 | 版本类型 | 说明 |
 |----------|------|
-| 主版本号 | 重大规则变更/格式变化 |
-| 次版本号 | 新增功能/规则 |
-| 修订号 | 规则修正/优化 |
+| 主版本号 (MAJOR) | 重大规则变更/格式变化 |
+| 次版本号 (MINOR) | 新增功能/规则 |
+| 修订号 (PATCH) | 规则修正/优化 |
 
-## 9. 依赖关系
+## 10. 依赖关系
 
 ```
 manager.html (纯静态，无需服务器)
     │
-    ├── domains.txt (数据源)
+    ├── domains.txt                ← 数据源
     │
-    ├── assets/js/i18n.js (国际化)
+    ├── assets/js/
+    │   ├── i18n.js              ← 国际化
+    │   ├── utils.js              ← 工具函数
+    │   ├── core.js               ← 状态管理
+    │   ├── parser.js             ← 域名解析
+    │   ├── generator.js           ← 规则生成
+    │   ├── ui.js                 ← UI 交互
+    │   └── app.js                ← 主逻辑入口
     │
-    ├── assets/js/utils.js (工具函数)
-    │
-    ├── assets/js/app.js (主逻辑)
-    │
-    ├── assets/css/styles.css (样式)
+    ├── assets/css/
+    │   ├── styles.css            ← 样式入口
+    │   ├── variables.css         ← CSS 变量
+    │   ├── layout.css            ← 布局样式
+    │   ├── components.css        ← 组件样式
+    │   ├── editor.css            ← 编辑器样式
+    │   └── utilities.css         ← 工具类
     │
     └── 预设源 URL
         ├── AdGuard DNS Filter
         ├── EasyList
-        ├── NeoHosts
-        └── (本地文件)
+        └── NeoHosts
 ```
 
-## 10. 浏览器兼容性
+## 11. 浏览器兼容性
 
 - Chrome 80+
 - Firefox 75+
 - Safari 13+
 - Edge 80+
 
-## 11. 已知限制
+## 12. 已知限制
 
-- 部分广告域名可能使用 HTTPS 硬编码，需配合 Pi-hole 或广告屏蔽插件
+- 部分广告域名使用 HTTPS 硬编码，需配合 Pi-hole 或广告屏蔽插件
 - 部分设备可能有 hosts 文件大小限制
 - 需要定期更新规则以应对新广告形式
