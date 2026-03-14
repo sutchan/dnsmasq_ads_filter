@@ -31,8 +31,11 @@ dnsmasq_ads_filter/
 │   │   ├── utils.js             # 工具函数
 │   │   ├── core.js              # 核心状态管理
 │   │   ├── parser.js            # 域名解析
-│   │   ├── generator.js          # 规则生成
-│   │   └── ui.js                # UI 交互
+│   │   ├── generator.js         # 规则生成
+│   │   ├── ui.js                # UI 交互（入口）
+│   │   ├── ui-urls.js           # URL 管理交互
+│   │   ├── ui-editor.js        # 编辑器交互
+│   │   └── ui-controls.js       # 控件交互
 │   └── css/
 │       ├── styles.css            # 样式入口
 │       ├── variables.css         # CSS 变量
@@ -198,9 +201,12 @@ manager.html (纯静态，无需服务器)
     │   ├── utils.js              ← 工具函数
     │   ├── core.js               ← 状态管理
     │   ├── parser.js             ← 域名解析
-    │   ├── generator.js           ← 规则生成
-    │   ├── ui.js                 ← UI 交互
-    │   └── app.js                ← 主逻辑入口
+    │   ├── generator.js          ← 规则生成
+    │   ├── ui.js                ← UI 交互（入口）
+    │   ├── ui-urls.js           ← URL 管理交互
+    │   ├── ui-editor.js         ← 编辑器交互
+    │   ├── ui-controls.js       ← 控件交互
+    │   └── app.js               ← 主逻辑入口
     │
     ├── assets/css/
     │   ├── styles.css            ← 样式入口

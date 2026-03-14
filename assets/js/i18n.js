@@ -1,3 +1,6 @@
+// assets/js/i18n.js v1.0.2
+// Internationalization (i18n) translations for DNS Ad Block List Generator
+
 const i18n = {
     zh: {
         title: '🛡️ DNS广告过滤清单生成器',
