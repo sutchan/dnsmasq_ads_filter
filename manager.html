@@ -24,76 +24,95 @@
 </head>
 <body>
     <div class="container" id="app-container">
-        <div class="header-bar">
-            <h1>🛡️ DNS广告过滤清单生成器</h1>
-            <div class="header-controls">
-                <button class="lang-btn" onclick="switchLang()">🌐 中文</button>
-                <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        <header class="app-header">
+            <div class="header-main">
+                <h1>🛡️ DNS广告过滤清单生成器</h1>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="switchLang()" title="切换语言">
+                        <span class="lang-btn">🌐</span>
+                    </button>
+                    <button class="icon-btn" onclick="toggleTheme()" title="切换主题">
+                        <span class="theme-btn">🌙</span>
+                    </button>
+                    <button class="icon-btn settings-toggle" onclick="toggleSettings()" title="设置">
+                        ⚙️
+                    </button>
+                </div>
+            </div>
+            <p class="subtitle" data-i18n="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
+        </header>
+
+        <div class="stats-compact" id="stats-bar">
+            <div class="stat-badge">
+                <span class="stat-value" id="domainCount">0</span>
+                <span class="stat-label" data-i18n="domainCount">域名</span>
+            </div>
+            <div class="stat-badge">
+                <span class="stat-value" id="validCount">0</span>
+                <span class="stat-label" data-i18n="validCount">有效</span>
+            </div>
+            <div class="stat-badge">
+                <span class="stat-value" id="commentCount">0</span>
+                <span class="stat-label" data-i18n="commentCount">注释</span>
             </div>
         </div>
-        <p class="subtitle" data-i18n="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
-        
-        <div class="stats-bar" id="stats-bar">
-            <div class="stat-item">
-                <div class="value" id="domainCount">0</div>
-                <div class="label" data-i18n="domainCount">域名总数</div>
-            </div>
-            <div class="stat-item">
-                <div class="value" id="validCount">0</div>
-                <div class="label" data-i18n="validCount">有效域名</div>
-            </div>
-            <div class="stat-item">
-                <div class="value" id="commentCount">0</div>
-                <div class="label" data-i18n="commentCount">注释行</div>
-            </div>
-        </div>
-        
-        <div class="grid" id="main-grid">
-            <div class="panel" id="input-panel">
-                <h2 data-i18n="inputTitle">📥 输入域名清单</h2>
-                
-                <div class="label" data-i18n="importUrl">从 URL 导入</div>
-                <div class="url-input-group">
-                    <input type="text" class="url-input" id="urlInput" placeholder="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt" value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt">
-                    <button class="btn btn-primary" onclick="fetchFromUrl()" data-i18n="fetchBtn">获取域名列表</button>
-                    <button class="btn btn-outline" onclick="addUrl()" data-i18n="addUrlBtn">➕ 添加</button>
-                    <button class="btn btn-outline" onclick="validateAllUrls()" data-i18n="validateBtn">✓ 校验</button>
-                    <button class="btn btn-primary" onclick="fetchAllUrls()" data-i18n="fetchAllBtn">🌐 获取全部</button>
+
+        <main class="main-content">
+            <section class="panel input-section" id="input-panel">
+                <div class="section-header">
+                    <h2 data-i18n="inputTitle">📥 输入域名清单</h2>
+                    <button class="collapse-btn" onclick="toggleSection('url-section')">
+                        <span class="collapse-icon">▼</span>
+                        <span>高级选项</span>
+                    </button>
                 </div>
-                <div class="url-list" id="urlList"></div>
-                
-                <div class="label" style="margin-top: 16px;" data-i18n="preset">或选择预设源</div>
-                <div class="preset-list">
-                    <span class="preset-tag" onclick="loadPreset('adguard', event)" data-i18n="adguard">AdGuard DNS</span>
-                    <span class="preset-tag" onclick="loadPreset('easylist', event)" data-i18n="easylist">EasyList</span>
-                    <span class="preset-tag" onclick="loadPreset('xiaomi', event)" data-i18n="xiaomiAd">小米广告</span>
-                    <span class="preset-tag" onclick="loadPreset('neohosts', event)" data-i18n="neohosts">NeoHosts</span>
+
+                <div class="url-section collapsed" id="url-section">
+                    <div class="url-input-row">
+                        <input type="text" class="url-input" id="urlInput" placeholder="输入 URL 导入域名列表..." value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt">
+                        <button class="btn btn-primary" onclick="fetchFromUrl()" data-i18n="fetchBtn">获取</button>
+                    </div>
+                    <div class="url-actions">
+                        <button class="btn btn-sm" onclick="addUrl()">➕ 添加URL</button>
+                        <button class="btn btn-sm" onclick="validateAllUrls()">✓ 校验</button>
+                        <button class="btn btn-sm" onclick="fetchAllUrls()">🌐 获取全部</button>
+                    </div>
+                    <div class="url-list" id="urlList"></div>
+
+                    <div class="preset-section">
+                        <span class="preset-label" data-i18n="preset">预设源:</span>
+                        <div class="preset-tags">
+                            <span class="preset-tag" onclick="loadPreset('adguard', event)">AdGuard</span>
+                            <span class="preset-tag" onclick="loadPreset('easylist', event)">EasyList</span>
+                            <span class="preset-tag" onclick="loadPreset('xiaomi', event)">小米</span>
+                            <span class="preset-tag" onclick="loadPreset('neohosts', event)">NeoHosts</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="label" style="margin-top: 16px;" data-i18n="manualEdit">或直接编辑域名（每行一个域名，# 开头为注释）</div>
+
                 <div class="editor-container">
                     <div class="line-numbers" id="lineNumbers"></div>
-                    <textarea id="sourceInput" placeholder="# 示例域名&#10;ad.example.com&#10;ads.example.com&#10;tracker.example.com" oninput="handleSourceInput()"></textarea>
+                    <textarea id="sourceInput" placeholder="# 输入域名，每行一个&#10;ad.example.com&#10;ads.example.com&#10;# + 开头为白名单&#10;# @domain=ip 为自定义DNS" oninput="handleSourceInput()"></textarea>
                 </div>
-                
-                <div class="btn-group" style="margin-top: 12px;">
-                    <button class="btn btn-outline" onclick="clearAll()" data-i18n="clearBtn">清空</button>
-                    <button class="btn btn-outline" onclick="sortDomains()" data-i18n="sortBtn">↕ 排序</button>
+
+                <div class="editor-actions">
+                    <button class="btn btn-outline" onclick="clearAll()">🗑️ 清空</button>
+                    <button class="btn btn-outline" onclick="sortDomains()">↕️ 排序</button>
                     <button class="btn btn-primary" onclick="parseSource()" data-i18n="parseBtn">解析域名</button>
                 </div>
-            </div>
-            
-            <div class="panel" id="output-panel">
-                <h2 data-i18n="outputTitle">📤 生成过滤规则</h2>
-                
-                <div class="format-tabs">
-                    <button class="format-tab active" onclick="setFormat('dnsmasq')" data-i18n="dnsmasq">Dnsmasq</button>
-                    <button class="format-tab" onclick="setFormat('hosts')" data-i18n="hosts">Hosts</button>
-                    <button class="format-tab" onclick="setFormat('both')" data-i18n="both">混合输出</button>
+            </section>
+
+            <section class="panel output-section" id="output-panel">
+                <div class="section-header">
+                    <h2 data-i18n="outputTitle">📤 生成过滤规则</h2>
+                    <div class="format-tabs">
+                        <button class="format-tab active" onclick="setFormat('dnsmasq')">Dnsmasq</button>
+                        <button class="format-tab" onclick="setFormat('hosts')">Hosts</button>
+                        <button class="format-tab" onclick="setFormat('both')">混合</button>
+                    </div>
                 </div>
-                
-                <div class="settings-panel">
-                    <div class="settings-title">⚙️ 生成设置</div>
+
+                <div class="settings-panel collapsed" id="settings-panel">
                     <div class="settings-grid">
                         <div class="settings-item">
                             <label>项目名称</label>
@@ -104,97 +123,61 @@
                             <input type="text" id="versionInput" value="1.0.2" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
-                            <label data-i18n="ipV4">目标 IP (IPv4)</label>
+                            <label data-i18n="ipV4">IPv4</label>
                             <input type="text" id="ipv4Input" value="0.0.0.0" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
-                            <label data-i18n="ipV6">目标 IP (IPv6)</label>
+                            <label data-i18n="ipV6">IPv6</label>
                             <input type="text" id="ipv6Input" value="::" onchange="updateSettings()">
                         </div>
                     </div>
-                    <div class="divider"></div>
-                    <div class="settings-grid">
-                        <div class="settings-item">
-                            <label>Dnsmasq 文件名</label>
-                            <input type="text" id="dnsmasqFilename" value="dnsmasq.conf" onchange="updateSettings()">
-                        </div>
-                        <div class="settings-item">
-                            <label>Hosts 文件名</label>
-                            <input type="text" id="hostsFilename" value="hosts.txt" onchange="updateSettings()">
-                        </div>
+                    <div class="options-row">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="addHeader" checked onchange="generateRules()">
+                            <span>头部注释</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="blockIPv6" onchange="generateRules()">
+                            <span>阻止 IPv6</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="dedupDomains" checked onchange="generateRules()">
+                            <span>自动去重</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="removeWildcard" checked onchange="generateRules()">
+                            <span>移除通配符</span>
+                        </label>
                     </div>
                 </div>
-                
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="addHeader" checked onchange="generateRules()">
-                        添加头部注释
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="blockIPv6" checked onchange="generateRules()">
-                        阻止 IPv6
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="dedupDomains" checked onchange="generateRules()">
-                        自动去重
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="removeWildcard" checked onchange="generateRules()">
-                        移除通配符前缀
-                    </label>
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="merge-info" id="mergeInfo">
-                    点击"生成规则"查看输出
-                </div>
-                
+
+                <div class="merge-info" id="mergeInfo">点击"生成规则"查看输出</div>
+
                 <div class="output-preview" id="outputPreview">// 生成的规则将显示在这里</div>
-                
-                <div class="btn-group" style="margin-top: 16px;">
-                    <button class="btn btn-success" onclick="generateRules()" data-i18n="generateBtn">🔄 生成规则</button>
-                    <button class="btn btn-primary" onclick="downloadOutput()" data-i18n="downloadBtn">📥 下载文件</button>
-                    <button class="btn btn-outline" onclick="copyOutput()" data-i18n="copyBtn">📋 复制到剪贴板</button>
+
+                <div class="output-actions">
+                    <button class="btn btn-success" onclick="generateRules()">🔄 生成规则</button>
+                    <button class="btn btn-primary" onclick="downloadOutput()">📥 下载</button>
+                    <button class="btn btn-outline" onclick="copyOutput()">📋 复制</button>
                 </div>
+            </section>
+        </main>
+
+        <footer class="app-footer" id="about-panel">
+            <div class="footer-content">
+                <a href="https://github.com/sutchan/dnsmasq_ads_filter" target="_blank" class="footer-link">
+                    dnsmasq_ads_filter
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+                <span class="footer-version">v1.0.2</span>
             </div>
-        </div>
-        
-        <div class="panel" id="download-panel">
-            <h2 data-i18n="preview">📋 输出文件预览</h2>
-            <div class="btn-group">
-                <button class="btn btn-primary" onclick="downloadDnsmasq()">下载 dnsmasq.conf</button>
-                <button class="btn btn-success" onclick="downloadHosts()">下载 hosts.txt</button>
-            </div>
-        </div>
-        
-        <div class="panel about-panel" id="about-panel">
-            <div class="about-content">
-                <div class="about-info">
-                    <div class="about-item">
-                        <span class="about-label" data-i18n="aboutProject">📦 项目</span>
-                        <a href="https://github.com/sutchan/dnsmasq_ads_filter" target="_blank" class="about-link">
-                            dnsmasq_ads_filter
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                <polyline points="15 3 21 3 21 9"></polyline>
-                                <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="about-item">
-                        <span class="about-label" data-i18n="aboutVersion">🏷️ 版本</span>
-                        <span class="about-value">v1.0.2</span>
-                    </div>
-                </div>
-                <div class="about-desc">
-                    <p data-i18n="aboutDesc1">从单一域名清单生成多种格式的路由器过滤规则</p>
-                    <p data-i18n="aboutDesc2">支持 Dnsmasq、Hosts 格式输出</p>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
-    
+
     <div class="toast" id="toast"></div>
 </body>
 </html>

@@ -208,13 +208,23 @@ function loadPreset(name, evt) {
 function handleSourceInput() {
     parseSource();
     updateLineNumbers();
+    syncScroll();
 }
 
 function updateLineNumbers() {
     const textarea = document.getElementById('sourceInput');
     const lineNumbers = document.getElementById('lineNumbers');
+    if (!textarea || !lineNumbers) return;
+    
     const lines = textarea.value.split('\n').length;
     lineNumbers.innerHTML = Array.from({length: lines}, (_, i) => i + 1).join('<br>');
+}
+
+function syncScroll() {
+    const textarea = document.getElementById('sourceInput');
+    const lineNumbers = document.getElementById('lineNumbers');
+    if (!textarea || !lineNumbers) return;
+    lineNumbers.scrollTop = textarea.scrollTop;
 }
 
 function parseSource() {
@@ -459,17 +469,51 @@ function copyOutput() {
 function sortDomains() {
     const textarea = document.getElementById('sourceInput');
     const lines = textarea.value.split('\n');
-    const sortedLines = lines
-        .map(line => line.trim())
-        .filter(line => line.length > 0)
-        .sort((a, b) => {
-            const aIsComment = a.startsWith('#');
-            const bIsComment = b.startsWith('#');
-            if (aIsComment && !bIsComment) return 1;
-            if (!aIsComment && bIsComment) return -1;
-            return a.localeCompare(b);
-        });
-    textarea.value = sortedLines.join('\n');
+    
+    const headerComments = [];
+    const bodyComments = [];
+    const domains = [];
+    
+    let inHeader = true;
+    let headerEnded = false;
+    
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed) continue;
+        
+        const isComment = trimmed.startsWith('#');
+        
+        if (inHeader && isComment) {
+            headerComments.push(line);
+        } else if (!isComment && trimmed.length > 0) {
+            inHeader = false;
+            domains.push(line);
+        } else if (!inHeader && isComment) {
+            bodyComments.push(line);
+        } else {
+            if (inHeader && !headerEnded) {
+                headerEnded = true;
+                inHeader = false;
+            }
+            domains.push(line);
+        }
+    }
+    
+    const sortedDomains = [...domains].sort((a, b) => {
+        const aClean = a.trim().replace(/^(0\.0\.0\.0|127\.0\.0\.1|address=\/|\+|\!|@)/, '').toLowerCase();
+        const bClean = b.trim().replace(/^(0\.0\.0\.0|127\.0\.0\.1|address=\/|\+|\!|@)/, '').toLowerCase();
+        return aClean.localeCompare(bClean);
+    });
+    
+    const sortedBodyComments = [...bodyComments].sort((a, b) => a.localeCompare(b));
+    
+    const result = [
+        ...headerComments,
+        ...sortedDomains,
+        ...sortedBodyComments
+    ];
+    
+    textarea.value = result.join('\n');
     parseSource();
     showToast(t('toastSorted'));
 }
@@ -496,6 +540,20 @@ function toggleTheme() {
         html.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
         document.querySelector('.theme-btn').textContent = '☀️';
+    }
+}
+
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.toggle('collapsed');
+    }
+}
+
+function toggleSettings() {
+    const panel = document.getElementById('settings-panel');
+    if (panel) {
+        panel.classList.toggle('collapsed');
     }
 }
 
@@ -534,12 +592,18 @@ function updateLang() {
     updateLang();
     loadUrlList();
 
+    const textarea = document.getElementById('sourceInput');
+    if (textarea) {
+        textarea.addEventListener('scroll', syncScroll);
+    }
+
     fetch('domains.txt')
         .then(r => r.text())
         .then(t => {
             if (t.trim()) {
                 document.getElementById('sourceInput').value = t;
                 parseSource();
+                updateLineNumbers();
             }
         })
         .catch(() => {});
