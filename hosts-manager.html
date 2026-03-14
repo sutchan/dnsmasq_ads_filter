@@ -1,9 +1,10 @@
+// hosts-manager.html v1.0.1
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DNS广告过滤清单生成器</title>
+    <title>DNS广告过滤清单生成器 v1.0.1</title>
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -32,11 +33,18 @@
             --shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
             transition: all 0.3s ease;
         }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
         
         .header-bar {
             display: flex;
@@ -67,62 +75,16 @@
             border-color: var(--accent-color);
         }
         
-        .panel {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-color);
-        }
-        
-        .stats-bar, .settings-panel, .preset-list, .output-preview {
-            background: var(--bg-secondary);
-        }
-        
-        input, textarea, select {
-            background: var(--bg-secondary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-        
-        .label, .settings-title {
-            color: var(--text-secondary);
-        }
-        
-        h1, h2, h3 {
-            color: var(--text-primary);
-        }
-        
-        .subtitle {
-            color: var(--text-secondary);
-        }
-        
-        .stat-item, .settings-item {
-            color: var(--text-secondary);
-        }
-        
-        .stat-value {
-            color: var(--accent-color);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-        
-        .container { max-width: 1200px; margin: 0 auto; }
-        
         h1 {
             text-align: center;
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 8px;
             font-size: 1.8rem;
         }
         
         .subtitle {
             text-align: center;
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
             margin-bottom: 30px;
         }
         
@@ -138,14 +100,15 @@
         }
         
         .panel {
-            background: #fff;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow);
         }
         
         .panel h2 {
-            color: #1a1a2e;
+            color: var(--text-primary);
             margin-bottom: 16px;
             font-size: 1.1rem;
             display: flex;
@@ -190,11 +153,11 @@
         
         .btn-outline {
             background: transparent;
-            border: 2px solid #667eea;
-            color: #667eea;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
         }
         
-        .btn-outline:hover { background: #667eea; color: #fff; }
+        .btn-outline:hover { background: var(--accent-color); color: #fff; }
         
         .btn-group {
             display: flex;
@@ -207,30 +170,34 @@
             width: 100%;
             height: 300px;
             padding: 12px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-family: 'Monaco', 'Menlo', monospace;
             font-size: 13px;
             resize: vertical;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
         
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent-color);
         }
         
         .url-input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 14px;
             margin-bottom: 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
         
         .url-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent-color);
         }
         
         .format-tabs {
@@ -242,11 +209,12 @@
         .format-tab {
             padding: 8px 16px;
             border: none;
-            background: #f3f4f6;
+            background: var(--bg-secondary);
             border-radius: 6px;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.2s;
+            color: var(--text-primary);
         }
         
         .format-tab.active {
@@ -282,6 +250,7 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            color: var(--text-primary);
         }
         
         .checkbox-item input { width: 18px; height: 18px; }
@@ -303,16 +272,16 @@
         .toast.show { transform: translateX(0); }
         .toast.error { background: #ef4444; }
         
-        .label { font-weight: 500; margin-bottom: 8px; display: block; color: #374151; }
+        .label { font-weight: 500; margin-bottom: 8px; display: block; color: var(--text-secondary); }
         
         .merge-info {
-            background: #fef3c7;
-            border: 1px solid #fcd34d;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 16px;
             font-size: 13px;
-            color: #92400e;
+            color: var(--text-primary);
         }
         
         .preset-list {
@@ -324,18 +293,19 @@
         
         .preset-tag {
             padding: 6px 12px;
-            background: #e5e7eb;
+            background: var(--bg-secondary);
             border-radius: 20px;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
+            color: var(--text-primary);
         }
         
-        .preset-tag:hover { background: #d1d5db; }
-        .preset-tag.active { background: #667eea; color: #fff; }
+        .preset-tag:hover { background: var(--border-color); }
+        .preset-tag.active { background: var(--accent-color); color: #fff; }
         
         .settings-panel {
-            background: #f8fafc;
+            background: var(--bg-secondary);
             border-radius: 8px;
             padding: 16px;
             margin-bottom: 16px;
@@ -344,7 +314,7 @@
         .settings-title {
             font-weight: 600;
             margin-bottom: 12px;
-            color: #1e293b;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -364,25 +334,27 @@
         
         .settings-item label {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
         }
         
         .settings-item input[type="text"],
         .settings-item input[type="number"] {
             padding: 8px 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 13px;
+            background: var(--bg-panel);
+            color: var(--text-primary);
         }
         
         .settings-item input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent-color);
         }
         
         .divider {
             height: 1px;
-            background: #e2e8f0;
+            background: var(--border-color);
             margin: 16px 0;
         }
     </style>
@@ -396,21 +368,21 @@
                 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
             </div>
         </div>
-        <p class="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
+        <p class="subtitle" data-i18n="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
         
         <div class="stats-bar">
             <div class="stat-item">
-                    <div class="value" id="domainCount">0</div>
-                    <div class="label" data-i18n="domainCount">域名总数</div>
-                </div>
-                <div class="stat-item">
-                    <div class="value" id="validCount">0</div>
-                    <div class="label" data-i18n="validCount">有效域名</div>
-                </div>
-                <div class="stat-item">
-                    <div class="value" id="commentCount">0</div>
-                    <div class="label" data-i18n="commentCount">注释行</div>
-                </div>
+                <div class="value" id="domainCount">0</div>
+                <div class="label" data-i18n="domainCount">域名总数</div>
+            </div>
+            <div class="stat-item">
+                <div class="value" id="validCount">0</div>
+                <div class="label" data-i18n="validCount">有效域名</div>
+            </div>
+            <div class="stat-item">
+                <div class="value" id="commentCount">0</div>
+                <div class="label" data-i18n="commentCount">注释行</div>
+            </div>
         </div>
         
         <div class="grid">
@@ -449,13 +421,6 @@
                     <button class="format-tab" onclick="setFormat('both')" data-i18n="both">混合输出</button>
                 </div>
                 
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" id="blockIPv6" checked>
-                        阻止 IPv6
-                    </label>
-                </div>
-                
                 <div class="settings-panel">
                     <div class="settings-title">⚙️ 生成设置</div>
                     <div class="settings-grid">
@@ -465,7 +430,7 @@
                         </div>
                         <div class="settings-item">
                             <label>版本号</label>
-                            <input type="text" id="versionInput" value="1.0.0" onchange="updateSettings()">
+                            <input type="text" id="versionInput" value="1.0.1" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
                             <label data-i18n="ipV4">目标 IP (IPv4)</label>
@@ -542,10 +507,10 @@
                     </div>
                     <div class="settings-item">
                         <label>Web 管理工具版本</label>
-                        <input type="text" value="1.0.0" readonly>
+                        <input type="text" value="1.0.1" readonly>
                     </div>
                 </div>
-                <div style="margin-top: 16px; font-size: 13px; color: #64748b;">
+                <div style="margin-top: 16px; font-size: 13px; color: var(--text-secondary);">
                     <p>DNS广告过滤清单生成器 - 从单一域名清单生成多种格式的路由器过滤规则</p>
                     <p style="margin-top: 8px;">支持 Dnsmasq、Hosts 格式输出，适用于梅林固件、小米路由器等设备</p>
                 </div>
@@ -559,10 +524,13 @@
         let domains = [];
         let currentFormat = 'dnsmasq';
         let outputContent = { dnsmasq: '', hosts: '' };
+        let isLangZh = true;
+        
+        const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
         
         let settings = {
             projectName: 'dnsmasq_ads_filter',
-            version: '1.0.0',
+            version: '1.0.1',
             ipv4: '0.0.0.0',
             ipv6: '::',
             dnsmasqFilename: 'dnsmasq-ads-filter-list.txt',
@@ -574,6 +542,63 @@
             easylist: 'https://easylist.to/easylist/easylist.txt',
             xiaomi: '',
             neohosts: 'https://raw.githubusercontent.com/neo-forte/neo-forte.github.io/main/hosts/AdGameHosts/hosts'
+        };
+        
+        const translations = {
+            zh: {
+                title: '🛡️ DNS广告过滤清单生成器',
+                subtitle: '从单一域名清单生成多种格式的路由器过滤规则',
+                domainCount: '域名总数',
+                validCount: '有效域名',
+                commentCount: '注释行',
+                inputTitle: '📥 输入域名清单',
+                importUrl: '从 URL 导入',
+                fetchBtn: '获取域名列表',
+                preset: '或选择预设源',
+                manualEdit: '或直接编辑域名（每行一个域名，# 开头为注释）',
+                parseBtn: '解析域名',
+                outputTitle: '📤 生成过滤规则',
+                dnsmasq: 'Dnsmasq',
+                hosts: 'Hosts',
+                both: '混合输出',
+                ipV4: '目标 IP (IPv4)',
+                ipV6: '目标 IP (IPv6)',
+                preview: '📋 输出文件预览',
+                about: 'ℹ️ 关于',
+                langBtn: '🌐 EN',
+                themeBtn: '🌙',
+                adguard: 'AdGuard DNS',
+                easylist: 'EasyList',
+                xiaomiAd: '小米广告',
+                neohosts: 'NeoHosts'
+            },
+            en: {
+                title: '🛡️ DNS Ad Blocklist Generator',
+                subtitle: 'Generate router filter rules from a single domain list',
+                domainCount: 'Total Domains',
+                validCount: 'Valid Domains',
+                commentCount: 'Comment Lines',
+                inputTitle: '📥 Input Domain List',
+                importUrl: 'Import from URL',
+                fetchBtn: 'Fetch Domains',
+                preset: 'Or choose a preset',
+                manualEdit: 'Or edit domains directly (one per line, # for comments)',
+                parseBtn: 'Parse Domains',
+                outputTitle: '📤 Generate Filter Rules',
+                dnsmasq: 'Dnsmasq',
+                hosts: 'Hosts',
+                both: 'Both',
+                ipV4: 'IPv4 Address',
+                ipV6: 'IPv6 Address',
+                preview: '📋 Output Preview',
+                about: 'ℹ️ About',
+                langBtn: '🌐 中文',
+                themeBtn: '☀️',
+                adguard: 'AdGuard DNS',
+                easylist: 'EasyList',
+                xiaomiAd: 'Xiaomi Ads',
+                neohosts: 'NeoHosts'
+            }
         };
         
         function setFormat(format) {
@@ -597,18 +622,7 @@
                 const content = await response.text();
                 document.getElementById('sourceInput').value = content;
                 parseSource();
-            
-            // 自动加载 raw-domains.txt
-            fetch('raw-domains.txt')
-                .then(r => r.text())
-                .then(t => {
-                    if (t.trim()) {
-                        document.getElementById('sourceInput').value = t;
-                        parseSource();
-                    }
-                })
-                .catch(() => {});
-                showToast(`成功获取域名列表！`);
+                showToast('成功获取域名列表！');
             } catch (e) {
                 showToast('获取失败: ' + e.message, true);
             }
@@ -680,8 +694,6 @@
             return /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(domain);
         }
         
-        const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
-        
         function updateSettings() {
             settings.projectName = document.getElementById('projectNameInput').value || 'ad_block_list';
             settings.version = document.getElementById('versionInput').value || '1.0.0';
@@ -717,16 +729,15 @@
                 dnsmasqContent += `# ${settings.projectName} - Dnsmasq Ad Block List\n`;
                 dnsmasqContent += `# ===============================================\n`;
                 dnsmasqContent += `#\n`;
-                dnsmasqContent += `# Description: Router-level ad blocking filter for Xiaomi devices\n`;
-                dnsmasqContent += `#              and general advertising/tracking domains\n`;
+                dnsmasqContent += `# Description: Router-level ad blocking filter\n`;
                 dnsmasqContent += `#\n`;
                 dnsmasqContent += `# Version: ${settings.version}\n`;
                 dnsmasqContent += `# Update: ${dateStr}\n`;
                 dnsmasqContent += `# Domains: ${processedDomains.length} unique domains\n`;
                 dnsmasqContent += `#\n`;
                 dnsmasqContent += `# Usage:\n`;
-                dnsmasqContent += `#   - Merlin: Software Center -> DNS Settings -> Custom dnsmasq\n`;
-                dnsmasqContent += `#   - OpenWrt: Services -> DHCP and DNS -> Resolvfile\n`;
+                dnsmasqContent += `#   - Merlin: Software Center -> DNS Settings\n`;
+                dnsmasqContent += `#   - OpenWrt: Services -> DHCP and DNS\n`;
                 dnsmasqContent += `#\n`;
                 dnsmasqContent += `# Project: ${projectUrl}\n`;
                 dnsmasqContent += `#\n`;
@@ -737,7 +748,6 @@
                 hostsContent += `# ===============================================\n`;
                 hostsContent += `#\n`;
                 hostsContent += `# Description: Router-level ad blocking hosts file\n`;
-                hostsContent += `#              for Xiaomi routers and general use\n`;
                 hostsContent += `#\n`;
                 hostsContent += `# Version: ${settings.version}\n`;
                 hostsContent += `# Update: ${dateStr}\n`;
@@ -755,7 +765,7 @@
                 hostsContent += `${settings.ipv4} ${domain}\n`;
                 
                 if (blockIPv6) {
-                    dnsmasqContent += `address=/${domain}${settings.ipv6}/\n`;
+                    dnsmasqContent += `address=/${domain}/${settings.ipv6}\n`;
                     hostsContent += `${settings.ipv6} ${domain}\n`;
                 }
             });
@@ -834,8 +844,12 @@
         }
         
         function showToast(message, isError = false) {
-        
-        let isLangZh = localStorage.getItem('lang') === 'zh';
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast' + (isError ? ' error' : '');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
         
         function toggleTheme() {
             const html = document.documentElement;
@@ -858,227 +872,41 @@
         }
         
         function updateLang() {
-            const isZh = localStorage.getItem('lang') === 'zh';
+            const lang = localStorage.getItem('lang') || 'zh';
+            const t = translations[lang];
             
-            document.querySelector('[data-i18n="title"]')?.setAttribute('data-i18n', 'title');
-            document.querySelector('h1').setAttribute('data-i18n', 'title');
-            
-            const translations = isZh ? {
-                'title': '🛡️ DNS广告过滤清单生成器',
-                'subtitle': '从单一域名清单生成多种格式的路由器过滤规则',
-                'domainCount': '域名总数',
-                'validCount': '有效域名',
-                'commentCount': '注释行',
-                'inputTitle': '📥 输入域名清单',
-                'importUrl': '从 URL 导入',
-                'fetchBtn': '获取域名列表',
-                'preset': '或选择预设源',
-                'manualEdit': '或直接编辑域名（每行一个域名，# 开头为注释）',
-                'parseBtn': '解析域名',
-                'outputTitle': '📤 生成过滤规则',
-                'format': '选择输出格式',
-                'dnsmasq': 'Dnsmasq 格式',
-                'hosts': 'Hosts 格式',
-                'adblock': 'AdBlock 格式',
-                'settings': '⚙️ 生成设置',
-                'ip': '目标 IP',
-                'ipV4': '目标 IP (IPv4)',
-                'ipV6': '目标 IP (IPv6)',
-                'dnsmasqFile': 'Dnsmasq 文件名',
-                'hostsFile': 'Hosts 文件名',
-                'includeComments': '包含注释',
-                'addTimestamp': '添加时间戳',
-                'options': '选项',
-                'mergeOption': '去重合并',
-                'sortOption': '排序输出',
-                'preview': '📋 输出文件预览',
-                'download': '下载',
-                'downloadDnsmasq': '下载 dnsmasq 格式',
-                'downloadHosts': '下载 Hosts 格式',
-                'copyAll': '复制全部',
-                'mergeInfo': '已合并去重，共 {count} 条规则',
-                'about': 'ℹ️ 关于',
-                'localSettings': '📁 本地文件',
-                'loadLocal': '加载本地文件',
-                'autoLoad': '自动加载 raw-domains.txt',
-                'save': '保存到本地',
-                'langBtn': '🌐 EN',
-                'themeBtn': '☀️'
-            } : {
-                'title': '🛡️ DNS Ad Filter Generator',
-                'subtitle': 'Generate router filter rules from a single domain list',
-                'domainCount': 'Total Domains',
-                'validCount': 'Valid Domains',
-                'commentCount': 'Comment Lines',
-                'inputTitle': '📥 Input Domain List',
-                'importUrl': 'Import from URL',
-                'fetchBtn': 'Fetch Domains',
-                'preset': 'Or select preset source',
-                'manualEdit': 'Or edit domains directly (one per line, # for comments)',
-                'parseBtn': 'Parse Domains',
-                'outputTitle': '📤 Generate Filter Rules',
-                'format': 'Select Output Format',
-                'dnsmasq': 'Dnsmasq Format',
-                'hosts': 'Hosts Format',
-                'adblock': 'AdBlock Format',
-                'settings': '⚙️ Generation Settings',
-                'ip': 'Target IP',
-                'ipV4': 'Target IP (IPv4)',
-                'ipV6': 'Target IP (IPv6)',
-                'dnsmasqFile': 'Dnsmasq Filename',
-                'hostsFile': 'Hosts Filename',
-                'includeComments': 'Include Comments',
-                'addTimestamp': 'Add Timestamp',
-                'options': 'Options',
-                'mergeOption': 'Deduplicate',
-                'sortOption': 'Sort Output',
-                'preview': '📋 Output Preview',
-                'download': 'Download',
-                'downloadDnsmasq': 'Download Dnsmasq',
-                'downloadHosts': 'Download Hosts',
-                'copyAll': 'Copy All',
-                'mergeInfo': 'Merged & deduplicated: {count} rules',
-                'about': 'ℹ️ About',
-                'localSettings': '📁 Local Files',
-                'loadLocal': 'Load Local File',
-                'autoLoad': 'Auto-load raw-domains.txt',
-                'save': 'Save to Local',
-                'langBtn': '🌐 中文',
-                'themeBtn': '🌙'
-            };
-            
-            document.querySelector('h1').textContent = translations.title;
-            document.querySelector('.subtitle').textContent = translations.subtitle;
+            document.querySelector('h1').textContent = t.title;
+            document.querySelector('.subtitle').textContent = t.subtitle;
+            document.querySelector('.lang-btn').textContent = t.langBtn;
             
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[key]) {
-                    el.textContent = translations[key];
+                if (t[key]) {
+                    el.textContent = t[key];
                 }
             });
-            
-            document.querySelector('.lang-btn').textContent = translations.langBtn;
-            document.querySelector('.theme-btn').textContent = translations.themeBtn;
-        }
-                'title': 'DNS广告过滤清单生成器',
-                'subtitle': '从单一域名清单生成多种格式的路由器过滤规则',
-                'domainCount': '域名总数',
-                'validCount': '有效域名',
-                'commentCount': '注释行',
-                'importUrl': '从 URL 导入',
-                'fetchBtn': '获取域名列表',
-                'preset': '或选择预设源',
-                'manualEdit': '或直接编辑域名（每行一个域名，# 开头为注释）',
-                'parseBtn': '解析域名',
-                'format': '选择输出格式',
-                'dnsmasq': 'Dnsmasq 格式',
-                'hosts': 'Hosts 格式',
-                'adblock': 'AdBlock 格式',
-                'settings': '⚙️ 生成设置',
-                'ip': '目标 IP',
-                'dnsmasqFile': 'Dnsmasq 文件名',
-                'hostsFile': 'Hosts 文件名',
-                'includeComments': '包含注释',
-                'addTimestamp': '添加时间戳',
-                'options': '选项',
-                'mergeOption': '去重合并',
-                'sortOption': '排序输出',
-                'preview': '📄 预览',
-                'download': '下载',
-                'downloadDnsmasq': '下载 dnsmasq 格式',
-                'downloadHosts': '下载 Hosts 格式',
-                'copyAll': '复制全部',
-                'mergeInfo': '已合并去重，共 {count} 条规则',
-                'localSettings': '📁 本地文件',
-                'loadLocal': '加载本地文件',
-                'autoLoad': '自动加载 raw-domains.txt',
-                'save': '保存到本地',
-                'langBtn': '🌐 EN'
-            } : {
-                'title': 'DNS Ad Filter Generator',
-                'subtitle': 'Generate router filter rules from a single domain list',
-                'domainCount': 'Total Domains',
-                'validCount': 'Valid Domains',
-                'commentCount': 'Comment Lines',
-                'importUrl': 'Import from URL',
-                'fetchBtn': 'Fetch Domains',
-                'preset': 'Or select preset source',
-                'manualEdit': 'Or edit domains directly (one per line, # for comments)',
-                'parseBtn': 'Parse Domains',
-                'format': 'Select Output Format',
-                'dnsmasq': 'Dnsmasq Format',
-                'hosts': 'Hosts Format',
-                'adblock': 'AdBlock Format',
-                'settings': '⚙️ Generation Settings',
-                'ip': 'Target IP',
-                'dnsmasqFile': 'Dnsmasq Filename',
-                'hostsFile': 'Hosts Filename',
-                'includeComments': 'Include Comments',
-                'addTimestamp': 'Add Timestamp',
-                'options': 'Options',
-                'mergeOption': 'Deduplicate',
-                'sortOption': 'Sort Output',
-                'preview': '📄 Preview',
-                'download': 'Download',
-                'downloadDnsmasq': 'Download Dnsmasq',
-                'downloadHosts': 'Download Hosts',
-                'copyAll': 'Copy All',
-                'mergeInfo': 'Merged & deduplicated: {count} rules',
-                'localSettings': '📁 Local Files',
-                'loadLocal': 'Load Local File',
-                'autoLoad': 'Auto-load raw-domains.txt',
-                'save': 'Save to Local',
-                'langBtn': '🌐 中文'
-            };
-            
-            document.querySelector('h1').textContent = '🛡️ ' + langData.title;
-            document.querySelector('.subtitle').textContent = langData.subtitle;
-            document.querySelectorAll('.stat-item .label')[0].textContent = langData.domainCount;
-            document.querySelectorAll('.stat-item .label')[1].textContent = langData.validCount;
-            document.querySelectorAll('.stat-item .label')[2].textContent = langData.commentCount;
-            document.querySelectorAll('.label')[0].textContent = langData.importUrl;
-            document.querySelector('.btn-primary').textContent = langData.fetchBtn;
-            document.querySelectorAll('.label')[1].textContent = langData.preset;
-            document.querySelectorAll('.label')[2].textContent = langData.manualEdit;
-            document.querySelectorAll('.btn-primary')[1].textContent = langData.parseBtn;
-            document.querySelector('.settings-title').textContent = langData.settings;
-            document.querySelectorAll('.settings-item label')[0].textContent = langData.ip;
-            document.querySelectorAll('.settings-item label')[1].textContent = langData.dnsmasqFile;
-            document.querySelectorAll('.settings-item label')[2].textContent = langData.hostsFile;
-            document.querySelector('.checkbox-group label').textContent = langData.includeComments;
-            document.querySelectorAll('.checkbox-group label')[1].textContent = langData.addTimestamp;
-            document.querySelectorAll('.merge-info')[0].querySelector('span').textContent = langData.options;
-            document.querySelectorAll('.merge-info label')[0].textContent = langData.mergeOption;
-            document.querySelectorAll('.merge-info label')[1].textContent = langData.sortOption;
-            document.querySelector('.output-title').textContent = langData.preview;
-            document.querySelector('.btn-group .btn-success').textContent = langData.download;
-            document.querySelectorAll('.btn-group .btn-primary')[2].textContent = langData.downloadDnsmasq;
-            document.querySelectorAll('.btn-group .btn-primary')[3].textContent = langData.downloadHosts;
-            document.querySelector('.btn-copy').textContent = langData.copyAll;
-            document.querySelector('.panel-title').textContent = langData.localSettings;
-            document.querySelectorAll('.settings-item label')[3].textContent = langData.loadLocal;
-            document.querySelector('.auto-load-label').textContent = langData.autoLoad;
-            document.querySelector('.btn-warning').textContent = langData.save;
-            document.querySelector('.lang-btn').textContent = langData.langBtn;
         }
         
-        (function initTheme() {
+        (function init() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.querySelector('.theme-btn').textContent = '☀️';
             }
-            isLangZh = localStorage.getItem('lang') === 'zh';
+            
+            isLangZh = localStorage.getItem('lang') !== 'en';
             updateLang();
+            
+            fetch('raw-domains.txt')
+                .then(r => r.text())
+                .then(t => {
+                    if (t.trim()) {
+                        document.getElementById('sourceInput').value = t;
+                        parseSource();
+                    }
+                })
+                .catch(() => {});
         })();
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast' + (isError ? ' error' : '');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-        
-        parseSource();
     </script>
 </body>
 </html>
