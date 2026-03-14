@@ -19,6 +19,7 @@
     <title>DNS广告过滤清单生成器 v1.0.2</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/js/i18n.js" defer></script>
+    <script src="assets/js/utils.js" defer></script>
     <script src="assets/js/app.js" defer></script>
 </head>
 <body>
@@ -32,7 +33,7 @@
         </div>
         <p class="subtitle" data-i18n="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
         
-        <div class="stats-bar">
+        <div class="stats-bar" id="stats-bar">
             <div class="stat-item">
                 <div class="value" id="domainCount">0</div>
                 <div class="label" data-i18n="domainCount">域名总数</div>
@@ -47,8 +48,8 @@
             </div>
         </div>
         
-        <div class="grid">
-            <div class="panel">
+        <div class="grid" id="main-grid">
+            <div class="panel" id="input-panel">
                 <h2 data-i18n="inputTitle">📥 输入域名清单</h2>
                 
                 <div class="label" data-i18n="importUrl">从 URL 导入</div>
@@ -82,7 +83,7 @@
                 </div>
             </div>
             
-            <div class="panel">
+            <div class="panel" id="output-panel">
                 <h2 data-i18n="outputTitle">📤 生成过滤规则</h2>
                 
                 <div class="format-tabs">
@@ -159,7 +160,7 @@
             </div>
         </div>
         
-        <div class="panel">
+        <div class="panel" id="download-panel">
             <h2 data-i18n="preview">📋 输出文件预览</h2>
             <div class="btn-group">
                 <button class="btn btn-primary" onclick="downloadDnsmasq()">下载 dnsmasq.conf</button>
@@ -167,7 +168,7 @@
             </div>
         </div>
         
-        <div class="panel about-panel">
+        <div class="panel about-panel" id="about-panel">
             <div class="about-content">
                 <div class="about-info">
                     <div class="about-item">
