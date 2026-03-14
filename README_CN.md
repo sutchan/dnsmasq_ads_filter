@@ -1,6 +1,6 @@
 # dnsmasq_ads_filter
 
-[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README_CN.md)
+[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README_CN.md) [![Version](https://img.shields.io/badge/version-1.0.1-green)](https://github.com/sutchan/dnsmasq_ads_filter)
 
 基于 dnsmasq 的广告过滤规则，用于在路由器级别屏蔽小米设备（电视盒子、手机）的广告。
 
@@ -12,7 +12,7 @@
 
 ### 梅林固件（华硕路由器）
 
-**路径 1:** 软件中心 → 科学上网 → DNS 设置 → 自定义 dnsmasq
+**路径 1:** 软件中心 → DNS 设置 → 自定义 dnsmasq
 
 **路径 2:** 可选上网 → 自定义 dnsmasq
 
@@ -22,16 +22,49 @@
 
 将 `xiaomi-router-hosts-noad.txt` 导入小米路由器的广告屏蔽设置。
 
+### OpenWrt
+
+```bash
+curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsmasq-ads-filter-list.txt >> /etc/dnsmasq.conf
+```
+
 ## 文件说明
 
 | 文件 | 说明 |
 |------|------|
-| `dnsmasq-ads-filter-list.txt` | 主 dnsmasq 过滤列表 |
-| `xiaomi-router-hosts-noad.txt` | 小米路由器 hosts 文件 |
+| `dnsmasq-ads-filter-list.txt` | 主 dnsmasq 过滤列表（`address=/domain/0.0.0.0` 格式） |
+| `xiaomi-router-hosts-noad.txt` | 小米路由器 hosts 文件（`0.0.0.0 domain` 格式） |
+| `hosts-manager.html` | Web 管理界面，用于管理和生成过滤清单 |
+| `raw-domains.txt` | 统一域名列表（每行一个域名，数据源） |
+
+## Web 管理界面
+
+在浏览器中打开 `hosts-manager.html` 可以：
+
+- 从 URL 或本地文件加载域名列表
+- 选择预设源（AdGuard、EasyList、NeoHosts、小米广告）
+- 生成 Dnsmasq 或 Hosts 格式输出
+- 配置 IP 地址（IPv4/IPv6）
+- 自动去重和排序域名
+- 下载生成的文件
+
+## 单一数据源工作流
+
+```
+raw-domains.txt (唯一数据源)
+        ↓
+  hosts-manager.html (Web 工具)
+        ↓
+   ┌────────────┴────────────┐
+   ↓                         ↓
+dnsmasq-ads-filter-list.txt  xiaomi-router-hosts-noad.txt
+```
 
 ## 贡献
 
-请直接编辑 `dnsmasq-ads-filter-list.txt`，编辑完成后提交 Pull Request 更新列表。
+1. 编辑 `raw-domains.txt` 添加或删除域名
+2. 打开 `hosts-manager.html` 生成更新的文件
+3. 提交 Pull Request
 
 ## 许可证
 
