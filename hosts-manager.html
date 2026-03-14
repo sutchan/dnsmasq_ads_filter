@@ -400,38 +400,38 @@
         
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="value" id="domainCount">0</div>
-                <div class="label">域名总数</div>
-            </div>
-            <div class="stat-item">
-                <div class="value" id="validCount">0</div>
-                <div class="label">有效域名</div>
-            </div>
-            <div class="stat-item">
-                <div class="value" id="commentCount">0</div>
-                <div class="label">注释行</div>
-            </div>
+                    <div class="value" id="domainCount">0</div>
+                    <div class="label" data-i18n="domainCount">域名总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value" id="validCount">0</div>
+                    <div class="label" data-i18n="validCount">有效域名</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value" id="commentCount">0</div>
+                    <div class="label" data-i18n="commentCount">注释行</div>
+                </div>
         </div>
         
         <div class="grid">
             <div class="panel">
-                <h2>📥 输入域名清单</h2>
+                <h2 data-i18n="inputTitle">📥 输入域名清单</h2>
                 
-                <div class="label">从 URL 导入</div>
+                <div class="label" data-i18n="importUrl">从 URL 导入</div>
                 <input type="text" class="url-input" id="urlInput" placeholder="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/refs/heads/main/raw-domains.txt" value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/refs/heads/main/raw-domains.txt">
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="fetchFromUrl()">获取域名列表</button>
                 </div>
                 
-                <div class="label" style="margin-top: 16px;">或选择预设源</div>
+                <div class="label" style="margin-top: 16px;" data-i18n="preset">或选择预设源</div>
                 <div class="preset-list">
-                    <span class="preset-tag" onclick="loadPreset('adguard')">AdGuard DNS</span>
-                    <span class="preset-tag" onclick="loadPreset('easylist')">EasyList</span>
-                    <span class="preset-tag" onclick="loadPreset('xiaomi')">小米广告</span>
-                    <span class="preset-tag" onclick="loadPreset('neohosts')">NeoHosts</span>
+                    <span class="preset-tag" onclick="loadPreset('adguard')" data-i18n="adguard">AdGuard DNS</span>
+                    <span class="preset-tag" onclick="loadPreset('easylist')" data-i18n="easylist">EasyList</span>
+                    <span class="preset-tag" onclick="loadPreset('xiaomi')" data-i18n="xiaomiAd">小米广告</span>
+                    <span class="preset-tag" onclick="loadPreset('neohosts')" data-i18n="neohosts">NeoHosts</span>
                 </div>
                 
-                <div class="label" style="margin-top: 16px;">或直接编辑域名（每行一个域名，# 开头为注释）</div>
+                <div class="label" style="margin-top: 16px;" data-i18n="manualEdit">或直接编辑域名（每行一个域名，# 开头为注释）</div>
                 <textarea id="sourceInput" placeholder="# 示例域名&#10;ad.example.com&#10;ads.example.com&#10;tracker.example.com" oninput="parseSource()"></textarea>
                 
                 <div class="btn-group" style="margin-top: 12px;">
@@ -441,12 +441,12 @@
             </div>
             
             <div class="panel">
-                <h2>📤 生成过滤规则</h2>
+                <h2 data-i18n="outputTitle">📤 生成过滤规则</h2>
                 
                 <div class="format-tabs">
-                    <button class="format-tab active" onclick="setFormat('dnsmasq')">Dnsmasq</button>
-                    <button class="format-tab" onclick="setFormat('hosts')">Hosts</button>
-                    <button class="format-tab" onclick="setFormat('both')">混合输出</button>
+                    <button class="format-tab active" onclick="setFormat('dnsmasq')" data-i18n="dnsmasq">Dnsmasq</button>
+                    <button class="format-tab" onclick="setFormat('hosts')" data-i18n="hosts">Hosts</button>
+                    <button class="format-tab" onclick="setFormat('both')" data-i18n="both">混合输出</button>
                 </div>
                 
                 <div class="checkbox-group">
@@ -468,11 +468,11 @@
                             <input type="text" id="versionInput" value="1.0.0" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
-                            <label>目标 IP (IPv4)</label>
+                            <label data-i18n="ipV4">目标 IP (IPv4)</label>
                             <input type="text" id="ipv4Input" value="0.0.0.0" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
-                            <label>目标 IP (IPv6)</label>
+                            <label data-i18n="ipV6">目标 IP (IPv6)</label>
                             <input type="text" id="ipv6Input" value="::" onchange="updateSettings()">
                         </div>
                     </div>
@@ -525,7 +525,7 @@
         </div>
         
         <div class="panel">
-            <h2>📋 输出文件预览</h2>
+            <h2 data-i18n="preview">📋 输出文件预览</h2>
             <div class="btn-group">
                 <button class="btn btn-primary" onclick="downloadDnsmasq()">下载 dnsmasq-ads-filter-list.txt</button>
                 <button class="btn btn-success" onclick="downloadHosts()">下载 xiaomi-router-hosts-noad.txt</button>
@@ -533,7 +533,7 @@
         </div>
         
         <div class="panel">
-            <h2>ℹ️ 关于</h2>
+            <h2 data-i18n="about">ℹ️ 关于</h2>
             <div class="settings-panel">
                 <div class="settings-grid">
                     <div class="settings-item">
@@ -858,7 +858,108 @@
         }
         
         function updateLang() {
-            const langData = isLangZh ? {
+            const isZh = localStorage.getItem('lang') === 'zh';
+            
+            document.querySelector('[data-i18n="title"]')?.setAttribute('data-i18n', 'title');
+            document.querySelector('h1').setAttribute('data-i18n', 'title');
+            
+            const translations = isZh ? {
+                'title': '🛡️ DNS广告过滤清单生成器',
+                'subtitle': '从单一域名清单生成多种格式的路由器过滤规则',
+                'domainCount': '域名总数',
+                'validCount': '有效域名',
+                'commentCount': '注释行',
+                'inputTitle': '📥 输入域名清单',
+                'importUrl': '从 URL 导入',
+                'fetchBtn': '获取域名列表',
+                'preset': '或选择预设源',
+                'manualEdit': '或直接编辑域名（每行一个域名，# 开头为注释）',
+                'parseBtn': '解析域名',
+                'outputTitle': '📤 生成过滤规则',
+                'format': '选择输出格式',
+                'dnsmasq': 'Dnsmasq 格式',
+                'hosts': 'Hosts 格式',
+                'adblock': 'AdBlock 格式',
+                'settings': '⚙️ 生成设置',
+                'ip': '目标 IP',
+                'ipV4': '目标 IP (IPv4)',
+                'ipV6': '目标 IP (IPv6)',
+                'dnsmasqFile': 'Dnsmasq 文件名',
+                'hostsFile': 'Hosts 文件名',
+                'includeComments': '包含注释',
+                'addTimestamp': '添加时间戳',
+                'options': '选项',
+                'mergeOption': '去重合并',
+                'sortOption': '排序输出',
+                'preview': '📋 输出文件预览',
+                'download': '下载',
+                'downloadDnsmasq': '下载 dnsmasq 格式',
+                'downloadHosts': '下载 Hosts 格式',
+                'copyAll': '复制全部',
+                'mergeInfo': '已合并去重，共 {count} 条规则',
+                'about': 'ℹ️ 关于',
+                'localSettings': '📁 本地文件',
+                'loadLocal': '加载本地文件',
+                'autoLoad': '自动加载 raw-domains.txt',
+                'save': '保存到本地',
+                'langBtn': '🌐 EN',
+                'themeBtn': '☀️'
+            } : {
+                'title': '🛡️ DNS Ad Filter Generator',
+                'subtitle': 'Generate router filter rules from a single domain list',
+                'domainCount': 'Total Domains',
+                'validCount': 'Valid Domains',
+                'commentCount': 'Comment Lines',
+                'inputTitle': '📥 Input Domain List',
+                'importUrl': 'Import from URL',
+                'fetchBtn': 'Fetch Domains',
+                'preset': 'Or select preset source',
+                'manualEdit': 'Or edit domains directly (one per line, # for comments)',
+                'parseBtn': 'Parse Domains',
+                'outputTitle': '📤 Generate Filter Rules',
+                'format': 'Select Output Format',
+                'dnsmasq': 'Dnsmasq Format',
+                'hosts': 'Hosts Format',
+                'adblock': 'AdBlock Format',
+                'settings': '⚙️ Generation Settings',
+                'ip': 'Target IP',
+                'ipV4': 'Target IP (IPv4)',
+                'ipV6': 'Target IP (IPv6)',
+                'dnsmasqFile': 'Dnsmasq Filename',
+                'hostsFile': 'Hosts Filename',
+                'includeComments': 'Include Comments',
+                'addTimestamp': 'Add Timestamp',
+                'options': 'Options',
+                'mergeOption': 'Deduplicate',
+                'sortOption': 'Sort Output',
+                'preview': '📋 Output Preview',
+                'download': 'Download',
+                'downloadDnsmasq': 'Download Dnsmasq',
+                'downloadHosts': 'Download Hosts',
+                'copyAll': 'Copy All',
+                'mergeInfo': 'Merged & deduplicated: {count} rules',
+                'about': 'ℹ️ About',
+                'localSettings': '📁 Local Files',
+                'loadLocal': 'Load Local File',
+                'autoLoad': 'Auto-load raw-domains.txt',
+                'save': 'Save to Local',
+                'langBtn': '🌐 中文',
+                'themeBtn': '🌙'
+            };
+            
+            document.querySelector('h1').textContent = translations.title;
+            document.querySelector('.subtitle').textContent = translations.subtitle;
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key]) {
+                    el.textContent = translations[key];
+                }
+            });
+            
+            document.querySelector('.lang-btn').textContent = translations.langBtn;
+            document.querySelector('.theme-btn').textContent = translations.themeBtn;
+        }
                 'title': 'DNS广告过滤清单生成器',
                 'subtitle': '从单一域名清单生成多种格式的路由器过滤规则',
                 'domainCount': '域名总数',
