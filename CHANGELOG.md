@@ -5,17 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.2] - 
+## [1.0.2] - 2026-03-14
+
+### Changed
+- **File Renaming**: Standardized all file names for consistency
+  - `dnsmasq-ads-filter-list.txt` → `dnsmasq.conf`
+  - `xiaomi-router-hosts-noad.txt` → `hosts.txt`
+  - `raw-domains.txt` → `domains.txt`
+  - `README_CN.md` → `README.zh-CN.md` (ISO 639-1 standard)
+  - `hosts-manager.html` → `manager.html`
+- Updated all internal references in `manager.html` to use new file names
+- Updated README.md and README.zh-CN.md with new file references
 
 ### Fixed
-- Fixed `raw-domains.txt` rule documentation (`@` syntax)
-- Fixed `hosts-manager.html` to support whitelist (`+`), comment domain (`!`), and custom DNS (`@`) prefixes
+- Fixed `domains.txt` rule documentation (`@` syntax)
+- Fixed `manager.html` to support whitelist (`+`), comment domain (`!`), and custom DNS (`@`) prefixes
 - Regenerated output files with correct domain count
 
 ### Added
-- Support for whitelist domains (`+` prefix) in `hosts-manager.html`
-- Support for comment domains (`!` prefix) in `hosts-manager.html`
-- Support for custom DNS (`@` prefix) in `hosts-manager.html`
+- Support for whitelist domains (`+` prefix) in `manager.html`
+- Support for comment domains (`!` prefix) in `manager.html`
+- Support for custom DNS (`@` prefix) in `manager.html`
 - Display of whitelist and custom DNS counts in output info
 
 ## [1.0.1] - 2026-03-14
