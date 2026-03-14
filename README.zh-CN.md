@@ -2,11 +2,17 @@
 
 [![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.2-green)](https://github.com/sutchan/dnsmasq_ads_filter)
 
-基于 dnsmasq 的广告过滤规则，用于在路由器级别屏蔽小米设备（电视盒子、手机）的广告。
+基于 DNS 的路由器广告过滤规则库，提供 Web 管理界面。
 
 ## 简介
 
-本项目提供基于 dnsmasq 的广告过滤列表，专为小米生态设备优化。通过 DNS 层面拦截广告，实现全路由器广告屏蔽。
+本项目提供基于 dnsmasq/hosts 的广告过滤解决方案，包含：
+
+- **356+ 拦截域名** - 全面的广告和追踪域名过滤
+- **Web 管理工具** - 通过浏览器生成自定义过滤清单
+- **多种输出格式** - 支持 Dnsmasq 和 Hosts 格式
+- **单一数据源工作流** - 一个域名清单生成所有输出格式
+- **路由器兼容** - 支持梅林、OpenWrt、小米、华硕、TP-Link 等
 
 ## 使用方法
 
@@ -18,9 +24,9 @@
 
 复制 `dnsmasq.conf` 的全部内容，粘贴到自定义 dnsmasq 配置中。
 
-### 小米路由器
+### 小米路由器/其他支持自定义 hosts 的路由器
 
-将 `hosts.txt` 导入小米路由器的广告屏蔽设置。
+将 `hosts.txt` 导入路由器的广告屏蔽设置。此方法适用于所有支持自定义 hosts 文件的路由器（小米、OpenWrt、华硕、TP-Link 等）。
 
 ### OpenWrt
 

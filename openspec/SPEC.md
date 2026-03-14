@@ -5,7 +5,7 @@
 - **项目名称**: dnsmasq_ads_filter
 - **项目类型**: 广告过滤规则库
 - **核心功能**: 基于 dnsmasq 的广告过滤规则，用于路由器级别屏蔽广告
-- **目标用户**: 使用梅林固件/小米路由器/OpenWrt 的用户
+- **目标用户**: 使用梅林固件/OpenWrt/小米/华硕/TP-Link 等路由器的用户
 - **项目地址**: https://github.com/sutchan/dnsmasq_ads_filter
 - **当前版本**: v1.0.2
 

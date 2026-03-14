@@ -2,11 +2,17 @@
 
 [![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.2-green)](https://github.com/sutchan/dnsmasq_ads_filter)
 
-Router-level ad blocking filter list for Xiaomi devices (TV, Box, Phone) using dnsmasq.
+Router-level DNS-based ad blocking filter list with web management tool.
 
 ## Overview
 
-This project provides a dnsmasq-based ad blocking list optimized for Xiaomi ecosystem devices. It blocks ads at the DNS level, providing a router-wide ad filtering solution.
+This project provides a dnsmasq/hosts-based ad blocking solution that works at the DNS level. It includes:
+
+- **356+ blocked domains** - Comprehensive ad and tracking domain filter
+- **Web management tool** - Generate custom filter lists via browser
+- **Multiple output formats** - Supports Dnsmasq and Hosts formats
+- **Single source workflow** - One domain list generates all output formats
+- **Router compatible** - Works with Merlin, OpenWrt, Xiaomi, ASUS, TP-Link, and more
 
 ## Usage
 
@@ -18,9 +24,10 @@ This project provides a dnsmasq-based ad blocking list optimized for Xiaomi ecos
 
 Copy all content from `dnsmasq.conf` and paste into the custom dnsmasq configuration.
 
-### Xiaomi Router
+### Xiaomi Router / Other Routers with Custom Hosts Support
 
-Import `hosts.txt` into your Xiaomi router's ad blocking settings.
+Import `hosts.txt` into your router's ad blocking settings.
+This method works for all routers that support custom hosts files (Xiaomi, OpenWrt, ASUS, TP-Link, etc.).
 
 ### OpenWrt
 
