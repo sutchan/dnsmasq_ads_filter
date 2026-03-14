@@ -19,10 +19,15 @@ dnsmasq_ads_filter/
 ├── dnsmasq.conf                        # Dnsmasq 过滤列表（生成）
 ├── hosts.txt                           # Hosts 文件（生成）
 ├── manager.html                        # Web 管理界面
-├── i18n.js                             # 国际化模块
-├── styles.css                          # 样式文件
 ├── .gitignore                          # Git 忽略配置
 ├── CHANGELOG.md                        # 变更日志
+├── assets/                            # 资源目录
+│   ├── js/
+│   │   ├── app.js                     # 主逻辑
+│   │   ├── i18n.js                    # 国际化模块
+│   │   └── utils.js                   # 工具函数
+│   └── css/
+│       └── styles.css                  # 样式文件
 └── openspec/                           # 项目规范文档
     ├── SPEC.md                         # 项目规范
     ├── TASKS.md                        # 任务清单
@@ -240,9 +245,13 @@ manager.html (纯静态，无需服务器)
     │
     ├── domains.txt (数据源)
     │
-    ├── i18n.js (国际化)
+    ├── assets/js/i18n.js (国际化)
     │
-    ├── styles.css (样式)
+    ├── assets/js/utils.js (工具函数)
+    │
+    ├── assets/js/app.js (主逻辑)
+    │
+    ├── assets/css/styles.css (样式)
     │
     └── 预设源 URL
         ├── AdGuard DNS Filter

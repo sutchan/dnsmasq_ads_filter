@@ -23,8 +23,10 @@
 - [ ] 根目录文件结构符合 SPEC.md 定义
 - [ ] `domains.txt` 存在且格式正确
 - [ ] `manager.html` 存在且功能完整
-- [ ] `i18n.js` 存在且翻译完整
-- [ ] `styles.css` 存在且样式正确
+- [ ] `assets/js/i18n.js` 存在且翻译完整
+- [ ] `assets/js/app.js` 存在且主逻辑完整
+- [ ] `assets/js/utils.js` 存在且工具函数完整
+- [ ] `assets/css/styles.css` 存在且样式正确
 - [ ] 生成的文件格式正确
 
 ## 功能验证

@@ -7,7 +7,7 @@
 #
 # Version: 1.0.2
 # Update: 2026.03.14
-# Domains: 359 unique domains
+# Domains: 356 unique domains
 #
 # Usage: Import to Xiaomi router ad blocking settings
 #

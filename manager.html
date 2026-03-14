@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/js/i18n.js" defer></script>
     <script src="assets/js/utils.js" defer></script>
+    <script src="assets/js/core.js" defer></script>
+    <script src="assets/js/parser.js" defer></script>
+    <script src="assets/js/generator.js" defer></script>
+    <script src="assets/js/ui.js" defer></script>
     <script src="assets/js/app.js" defer></script>
 </head>
 <body>
@@ -28,8 +32,10 @@
             <div class="header-main">
                 <h1>🛡️ DNS广告过滤清单生成器</h1>
                 <div class="header-actions">
-                    <button class="icon-btn" onclick="switchLang()" title="切换语言">
-                        <span class="lang-btn">🌐</span>
+                    <button class="lang-switch" onclick="switchLang()" title="切换语言">
+                        <span class="lang-zh">中</span>
+                        <span class="lang-divider">/</span>
+                        <span class="lang-en">EN</span>
                     </button>
                     <button class="icon-btn" onclick="toggleTheme()" title="切换主题">
                         <span class="theme-btn">🌙</span>
@@ -105,10 +111,15 @@
             <section class="panel output-section" id="output-panel">
                 <div class="section-header">
                     <h2 data-i18n="outputTitle">📤 生成过滤规则</h2>
-                    <div class="format-tabs">
-                        <button class="format-tab active" onclick="setFormat('dnsmasq')">Dnsmasq</button>
-                        <button class="format-tab" onclick="setFormat('hosts')">Hosts</button>
-                        <button class="format-tab" onclick="setFormat('both')">混合</button>
+                    <div class="header-actions">
+                        <div class="format-tabs">
+                            <button class="format-tab active" onclick="setFormat('dnsmasq')">Dnsmasq</button>
+                            <button class="format-tab" onclick="setFormat('hosts')">Hosts</button>
+                            <button class="format-tab" onclick="setFormat('both')">混合</button>
+                        </div>
+                        <button class="icon-btn settings-toggle" onclick="toggleSettings()" title="生成设置">
+                            ⚙️
+                        </button>
                     </div>
                 </div>
 
@@ -153,7 +164,10 @@
 
                 <div class="merge-info" id="mergeInfo">点击"生成规则"查看输出</div>
 
-                <div class="output-preview" id="outputPreview">// 生成的规则将显示在这里</div>
+                <div class="output-container">
+                    <div class="line-numbers" id="outputLineNumbers"></div>
+                    <div class="output-preview" id="outputPreview">// 生成的规则将显示在这里</div>
+                </div>
 
                 <div class="output-actions">
                     <button class="btn btn-success" onclick="generateRules()">🔄 生成规则</button>
