@@ -55,7 +55,12 @@ const i18n = {
         toastLoadPreset: '正在加载预设源...',
         toastPresetFailed: '加载预设失败',
         toastCopied: '已复制到剪贴板',
-        toastSaved: '已保存到本地'
+        toastSaved: '已保存到本地',
+        toastInvalidUrl: '请输入有效的 URL',
+        toastUrlExists: 'URL 已存在',
+        toastValidated: '校验完成',
+        toastNoValidUrls: '没有有效的 URL',
+        toastFiles: '个文件'
     },
     en: {
         title: '🛡️ DNS Ad Blocklist Generator',
@@ -113,7 +118,12 @@ const i18n = {
         toastLoadPreset: 'Loading preset...',
         toastPresetFailed: 'Failed to load preset',
         toastCopied: 'Copied to clipboard',
-        toastSaved: 'Saved to local'
+        toastSaved: 'Saved to local',
+        toastInvalidUrl: 'Please enter a valid URL',
+        toastUrlExists: 'URL already exists',
+        toastValidated: 'Validation complete',
+        toastNoValidUrls: 'No valid URLs',
+        toastFiles: 'files'
     }
 };
 
