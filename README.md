@@ -96,7 +96,7 @@
                 <td>Web interface for managing and syncing both filter lists</td>
             </tr>
             <tr>
-                <td><code>ad-domains.txt</code></td>
+                <td><code>raw-domains.txt</code></td>
                 <td>Unified domain list (one domain per line, source of truth)</td>
             </tr>
         </table>
@@ -111,7 +111,7 @@
         </ul>
 
         <h2>Contribution</h2>
-        <p>Edit <code>ad-domains.txt</code> to add/remove domains, then run the sync tool to regenerate both format files.</p>
+        <p>Edit <code>raw-domains.txt</code> to add/remove domains, then run the sync tool to regenerate both format files.</p>
 
         <h2>License</h2>
         <p>MIT License</p>
@@ -157,7 +157,7 @@
                 <td>Web 管理界面，用于管理和同步两份过滤清单</td>
             </tr>
             <tr>
-                <td><code>ad-domains.txt</code></td>
+                <td><code>raw-domains.txt</code></td>
                 <td>统一域名列表（每行一个域名，数据源）</td>
             </tr>
         </table>
@@ -172,7 +172,7 @@
         </ul>
 
         <h2>贡献</h2>
-        <p>请编辑 <code>ad-domains.txt</code> 添加或删除域名，然后运行同步工具重新生成两种格式的文件。</p>
+        <p>请编辑 <code>raw-domains.txt</code> 添加或删除域名，然后运行同步工具重新生成两种格式的文件。</p>
 
         <h2>许可证</h2>
         <p>MIT License</p>

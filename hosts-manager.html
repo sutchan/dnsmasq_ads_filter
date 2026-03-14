@@ -5,6 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DNS广告过滤清单生成器</title>
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f7fa;
+            --bg-panel: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e5e7eb;
+            --accent-color: #667eea;
+            --accent-hover: #5568d3;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-panel: #1f2937;
+            --text-primary: #e5e7eb;
+            --text-secondary: #9ca3af;
+            --border-color: #374151;
+            --accent-color: #818cf8;
+            --accent-hover: #6366f1;
+            --shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn, .theme-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-panel);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover, .theme-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+        }
+        
+        .stats-bar, .settings-panel, .preset-list, .output-preview {
+            background: var(--bg-secondary);
+        }
+        
+        input, textarea, select {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .label, .settings-title {
+            color: var(--text-secondary);
+        }
+        
+        h1, h2, h3 {
+            color: var(--text-primary);
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+        }
+        
+        .stat-item, .settings-item {
+            color: var(--text-secondary);
+        }
+        
+        .stat-value {
+            color: var(--accent-color);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -293,7 +389,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>🛡️ DNS广告过滤清单生成器</h1>
+        <div class="header-bar">
+            <h1>🛡️ DNS广告过滤清单生成器</h1>
+            <div class="header-controls">
+                <button class="lang-btn" onclick="switchLang()">🌐 中文</button>
+                <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+            </div>
+        </div>
         <p class="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
         
         <div class="stats-bar">
@@ -316,7 +418,7 @@
                 <h2>📥 输入域名清单</h2>
                 
                 <div class="label">从 URL 导入</div>
-                <input type="text" class="url-input" id="urlInput" placeholder="https://raw.githubusercontent.com/.../blocklist.txt">
+                <input type="text" class="url-input" id="urlInput" placeholder="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/refs/heads/main/raw-domains.txt" value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/refs/heads/main/raw-domains.txt">
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="fetchFromUrl()">获取域名列表</button>
                 </div>
@@ -354,6 +456,60 @@
                     </label>
                 </div>
                 
+                <div class="settings-panel">
+                    <div class="settings-title">⚙️ 生成设置</div>
+                    <div class="settings-grid">
+                        <div class="settings-item">
+                            <label>项目名称</label>
+                            <input type="text" id="projectNameInput" value="dnsmasq_ads_filter" onchange="updateSettings()">
+                        </div>
+                        <div class="settings-item">
+                            <label>版本号</label>
+                            <input type="text" id="versionInput" value="1.0.0" onchange="updateSettings()">
+                        </div>
+                        <div class="settings-item">
+                            <label>目标 IP (IPv4)</label>
+                            <input type="text" id="ipv4Input" value="0.0.0.0" onchange="updateSettings()">
+                        </div>
+                        <div class="settings-item">
+                            <label>目标 IP (IPv6)</label>
+                            <input type="text" id="ipv6Input" value="::" onchange="updateSettings()">
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="settings-grid">
+                        <div class="settings-item">
+                            <label>Dnsmasq 文件名</label>
+                            <input type="text" id="dnsmasqFilename" value="dnsmasq-ads-filter-list.txt" onchange="updateSettings()">
+                        </div>
+                        <div class="settings-item">
+                            <label>Hosts 文件名</label>
+                            <input type="text" id="hostsFilename" value="xiaomi-router-hosts-noad.txt" onchange="updateSettings()">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="addHeader" checked onchange="generateRules()">
+                        添加头部注释
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="blockIPv6" checked onchange="generateRules()">
+                        阻止 IPv6
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="dedupDomains" checked onchange="generateRules()">
+                        自动去重
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="removeWildcard" checked onchange="generateRules()">
+                        移除通配符前缀
+                    </label>
+                </div>
+                
+                <div class="divider"></div>
+                
                 <div class="merge-info" id="mergeInfo">
                     点击"生成规则"查看输出
                 </div>
@@ -375,6 +531,26 @@
                 <button class="btn btn-success" onclick="downloadHosts()">下载 xiaomi-router-hosts-noad.txt</button>
             </div>
         </div>
+        
+        <div class="panel">
+            <h2>ℹ️ 关于</h2>
+            <div class="settings-panel">
+                <div class="settings-grid">
+                    <div class="settings-item">
+                        <label>项目地址</label>
+                        <input type="text" value="https://github.com/sutchan/dnsmasq_ads_filter" readonly>
+                    </div>
+                    <div class="settings-item">
+                        <label>Web 管理工具版本</label>
+                        <input type="text" value="1.0.0" readonly>
+                    </div>
+                </div>
+                <div style="margin-top: 16px; font-size: 13px; color: #64748b;">
+                    <p>DNS广告过滤清单生成器 - 从单一域名清单生成多种格式的路由器过滤规则</p>
+                    <p style="margin-top: 8px;">支持 Dnsmasq、Hosts 格式输出，适用于梅林固件、小米路由器等设备</p>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="toast" id="toast"></div>
@@ -383,6 +559,15 @@
         let domains = [];
         let currentFormat = 'dnsmasq';
         let outputContent = { dnsmasq: '', hosts: '' };
+        
+        let settings = {
+            projectName: 'dnsmasq_ads_filter',
+            version: '1.0.0',
+            ipv4: '0.0.0.0',
+            ipv6: '::',
+            dnsmasqFilename: 'dnsmasq-ads-filter-list.txt',
+            hostsFilename: 'xiaomi-router-hosts-noad.txt'
+        };
         
         const presets = {
             adguard: 'https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt',
@@ -412,6 +597,17 @@
                 const content = await response.text();
                 document.getElementById('sourceInput').value = content;
                 parseSource();
+            
+            // 自动加载 raw-domains.txt
+            fetch('raw-domains.txt')
+                .then(r => r.text())
+                .then(t => {
+                    if (t.trim()) {
+                        document.getElementById('sourceInput').value = t;
+                        parseSource();
+                    }
+                })
+                .catch(() => {});
                 showToast(`成功获取域名列表！`);
             } catch (e) {
                 showToast('获取失败: ' + e.message, true);
@@ -485,13 +681,30 @@
         }
         
         const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
-        const projectName = 'dnsmasq_ads_filter';
-        const version = '1.0.0';
+        
+        function updateSettings() {
+            settings.projectName = document.getElementById('projectNameInput').value || 'ad_block_list';
+            settings.version = document.getElementById('versionInput').value || '1.0.0';
+            settings.ipv4 = document.getElementById('ipv4Input').value || '0.0.0.0';
+            settings.ipv6 = document.getElementById('ipv6Input').value || '::';
+            settings.dnsmasqFilename = document.getElementById('dnsmasqFilename').value || 'dnsmasq-ads-filter-list.txt';
+            settings.hostsFilename = document.getElementById('hostsFilename').value || 'xiaomi-router-hosts-noad.txt';
+            if (domains.length > 0) generateRules();
+        }
         
         function generateRules() {
+            const addHeader = document.getElementById('addHeader').checked;
             const blockIPv6 = document.getElementById('blockIPv6').checked;
+            const dedupDomains = document.getElementById('dedupDomains').checked;
+            const removeWildcard = document.getElementById('removeWildcard').checked;
             
-            const uniqueDomains = [...new Set(domains)].sort();
+            let processedDomains = [...domains];
+            if (removeWildcard) {
+                processedDomains = processedDomains.map(d => d.replace(/^\*\./, ''));
+            }
+            if (dedupDomains) {
+                processedDomains = [...new Set(processedDomains)].sort();
+            }
             
             const now = new Date();
             const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
@@ -499,49 +712,51 @@
             let dnsmasqContent = '';
             let hostsContent = '';
             
-            dnsmasqContent += `# ===============================================\n`;
-            dnsmasqContent += `# ${projectName} - Dnsmasq Ad Block List\n`;
-            dnsmasqContent += `# ===============================================\n`;
-            dnsmasqContent += `#\n`;
-            dnsmasqContent += `# Description: Router-level ad blocking filter for Xiaomi devices\n`;
-            dnsmasqContent += `#              and general advertising/tracking domains\n`;
-            dnsmasqContent += `#\n`;
-            dnsmasqContent += `# Version: ${version}\n`;
-            dnsmasqContent += `# Update: ${dateStr}\n`;
-            dnsmasqContent += `# Domains: ${uniqueDomains.length} unique domains\n`;
-            dnsmasqContent += `#\n`;
-            dnsmasqContent += `# Usage:\n`;
-            dnsmasqContent += `#   - Merlin: Software Center -> DNS Settings -> Custom dnsmasq\n`;
-            dnsmasqContent += `#   - OpenWrt: Services -> DHCP and DNS -> Resolvfile\n`;
-            dnsmasqContent += `#\n`;
-            dnsmasqContent += `# Project: ${projectUrl}\n`;
-            dnsmasqContent += `#\n`;
-            dnsmasqContent += `# ===============================================\n\n`;
+            if (addHeader) {
+                dnsmasqContent += `# ===============================================\n`;
+                dnsmasqContent += `# ${settings.projectName} - Dnsmasq Ad Block List\n`;
+                dnsmasqContent += `# ===============================================\n`;
+                dnsmasqContent += `#\n`;
+                dnsmasqContent += `# Description: Router-level ad blocking filter for Xiaomi devices\n`;
+                dnsmasqContent += `#              and general advertising/tracking domains\n`;
+                dnsmasqContent += `#\n`;
+                dnsmasqContent += `# Version: ${settings.version}\n`;
+                dnsmasqContent += `# Update: ${dateStr}\n`;
+                dnsmasqContent += `# Domains: ${processedDomains.length} unique domains\n`;
+                dnsmasqContent += `#\n`;
+                dnsmasqContent += `# Usage:\n`;
+                dnsmasqContent += `#   - Merlin: Software Center -> DNS Settings -> Custom dnsmasq\n`;
+                dnsmasqContent += `#   - OpenWrt: Services -> DHCP and DNS -> Resolvfile\n`;
+                dnsmasqContent += `#\n`;
+                dnsmasqContent += `# Project: ${projectUrl}\n`;
+                dnsmasqContent += `#\n`;
+                dnsmasqContent += `# ===============================================\n\n`;
+                
+                hostsContent += `# ===============================================\n`;
+                hostsContent += `# ${settings.projectName} - Xiaomi Router Hosts Block List\n`;
+                hostsContent += `# ===============================================\n`;
+                hostsContent += `#\n`;
+                hostsContent += `# Description: Router-level ad blocking hosts file\n`;
+                hostsContent += `#              for Xiaomi routers and general use\n`;
+                hostsContent += `#\n`;
+                hostsContent += `# Version: ${settings.version}\n`;
+                hostsContent += `# Update: ${dateStr}\n`;
+                hostsContent += `# Domains: ${processedDomains.length} unique domains\n`;
+                hostsContent += `#\n`;
+                hostsContent += `# Usage: Import to Xiaomi router ad blocking settings\n`;
+                hostsContent += `#\n`;
+                hostsContent += `# Project: ${projectUrl}\n`;
+                hostsContent += `#\n`;
+                hostsContent += `# ===============================================\n\n`;
+            }
             
-            hostsContent += `# ===============================================\n`;
-            hostsContent += `# ${projectName} - Xiaomi Router Hosts Block List\n`;
-            hostsContent += `# ===============================================\n`;
-            hostsContent += `#\n`;
-            hostsContent += `# Description: Router-level ad blocking hosts file\n`;
-            hostsContent += `#              for Xiaomi routers and general use\n`;
-            hostsContent += `#\n`;
-            hostsContent += `# Version: ${version}\n`;
-            hostsContent += `# Update: ${dateStr}\n`;
-            hostsContent += `# Domains: ${uniqueDomains.length} unique domains\n`;
-            hostsContent += `#\n`;
-            hostsContent += `# Usage: Import to Xiaomi router ad blocking settings\n`;
-            hostsContent += `#\n`;
-            hostsContent += `# Project: ${projectUrl}\n`;
-            hostsContent += `#\n`;
-            hostsContent += `# ===============================================\n\n`;
-            
-            uniqueDomains.forEach(domain => {
-                dnsmasqContent += `address=/${domain}/0.0.0.0\n`;
-                hostsContent += `0.0.0.0 ${domain}\n`;
+            processedDomains.forEach(domain => {
+                dnsmasqContent += `address=/${domain}/${settings.ipv4}\n`;
+                hostsContent += `${settings.ipv4} ${domain}\n`;
                 
                 if (blockIPv6) {
-                    dnsmasqContent += `address=/${domain}::/\n`;
-                    hostsContent += `:: ${domain}\n`;
+                    dnsmasqContent += `address=/${domain}${settings.ipv6}/\n`;
+                    hostsContent += `${settings.ipv6} ${domain}\n`;
                 }
             });
             
@@ -558,31 +773,31 @@
             }
             
             document.getElementById('outputPreview').textContent = preview;
-            document.getElementById('mergeInfo').textContent = `共 ${uniqueDomains.length} 个唯一域名 | Dnsmasq: ${dnsmasqContent.split('\n').length} 行 | Hosts: ${hostsContent.split('\n').length} 行`;
+            document.getElementById('mergeInfo').textContent = `共 ${processedDomains.length} 个域名 | Dnsmasq: ${dnsmasqContent.split('\n').length} 行 | Hosts: ${hostsContent.split('\n').length} 行`;
         }
         
         function downloadOutput() {
             const format = currentFormat;
             if (format === 'dnsmasq') {
-                downloadFile(outputContent.dnsmasq, 'dnsmasq-ads-filter-list.txt');
+                downloadFile(outputContent.dnsmasq, settings.dnsmasqFilename);
             } else if (format === 'hosts') {
-                downloadFile(outputContent.hosts, 'xiaomi-router-hosts-noad.txt');
+                downloadFile(outputContent.hosts, settings.hostsFilename);
             } else {
-                downloadFile(outputContent.dnsmasq, 'dnsmasq-ads-filter-list.txt');
-                setTimeout(() => downloadFile(outputContent.hosts, 'xiaomi-router-hosts-noad.txt'), 500);
+                downloadFile(outputContent.dnsmasq, settings.dnsmasqFilename);
+                setTimeout(() => downloadFile(outputContent.hosts, settings.hostsFilename), 500);
             }
         }
         
         function downloadDnsmasq() {
             if (!outputContent.dnsmasq) generateRules();
-            downloadFile(outputContent.dnsmasq, 'dnsmasq-ads-filter-list.txt');
-            showToast('已下载 dnsmasq-ads-filter-list.txt');
+            downloadFile(outputContent.dnsmasq, settings.dnsmasqFilename);
+            showToast('已下载 ' + settings.dnsmasqFilename);
         }
         
         function downloadHosts() {
             if (!outputContent.hosts) generateRules();
-            downloadFile(outputContent.hosts, 'xiaomi-router-hosts-noad.txt');
-            showToast('已下载 xiaomi-router-hosts-noad.txt');
+            downloadFile(outputContent.hosts, settings.hostsFilename);
+            showToast('已下载 ' + settings.hostsFilename);
         }
         
         function downloadFile(content, filename) {
@@ -619,6 +834,142 @@
         }
         
         function showToast(message, isError = false) {
+        
+        let isLangZh = localStorage.getItem('lang') === 'zh';
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                document.querySelector('.theme-btn').textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                document.querySelector('.theme-btn').textContent = '☀️';
+            }
+        }
+        
+        function switchLang() {
+            isLangZh = !isLangZh;
+            localStorage.setItem('lang', isLangZh ? 'zh' : 'en');
+            updateLang();
+        }
+        
+        function updateLang() {
+            const langData = isLangZh ? {
+                'title': 'DNS广告过滤清单生成器',
+                'subtitle': '从单一域名清单生成多种格式的路由器过滤规则',
+                'domainCount': '域名总数',
+                'validCount': '有效域名',
+                'commentCount': '注释行',
+                'importUrl': '从 URL 导入',
+                'fetchBtn': '获取域名列表',
+                'preset': '或选择预设源',
+                'manualEdit': '或直接编辑域名（每行一个域名，# 开头为注释）',
+                'parseBtn': '解析域名',
+                'format': '选择输出格式',
+                'dnsmasq': 'Dnsmasq 格式',
+                'hosts': 'Hosts 格式',
+                'adblock': 'AdBlock 格式',
+                'settings': '⚙️ 生成设置',
+                'ip': '目标 IP',
+                'dnsmasqFile': 'Dnsmasq 文件名',
+                'hostsFile': 'Hosts 文件名',
+                'includeComments': '包含注释',
+                'addTimestamp': '添加时间戳',
+                'options': '选项',
+                'mergeOption': '去重合并',
+                'sortOption': '排序输出',
+                'preview': '📄 预览',
+                'download': '下载',
+                'downloadDnsmasq': '下载 dnsmasq 格式',
+                'downloadHosts': '下载 Hosts 格式',
+                'copyAll': '复制全部',
+                'mergeInfo': '已合并去重，共 {count} 条规则',
+                'localSettings': '📁 本地文件',
+                'loadLocal': '加载本地文件',
+                'autoLoad': '自动加载 raw-domains.txt',
+                'save': '保存到本地',
+                'langBtn': '🌐 EN'
+            } : {
+                'title': 'DNS Ad Filter Generator',
+                'subtitle': 'Generate router filter rules from a single domain list',
+                'domainCount': 'Total Domains',
+                'validCount': 'Valid Domains',
+                'commentCount': 'Comment Lines',
+                'importUrl': 'Import from URL',
+                'fetchBtn': 'Fetch Domains',
+                'preset': 'Or select preset source',
+                'manualEdit': 'Or edit domains directly (one per line, # for comments)',
+                'parseBtn': 'Parse Domains',
+                'format': 'Select Output Format',
+                'dnsmasq': 'Dnsmasq Format',
+                'hosts': 'Hosts Format',
+                'adblock': 'AdBlock Format',
+                'settings': '⚙️ Generation Settings',
+                'ip': 'Target IP',
+                'dnsmasqFile': 'Dnsmasq Filename',
+                'hostsFile': 'Hosts Filename',
+                'includeComments': 'Include Comments',
+                'addTimestamp': 'Add Timestamp',
+                'options': 'Options',
+                'mergeOption': 'Deduplicate',
+                'sortOption': 'Sort Output',
+                'preview': '📄 Preview',
+                'download': 'Download',
+                'downloadDnsmasq': 'Download Dnsmasq',
+                'downloadHosts': 'Download Hosts',
+                'copyAll': 'Copy All',
+                'mergeInfo': 'Merged & deduplicated: {count} rules',
+                'localSettings': '📁 Local Files',
+                'loadLocal': 'Load Local File',
+                'autoLoad': 'Auto-load raw-domains.txt',
+                'save': 'Save to Local',
+                'langBtn': '🌐 中文'
+            };
+            
+            document.querySelector('h1').textContent = '🛡️ ' + langData.title;
+            document.querySelector('.subtitle').textContent = langData.subtitle;
+            document.querySelectorAll('.stat-item .label')[0].textContent = langData.domainCount;
+            document.querySelectorAll('.stat-item .label')[1].textContent = langData.validCount;
+            document.querySelectorAll('.stat-item .label')[2].textContent = langData.commentCount;
+            document.querySelectorAll('.label')[0].textContent = langData.importUrl;
+            document.querySelector('.btn-primary').textContent = langData.fetchBtn;
+            document.querySelectorAll('.label')[1].textContent = langData.preset;
+            document.querySelectorAll('.label')[2].textContent = langData.manualEdit;
+            document.querySelectorAll('.btn-primary')[1].textContent = langData.parseBtn;
+            document.querySelector('.settings-title').textContent = langData.settings;
+            document.querySelectorAll('.settings-item label')[0].textContent = langData.ip;
+            document.querySelectorAll('.settings-item label')[1].textContent = langData.dnsmasqFile;
+            document.querySelectorAll('.settings-item label')[2].textContent = langData.hostsFile;
+            document.querySelector('.checkbox-group label').textContent = langData.includeComments;
+            document.querySelectorAll('.checkbox-group label')[1].textContent = langData.addTimestamp;
+            document.querySelectorAll('.merge-info')[0].querySelector('span').textContent = langData.options;
+            document.querySelectorAll('.merge-info label')[0].textContent = langData.mergeOption;
+            document.querySelectorAll('.merge-info label')[1].textContent = langData.sortOption;
+            document.querySelector('.output-title').textContent = langData.preview;
+            document.querySelector('.btn-group .btn-success').textContent = langData.download;
+            document.querySelectorAll('.btn-group .btn-primary')[2].textContent = langData.downloadDnsmasq;
+            document.querySelectorAll('.btn-group .btn-primary')[3].textContent = langData.downloadHosts;
+            document.querySelector('.btn-copy').textContent = langData.copyAll;
+            document.querySelector('.panel-title').textContent = langData.localSettings;
+            document.querySelectorAll('.settings-item label')[3].textContent = langData.loadLocal;
+            document.querySelector('.auto-load-label').textContent = langData.autoLoad;
+            document.querySelector('.btn-warning').textContent = langData.save;
+            document.querySelector('.lang-btn').textContent = langData.langBtn;
+        }
+        
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.querySelector('.theme-btn').textContent = '☀️';
+            }
+            isLangZh = localStorage.getItem('lang') === 'zh';
+            updateLang();
+        })();
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.className = 'toast' + (isError ? ' error' : '');
