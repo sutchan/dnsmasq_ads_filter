@@ -177,19 +177,69 @@ textarea:focus {
 }
 
 .url-input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 14px;
-    margin-bottom: 12px;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    flex: 1;
+    min-width: 200px;
 }
 
 .url-input:focus {
     outline: none;
     border-color: var(--accent-color);
+}
+
+.url-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.url-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.url-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text-primary);
+}
+
+.url-item .url-text {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.url-item .url-remove {
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1;
+}
+
+.url-item .url-remove:hover {
+    color: var(--error-color);
+}
+
+.url-item.loading {
+    opacity: 0.6;
+}
+
+.url-item.success {
+    border-color: var(--success-color);
+}
+
+.url-item.error {
+    border-color: var(--error-color);
 }
 
 .format-tabs {

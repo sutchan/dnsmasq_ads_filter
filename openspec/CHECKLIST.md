@@ -6,12 +6,14 @@
 - [ ] 无硬编码敏感信息
 - [ ] 文件编码为 UTF-8
 - [ ] HTML/CSS/JS 语法正确
+- [ ] 文件头注释格式正确
 
 ## 文档完整性
 
 - [ ] `README.md` 存在且内容完整
-- [ ] `README_CN.md` 存在且内容完整
+- [ ] `README.zh-CN.md` 存在且内容完整
 - [ ] 两个 README 文件互相链接正确
+- [ ] `CHANGELOG.md` 变更记录完整
 - [ ] `openspec/SPEC.md` 规范文档完整
 - [ ] `openspec/TASKS.md` 任务清单完整
 - [ ] `openspec/CHECKLIST.md` 检查清单完整
@@ -19,8 +21,10 @@
 ## 文件结构
 
 - [ ] 根目录文件结构符合 SPEC.md 定义
-- [ ] `raw-domains.txt` 存在且格式正确
-- [ ] `hosts-manager.html` 存在且功能完整
+- [ ] `domains.txt` 存在且格式正确
+- [ ] `manager.html` 存在且功能完整
+- [ ] `i18n.js` 存在且翻译完整
+- [ ] `styles.css` 存在且样式正确
 - [ ] 生成的文件格式正确
 
 ## 功能验证
@@ -33,6 +37,9 @@
 - [ ] 通配符处理正常
 - [ ] 头部注释生成正确
 - [ ] 文件下载功能正常
+- [ ] 白名单功能正常（`+` 前缀）
+- [ ] 注释域名功能正常（`!` 前缀）
+- [ ] 自定义 DNS 功能正常（`@` 前缀）
 
 ## Web 管理工具
 

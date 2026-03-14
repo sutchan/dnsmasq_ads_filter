@@ -1,6 +1,6 @@
 # 原始域名清单
 # 格式：每行一个域名，# 开头为注释
-# 此文件为唯一数据源，通过 hosts-manager.html 生成其他格式
+# 此文件为唯一数据源，通过 manager.html 生成其他格式
 #
 # === 规则说明 ===
 # - 空行或 # 开头：注释/无效行
@@ -21,6 +21,11 @@
 !XX.market.mi-img.com #影响MIUI小部件
 !XX.market.xiaomi.com #影响MIUI小部件
 
+gdt.qq.com
+pgdt.gtimg.cn
+ad.weixin.qq.com
+mpad.weixin.qq.com
+wechatad.com
 3dns-2.adobe.com
 3dns-3.adobe.com
 4009997658.com

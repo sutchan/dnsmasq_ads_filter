@@ -7,22 +7,26 @@
 - **核心功能**: 基于 dnsmasq 的广告过滤规则，用于路由器级别屏蔽广告
 - **目标用户**: 使用梅林固件/小米路由器/OpenWrt 的用户
 - **项目地址**: https://github.com/sutchan/dnsmasq_ads_filter
+- **当前版本**: v1.0.2
 
 ## 2. 文件结构
 
 ```
 dnsmasq_ads_filter/
 ├── README.md                           # 英文说明文档
-├── README_CN.md                        # 中文说明文档
-├── raw-domains.txt                     # 原始域名清单（唯一数据源）
-├── dnsmasq-ads-filter-list.txt         # Dnsmasq 过滤列表（生成）
-├── xiaomi-router-hosts-noad.txt         # 小米路由器 hosts 文件（生成）
-├── hosts-manager.html                   # Web 管理界面
+├── README.zh-CN.md                     # 中文说明文档
+├── domains.txt                         # 原始域名清单（唯一数据源）
+├── dnsmasq.conf                        # Dnsmasq 过滤列表（生成）
+├── hosts.txt                           # Hosts 文件（生成）
+├── manager.html                        # Web 管理界面
+├── i18n.js                             # 国际化模块
+├── styles.css                          # 样式文件
 ├── .gitignore                          # Git 忽略配置
+├── CHANGELOG.md                        # 变更日志
 └── openspec/                           # 项目规范文档
-    ├── SPEC.md                          # 项目规范
-    ├── TASKS.md                         # 任务清单
-    └── CHECKLIST.md                     # 质量检查清单
+    ├── SPEC.md                         # 项目规范
+    ├── TASKS.md                        # 任务清单
+    └── CHECKLIST.md                    # 质量检查清单
 ```
 
 ## 3. 核心工作流程
@@ -30,21 +34,25 @@ dnsmasq_ads_filter/
 ### 3.1 单一数据源原则
 
 ```
-raw-domains.txt (唯一数据源)
+domains.txt (唯一数据源)
         ↓
-  hosts-manager.html (Web 管理工具)
+  manager.html (Web 管理工具)
         ↓
    ┌────────────┴────────────┐
    ↓                         ↓
-dnsmasq-ads-filter-list.txt  xiaomi-router-hosts-noad.txt
-(Dnsmasq 格式)              (Hosts 格式)
+dnsmasq.conf              hosts.txt
+(Dnsmasq 格式)            (Hosts 格式)
 ```
 
-### 3.2 原始域名格式 (raw-domains.txt)
+### 3.2 原始域名格式 (domains.txt)
 
 - 每行一个域名
 - `#` 开头为注释
 - 支持通配符格式 `*.example.com`
+- 支持特殊前缀：
+  - `+` 白名单域名（允许解析）
+  - `!` 注释域名（显示但不断言）
+  - `@` 自定义 DNS 指向（如 `@example.com=0.0.0.0`）
 
 **示例**:
 ```
@@ -52,11 +60,17 @@ dnsmasq-ads-filter-list.txt  xiaomi-router-hosts-noad.txt
 ad.mi.com
 analytics.mi.com
 
-# 通用广告域名
-doubleclick.net
+# 白名单域名
++api.io.mi.com
+
+# 注释域名（不影响解析）
+!connectivitycheck.gstatic.com
+
+# 自定义 DNS 指向
+@example.com=192.168.1.1
 ```
 
-### 3.3 Dnsmasq 格式 (dnsmasq-ads-filter-list.txt)
+### 3.3 Dnsmasq 格式 (dnsmasq.conf)
 
 ```
 address=/域名/IP
@@ -68,7 +82,7 @@ address=/ad.mi.com/0.0.0.0
 address=/ad.mi.com/::
 ```
 
-### 3.4 Hosts 格式 (xiaomi-router-hosts-noad.txt)
+### 3.4 Hosts 格式 (hosts.txt)
 
 ```
 IP 域名
@@ -80,7 +94,7 @@ IP 域名
 :: ad.mi.com
 ```
 
-## 4. Web 管理工具 (hosts-manager.html)
+## 4. Web 管理工具 (manager.html)
 
 ### 4.1 功能特性
 
@@ -96,16 +110,18 @@ IP 域名
 | 头部注释 | 生成包含项目信息的文件头 |
 | 一键下载 | 下载生成的文件 |
 | 剪贴板复制 | 复制生成的内容 |
+| 主题切换 | 亮色/暗色主题 |
+| 语言切换 | 中文/英文 |
 
 ### 4.2 设置选项
 
 **生成设置**:
 - 项目名称 (默认: `dnsmasq_ads_filter`)
-- 版本号 (默认: `1.0.0`)
+- 版本号 (默认: `1.0.2`)
 - IPv4 目标 IP (默认: `0.0.0.0`)
 - IPv6 目标 IP (默认: `::`)
-- Dnsmasq 文件名 (默认: `dnsmasq-ads-filter-list.txt`)
-- Hosts 文件名 (默认: `xiaomi-router-hosts-noad.txt`)
+- Dnsmasq 文件名 (默认: `dnsmasq.conf`)
+- Hosts 文件名 (默认: `hosts.txt`)
 
 **选项开关**:
 - [x] 添加头部注释
@@ -115,7 +131,7 @@ IP 域名
 
 ### 4.3 使用流程
 
-1. 打开 `hosts-manager.html`
+1. 打开 `manager.html`
 2. 选择输入方式:
    - 从 URL 导入
    - 选择预设源
@@ -152,9 +168,9 @@ IP 域名
 
 ### 5.1 新增规则
 
-1. 编辑 `raw-domains.txt`，添加新域名
-2. 打开 `hosts-manager.html`
-3. 自动加载 `raw-domains.txt` 或手动输入
+1. 编辑 `domains.txt`，添加新域名
+2. 打开 `manager.html`
+3. 自动加载 `domains.txt` 或手动输入
 4. 配置输出选项
 5. 点击"生成规则"
 6. 下载更新后的文件
@@ -209,7 +225,7 @@ refactor: 优化规则生成逻辑
 
 ## 8. 版本管理
 
-使用 SemVer 格式: `v1.0.0`
+使用 SemVer 格式: `v1.0.2`
 
 | 版本类型 | 说明 |
 |----------|------|
@@ -220,9 +236,13 @@ refactor: 优化规则生成逻辑
 ## 9. 依赖关系
 
 ```
-hosts-manager.html (纯静态，无需服务器)
+manager.html (纯静态，无需服务器)
     │
-    ├── raw-domains.txt (数据源)
+    ├── domains.txt (数据源)
+    │
+    ├── i18n.js (国际化)
+    │
+    ├── styles.css (样式)
     │
     └── 预设源 URL
         ├── AdGuard DNS Filter

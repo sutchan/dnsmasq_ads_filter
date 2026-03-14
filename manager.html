@@ -7,8 +7,6 @@
     <title>DNS广告过滤清单生成器 v1.0.2</title>
     <link rel="stylesheet" href="styles.css">
     <script src="i18n.js" defer></script>
-    
-    <script>
 </head>
 <body>
     <div class="container">
@@ -41,10 +39,12 @@
                 <h2 data-i18n="inputTitle">📥 输入域名清单</h2>
                 
                 <div class="label" data-i18n="importUrl">从 URL 导入</div>
-                <input type="text" class="url-input" id="urlInput" placeholder="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt" value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt">
-                <div class="btn-group">
+                <div class="url-input-group">
+                    <input type="text" class="url-input" id="urlInput" placeholder="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt" value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt">
                     <button class="btn btn-primary" onclick="fetchFromUrl()" data-i18n="fetchBtn">获取域名列表</button>
+                    <button class="btn btn-outline" onclick="addUrl()" data-i18n="addUrlBtn">➕ 添加</button>
                 </div>
+                <div class="url-list" id="urlList"></div>
                 
                 <div class="label" style="margin-top: 16px;" data-i18n="preset">或选择预设源</div>
                 <div class="preset-list">
@@ -173,6 +173,7 @@
 
     <script>
         let domains = [];
+        let urlList = [];
         let whitelist = [];
         let customDns = [];
         let currentFormat = 'dnsmasq';

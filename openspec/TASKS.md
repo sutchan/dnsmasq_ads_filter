@@ -4,10 +4,10 @@
 
 - [ ] 检查现有规则有效性
 - [ ] 测试新广告域名
-- [ ] 更新 `raw-domains.txt` 原始域名
-- [ ] 通过 `hosts-manager.html` 生成新规则
-- [ ] 更新 `dnsmasq-ads-filter-list.txt`
-- [ ] 更新 `xiaomi-router-hosts-noad.txt`
+- [ ] 更新 `domains.txt` 原始域名
+- [ ] 通过 `manager.html` 生成新规则
+- [ ] 更新 `dnsmasq.conf`
+- [ ] 更新 `hosts.txt`
 - [ ] 更新 README 版本日期
 
 ## 定期任务
@@ -20,13 +20,15 @@
 ## 版本发布
 
 - [ ] 递增版本号 (SemVer)
-- [ ] 更新 CHANGELOG
+- [ ] 更新 CHANGELOG.md
+- [ ] 更新输出文件版本号
 - [ ] 创建 GitHub Release
 
 ## 开发任务
 
-- [ ] 优化 `hosts-manager.html` 界面
+- [ ] 优化 `manager.html` 界面
 - [ ] 添加新的预设源
 - [ ] 改进规则生成算法
 - [ ] 添加单元测试
 - [ ] 优化浏览器兼容性
+- [ ] 完善国际化支持
