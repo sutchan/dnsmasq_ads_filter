@@ -57,10 +57,14 @@
                 </div>
                 
                 <div class="label" style="margin-top: 16px;" data-i18n="manualEdit">或直接编辑域名（每行一个域名，# 开头为注释）</div>
-                <textarea id="sourceInput" placeholder="# 示例域名&#10;ad.example.com&#10;ads.example.com&#10;tracker.example.com" oninput="parseSource()"></textarea>
+                <div class="editor-container">
+                    <div class="line-numbers" id="lineNumbers"></div>
+                    <textarea id="sourceInput" placeholder="# 示例域名&#10;ad.example.com&#10;ads.example.com&#10;tracker.example.com" oninput="handleSourceInput()"></textarea>
+                </div>
                 
                 <div class="btn-group" style="margin-top: 12px;">
                     <button class="btn btn-outline" onclick="clearAll()" data-i18n="clearBtn">清空</button>
+                    <button class="btn btn-outline" onclick="sortDomains()" data-i18n="sortBtn">↕ 排序</button>
                     <button class="btn btn-primary" onclick="parseSource()" data-i18n="parseBtn">解析域名</button>
                 </div>
             </div>
@@ -150,22 +154,28 @@
             </div>
         </div>
         
-        <div class="panel">
-            <h2 data-i18n="about">ℹ️ 关于</h2>
-            <div class="settings-panel">
-                <div class="settings-grid">
-                    <div class="settings-item">
-                        <label>项目地址</label>
-                        <input type="text" value="https://github.com/sutchan/dnsmasq_ads_filter" readonly>
+        <div class="panel about-panel">
+            <div class="about-content">
+                <div class="about-info">
+                    <div class="about-item">
+                        <span class="about-label">📦 项目</span>
+                        <a href="https://github.com/sutchan/dnsmasq_ads_filter" target="_blank" class="about-link">
+                            dnsmasq_ads_filter
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
                     </div>
-                    <div class="settings-item">
-                        <label>Web 管理工具版本</label>
-                        <input type="text" value="1.0.2" readonly>
+                    <div class="about-item">
+                        <span class="about-label">🏷️ 版本</span>
+                        <span class="about-value">v1.0.2</span>
                     </div>
                 </div>
-                <div style="margin-top: 16px; font-size: 13px; color: var(--text-secondary);">
-                    <p>DNS广告过滤清单生成器 - 从单一域名清单生成多种格式的路由器过滤规则</p>
-                    <p style="margin-top: 8px;">支持 Dnsmasq、Hosts 格式输出，适用于梅林固件、小米路由器等设备</p>
+                <div class="about-desc">
+                    <p>从单一域名清单生成多种格式的路由器过滤规则</p>
+                    <p>支持 Dnsmasq、Hosts 格式输出</p>
                 </div>
             </div>
         </div>
@@ -396,6 +406,18 @@
             if (evt && evt.target) evt.target.classList.add('active');
             
             showToast(t('toastLoadPreset'));
+        }
+        
+        function handleSourceInput() {
+            parseSource();
+            updateLineNumbers();
+        }
+        
+        function updateLineNumbers() {
+            const textarea = document.getElementById('sourceInput');
+            const lineNumbers = document.getElementById('lineNumbers');
+            const lines = textarea.value.split('\n').length;
+            lineNumbers.innerHTML = Array.from({length: lines}, (_, i) => i + 1).join('<br>');
         }
         
         function parseSource() {
@@ -652,6 +674,24 @@
             }).catch(() => {
                 showToast('复制失败', true);
             });
+        }
+        
+        function sortDomains() {
+            const textarea = document.getElementById('sourceInput');
+            const lines = textarea.value.split('\n');
+            const sortedLines = lines
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .sort((a, b) => {
+                    const aIsComment = a.startsWith('#');
+                    const bIsComment = b.startsWith('#');
+                    if (aIsComment && !bIsComment) return 1;
+                    if (!aIsComment && bIsComment) return -1;
+                    return a.localeCompare(b);
+                });
+            textarea.value = sortedLines.join('\n');
+            parseSource();
+            showToast(t('toastSorted'));
         }
         
         function clearAll() {

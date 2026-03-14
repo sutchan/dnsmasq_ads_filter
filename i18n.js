@@ -39,6 +39,10 @@ const i18n = {
         mergeInfo: '点击"生成规则"查看输出',
         mergeInfoCount: '已合并去重，共 {count} 条规则',
         about: 'ℹ️ 关于',
+        aboutProject: '📦 项目',
+        aboutVersion: '🏷️ 版本',
+        aboutDesc1: '从单一域名清单生成多种格式的路由器过滤规则',
+        aboutDesc2: '支持 Dnsmasq、Hosts 格式输出',
         localSettings: '📁 本地文件',
         loadLocal: '加载本地文件',
         autoLoad: '自动加载 raw-domains.txt',
@@ -60,7 +64,9 @@ const i18n = {
         toastUrlExists: 'URL 已存在',
         toastValidated: '校验完成',
         toastNoValidUrls: '没有有效的 URL',
-        toastFiles: '个文件'
+        toastFiles: '个文件',
+        toastSorted: '域名已排序',
+        sortBtn: '↕ 排序'
     },
     en: {
         title: '🛡️ DNS Ad Blocklist Generator',
@@ -123,7 +129,9 @@ const i18n = {
         toastUrlExists: 'URL already exists',
         toastValidated: 'Validation complete',
         toastNoValidUrls: 'No valid URLs',
-        toastFiles: 'files'
+        toastFiles: 'files',
+        toastSorted: 'Domains sorted',
+        sortBtn: '↕ Sort'
     }
 };
 
