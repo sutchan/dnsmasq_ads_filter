@@ -7,7 +7,7 @@
 # - 纯域名（如 ad.example.com）：黑名单，阻止解析
 # - + 开头（如 +example.com）：白名单，允许解析（覆盖黑名单）
 # - ! 开头（如 !example.com）：注释域名，显示在列表中但不断言
-# - @ 开头（如 @example.com）：自定义 DNS 指向（如 0.0.0.0 或指定 IP）
+# - @ 开头（如 @example.com=0.0.0.0）：自定义 DNS 指向（如 0.0.0.0 或指定 IP）
 #
 # === 示例 ===
 # ad.example.com        # 黑名单：阻止此域名
@@ -15,11 +15,11 @@
 # !ad.example.com      # 注释域名：显示用
 # @example.com=0.0.0.0 # 自定义 DNS 指向
 #
-# update date：2026.3.13
-# api.io.mi.com 影响米家互联的使用。
-# connectivitycheck.gstatic.com 影响 GooglePlay
-# XX.market.mi-img.com 影响MIUI小部件
-# XX.market.xiaomi.com 影响MIUI小部件
+
+!api.io.mi.com #影响米家互联的使用。
+!connectivitycheck.gstatic.com #影响 GooglePlay
+!XX.market.mi-img.com #影响MIUI小部件
+!XX.market.xiaomi.com #影响MIUI小部件
 
 3dns-2.adobe.com
 3dns-3.adobe.com

@@ -1,10 +1,10 @@
-// hosts-manager.html v1.0.1
+// hosts-manager.html v1.0.2
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DNS广告过滤清单生成器 v1.0.1</title>
+    <title>DNS广告过滤清单生成器 v1.0.2</title>
     <style>
         :root {
             --bg-primary: #ffffff;
@@ -430,7 +430,7 @@
                         </div>
                         <div class="settings-item">
                             <label>版本号</label>
-                            <input type="text" id="versionInput" value="1.0.1" onchange="updateSettings()">
+                            <input type="text" id="versionInput" value="1.0.2" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
                             <label data-i18n="ipV4">目标 IP (IPv4)</label>
@@ -507,7 +507,7 @@
                     </div>
                     <div class="settings-item">
                         <label>Web 管理工具版本</label>
-                        <input type="text" value="1.0.1" readonly>
+                        <input type="text" value="1.0.2" readonly>
                     </div>
                 </div>
                 <div style="margin-top: 16px; font-size: 13px; color: var(--text-secondary);">
@@ -522,6 +522,8 @@
 
     <script>
         let domains = [];
+        let whitelist = [];
+        let customDns = [];
         let currentFormat = 'dnsmasq';
         let outputContent = { dnsmasq: '', hosts: '' };
         let isLangZh = true;
@@ -530,7 +532,7 @@
         
         let settings = {
             projectName: 'dnsmasq_ads_filter',
-            version: '1.0.1',
+            version: '1.0.2',
             ipv4: '0.0.0.0',
             ipv6: '::',
             dnsmasqFilename: 'dnsmasq-ads-filter-list.txt',
@@ -652,6 +654,8 @@
             const lines = content.split('\n');
             
             domains = [];
+            whitelist = [];
+            customDns = [];
             let commentCount = 0;
             
             for (const line of lines) {
@@ -674,6 +678,35 @@
                     if (match) domain = match[1];
                 }
                 
+                if (trimmed.startsWith('+')) {
+                    domain = trimmed.substring(1).trim().toLowerCase().replace(/^\*\./, '');
+                    if (domain && isValidDomain(domain)) {
+                        whitelist.push(domain);
+                    }
+                    continue;
+                }
+                
+                if (trimmed.startsWith('!')) {
+                    domain = trimmed.substring(1).trim().split('#')[0].trim().toLowerCase().replace(/^\*\./, '');
+                    if (domain && isValidDomain(domain)) {
+                        domains.push(domain);
+                        commentCount++;
+                    }
+                    continue;
+                }
+                
+                if (trimmed.startsWith('@')) {
+                    const match = trimmed.substring(1).trim().match(/^([^=]+)=(.+)$/);
+                    if (match) {
+                        const dnsDomain = match[1].toLowerCase().replace(/^\*\./, '');
+                        const dnsIp = match[2].trim();
+                        if (dnsDomain && isValidDomain(dnsDomain)) {
+                            customDns.push({ domain: dnsDomain, ip: dnsIp });
+                        }
+                    }
+                    continue;
+                }
+                
                 domain = domain.toLowerCase().replace(/^\*\./, '');
                 
                 if (domain && isValidDomain(domain)) {
@@ -685,7 +718,7 @@
             document.getElementById('validCount').textContent = domains.length;
             document.getElementById('commentCount').textContent = commentCount;
             
-            if (domains.length > 0) {
+            if (domains.length > 0 || whitelist.length > 0 || customDns.length > 0) {
                 generateRules();
             }
         }
@@ -718,6 +751,14 @@
                 processedDomains = [...new Set(processedDomains)].sort();
             }
             
+            let processedWhitelist = [...whitelist];
+            if (removeWildcard) {
+                processedWhitelist = processedWhitelist.map(d => d.replace(/^\*\./, ''));
+            }
+            if (dedupDomains) {
+                processedWhitelist = [...new Set(processedWhitelist)].sort();
+            }
+            
             const now = new Date();
             const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
             
@@ -725,6 +766,7 @@
             let hostsContent = '';
             
             if (addHeader) {
+                const totalDomains = processedDomains.length + customDns.length;
                 dnsmasqContent += `# ===============================================\n`;
                 dnsmasqContent += `# ${settings.projectName} - Dnsmasq Ad Block List\n`;
                 dnsmasqContent += `# ===============================================\n`;
@@ -733,7 +775,10 @@
                 dnsmasqContent += `#\n`;
                 dnsmasqContent += `# Version: ${settings.version}\n`;
                 dnsmasqContent += `# Update: ${dateStr}\n`;
-                dnsmasqContent += `# Domains: ${processedDomains.length} unique domains\n`;
+                dnsmasqContent += `# Domains: ${totalDomains} unique domains\n`;
+                if (processedWhitelist.length > 0) {
+                    dnsmasqContent += `# Whitelist: ${processedWhitelist.length} domains\n`;
+                }
                 dnsmasqContent += `#\n`;
                 dnsmasqContent += `# Usage:\n`;
                 dnsmasqContent += `#   - Merlin: Software Center -> DNS Settings\n`;
@@ -751,7 +796,10 @@
                 hostsContent += `#\n`;
                 hostsContent += `# Version: ${settings.version}\n`;
                 hostsContent += `# Update: ${dateStr}\n`;
-                hostsContent += `# Domains: ${processedDomains.length} unique domains\n`;
+                hostsContent += `# Domains: ${totalDomains} unique domains\n`;
+                if (processedWhitelist.length > 0) {
+                    hostsContent += `# Whitelist: ${processedWhitelist.length} domains\n`;
+                }
                 hostsContent += `#\n`;
                 hostsContent += `# Usage: Import to Xiaomi router ad blocking settings\n`;
                 hostsContent += `#\n`;
@@ -770,6 +818,26 @@
                 }
             });
             
+            customDns.forEach(item => {
+                dnsmasqContent += `address=/${item.domain}/${item.ip}\n`;
+                hostsContent += `${item.ip} ${item.domain}\n`;
+                
+                if (blockIPv6) {
+                    dnsmasqContent += `address=/${item.domain}/::\n`;
+                }
+            });
+            
+            if (processedWhitelist.length > 0) {
+                if (addHeader) {
+                    dnsmasqContent += `\n# Whitelist (allow these domains)\n`;
+                    hostsContent += `\n# Whitelist (allow these domains)\n`;
+                }
+                processedWhitelist.forEach(domain => {
+                    dnsmasqContent += `server=/${domain}/\n`;
+                    hostsContent += `# Whitelisted: ${domain}\n`;
+                });
+            }
+            
             outputContent.dnsmasq = dnsmasqContent;
             outputContent.hosts = hostsContent;
             
@@ -783,7 +851,7 @@
             }
             
             document.getElementById('outputPreview').textContent = preview;
-            document.getElementById('mergeInfo').textContent = `共 ${processedDomains.length} 个域名 | Dnsmasq: ${dnsmasqContent.split('\n').length} 行 | Hosts: ${hostsContent.split('\n').length} 行`;
+            document.getElementById('mergeInfo').textContent = `黑名单: ${processedDomains.length} | 白名单: ${processedWhitelist.length} | 自定义DNS: ${customDns.length} | Dnsmasq: ${dnsmasqContent.split('\n').length} 行 | Hosts: ${hostsContent.split('\n').length} 行`;
         }
         
         function downloadOutput() {
@@ -838,6 +906,8 @@
             document.getElementById('sourceInput').value = '';
             document.getElementById('urlInput').value = '';
             domains = [];
+            whitelist = [];
+            customDns = [];
             parseSource();
             document.getElementById('outputPreview').textContent = '// 生成的规则将显示在这里';
             document.getElementById('mergeInfo').textContent = '点击"生成规则"查看输出';
