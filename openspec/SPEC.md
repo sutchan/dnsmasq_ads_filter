@@ -10,7 +10,7 @@
 | 目标用户 | 使用梅林/OpenWrt/小米/华硕/TP-Link 等路由器的用户 |
 | 项目地址 | https://github.com/sutchan/dnsmasq_ads_filter |
 | 当前版本 | v1.0.2 |
-| 拦截域名 | 356+ |
+| 拦截域名 | 6766+ |
 
 ## 2. 文件结构
 
@@ -26,15 +26,14 @@ dnsmasq_ads_filter/
 ├── .gitignore                    # Git 忽略配置
 ├── assets/                       # 资源目录
 │   ├── js/
-│   │   ├── app.js               # 主逻辑
+│   │   ├── app.js               # 主逻辑（入口）
 │   │   ├── i18n.js              # 国际化模块
 │   │   ├── utils.js             # 工具函数
 │   │   ├── core.js              # 核心状态管理
 │   │   ├── parser.js            # 域名解析
 │   │   ├── generator.js         # 规则生成
-│   │   ├── ui.js                # UI 交互（入口）
 │   │   ├── ui-urls.js           # URL 管理交互
-│   │   ├── ui-editor.js        # 编辑器交互
+│   │   ├── ui-editor.js         # 编辑器交互
 │   │   └── ui-controls.js       # 控件交互
 │   └── css/
 │       ├── styles.css            # 样式入口
@@ -202,7 +201,6 @@ manager.html (纯静态，无需服务器)
     │   ├── core.js               ← 状态管理
     │   ├── parser.js             ← 域名解析
     │   ├── generator.js          ← 规则生成
-    │   ├── ui.js                ← UI 交互（入口）
     │   ├── ui-urls.js           ← URL 管理交互
     │   ├── ui-editor.js         ← 编辑器交互
     │   ├── ui-controls.js       ← 控件交互

@@ -29,7 +29,7 @@
 - [ ] `assets/js/core.js` 存在且状态管理完整
 - [ ] `assets/js/parser.js` 存在且域名解析完整
 - [ ] `assets/js/generator.js` 存在且规则生成完整
-- [ ] `assets/js/ui.js` 存在且 UI 交互完整
+- [ ] `assets/js/app.js` 存在且入口逻辑完整
 - [ ] `assets/js/ui-urls.js` 存在且 URL 管理交互完整
 - [ ] `assets/js/ui-editor.js` 存在且编辑器交互完整
 - [ ] `assets/js/ui-controls.js` 存在且控件交互完整

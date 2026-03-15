@@ -1,15 +1,20 @@
 # ===============================================
-# dnsmasq_ads_filter - Xiaomi Router Hosts Block List
+# dnsmasq_ads_filter - Hosts Ad Block List
 # ===============================================
 #
 # Description: Router-level ad blocking hosts file
-#              for Xiaomi routers and general use
+#              for advertising/tracking domains
 #
 # Version: 1.0.2
 # Update: 2026.03.14
-# Domains: 356 unique domains
+# Domains: 6766 unique domains
 #
-# Usage: Import to Xiaomi router ad blocking settings
+# Usage:
+#   - Merlin: Software Center -> DNS Settings -> Custom hosts
+#   - OpenWrt: Services -> DHCP and DNS -> Resolvfile
+#   - Xiaomi: Ad Blocking settings
+#   - ASUS: DNS Settings -> Custom hosts
+#   - Other: Import via custom hosts file support
 #
 # Project: https://github.com/sutchan/dnsmasq_ads_filter
 #
