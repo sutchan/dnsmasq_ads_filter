@@ -8,45 +8,45 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
-    padding: 16px;
+    padding: 32px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .container { max-width: 1000px; margin: 0 auto; }
 
 .app-header {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .header-main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 600;
     color: var(--text-primary);
 }
 
 .header-actions {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
 
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
 }
 
 .panel {
     background: var(--bg-panel);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 28px;
     box-shadow: var(--shadow-sm);
 }
 
@@ -54,8 +54,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    gap: 12px;
+    margin-bottom: 20px;
+    gap: 16px;
 }
 
 .section-header h2 {
@@ -73,8 +73,8 @@ h1 {
 }
 
 .app-footer {
-    margin-top: 24px;
-    padding-top: 16px;
+    margin-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--border-color);
 }
 
@@ -82,8 +82,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
-    font-size: 0.8rem;
+    gap: 20px;
+    font-size: 0.85rem;
 }
 
 .footer-link {
@@ -104,13 +104,13 @@ h1 {
 }
 
 @media (max-width: 768px) {
-    body { padding: 12px; }
-    .panel { padding: 16px; }
-    h1 { font-size: 1.25rem; }
-    .header-main { flex-wrap: wrap; gap: 8px; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    body { padding: 16px; }
+    .panel { padding: 20px; }
+    h1 { font-size: 1.5rem; }
+    .header-main { flex-wrap: wrap; gap: 12px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
     .section-header .header-actions { width: 100%; justify-content: space-between; }
-    .usage-step { flex-direction: column; gap: 8px; }
-    .step-number { width: 20px; height: 20px; font-size: 0.65rem; }
-    .usage-tip { flex-direction: column; gap: 4px; }
+    .usage-step { flex-direction: column; gap: 12px; }
+    .step-number { width: 24px; height: 24px; font-size: 0.75rem; }
+    .usage-tip { flex-direction: column; gap: 8px; }
 }

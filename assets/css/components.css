@@ -90,16 +90,16 @@
 
 .url-actions {
     display: flex;
-    gap: 6px;
+    gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .url-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
 .url-item {
@@ -130,26 +130,26 @@
 .preset-section {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
 .preset-label {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
 }
 
 .preset-tags {
     display: flex;
-    gap: 6px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .preset-tag {
-    padding: 4px 10px;
+    padding: 6px 14px;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
