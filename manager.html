@@ -84,7 +84,8 @@
                     </div>
                     <div class="url-actions">
                         <button class="btn btn-sm" onclick="addUrl()">➕ 添加URL</button>
-                        <button class="btn btn-sm" onclick="validateAllUrls()">✓ 校验</button>
+                        <button class="btn btn-sm" onclick="validateAllUrls()">✓ 校验URL</button>
+                        <button class="btn btn-sm" onclick="saveDomains()">💾 保存</button>
                         <button class="btn btn-sm" onclick="fetchAllUrls()">🌐 获取全部</button>
                     </div>
                     <div class="url-list" id="urlList"></div>
@@ -117,8 +118,8 @@
                     <h2 data-i18n="outputTitle">📤 生成过滤规则</h2>
                     <div class="header-actions">
                         <div class="format-tabs">
-                            <button class="format-tab active" onclick="setFormat('dnsmasq')">Dnsmasq</button>
-                            <button class="format-tab" onclick="setFormat('hosts')">Hosts</button>
+                            <button class="format-tab active" onclick="setFormat('hosts')">Hosts</button>
+                            <button class="format-tab" onclick="setFormat('dnsmasq')">Dnsmasq</button>
                             <button class="format-tab" onclick="setFormat('both')">混合</button>
                         </div>
                         <button class="settings-btn" onclick="toggleSettings()" title="设置">

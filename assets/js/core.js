@@ -1,11 +1,11 @@
-// assets/js/core.js v1.0.2
+// assets/js/core.js v1.0.3
 // Core variables and configuration for DNS Ad Block List Generator
 
 let domains = [];
 let urlList = [];
 let whitelist = [];
 let customDns = [];
-let currentFormat = 'dnsmasq';
+let currentFormat = 'hosts';
 let outputContent = { dnsmasq: '', hosts: '' };
 let isLangZh = true;
 

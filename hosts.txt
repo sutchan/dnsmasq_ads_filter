@@ -3,18 +3,12 @@
 # ===============================================
 #
 # Description: Router-level ad blocking hosts file
-#              for advertising/tracking domains
 #
 # Version: 1.0.2
-# Update: 2026.03.14
-# Domains: 6766 unique domains
+# Update: 2026.03.15
+# Domains: 360 unique domains
 #
-# Usage:
-#   - Merlin: Software Center -> DNS Settings -> Custom hosts
-#   - OpenWrt: Services -> DHCP and DNS -> Resolvfile
-#   - Xiaomi: Ad Blocking settings
-#   - ASUS: DNS Settings -> Custom hosts
-#   - Other: Import via custom hosts file support
+# Usage: Import to router ad blocking settings
 #
 # Project: https://github.com/sutchan/dnsmasq_ads_filter
 #
@@ -74,12 +68,12 @@
 0.0.0.0 adobe-dns-3.adobe.com
 0.0.0.0 adping.qq.com
 0.0.0.0 adplay.tudou.com
+0.0.0.0 ads-union.jd.com
 0.0.0.0 ads.95516.com
 0.0.0.0 ads.api.vungle.com
 0.0.0.0 ads.cn.miaozhen.com
 0.0.0.0 ads.serving-sys.cn
 0.0.0.0 ads.union.jd.com
-0.0.0.0 ads-union.jd.com
 0.0.0.0 adsclick.qq.com
 0.0.0.0 adsfile.qq.com
 0.0.0.0 adsh.wagbridge.taobao.alimama.com
@@ -178,6 +172,7 @@
 0.0.0.0 g.dtv.cn.miaozhen.com
 0.0.0.0 g.pandora.xiaomi.com
 0.0.0.0 gallery.pandora.xiaomi.com
+0.0.0.0 gdt.qq.com
 0.0.0.0 gifshow.com
 0.0.0.0 googleads.g.doubleclick.net
 0.0.0.0 gs.getui.com
@@ -185,9 +180,8 @@
 0.0.0.0 gvod.aiseejapp.atianqi.com
 0.0.0.0 h-adashx.ut.taobao.com
 0.0.0.0 h5.hpplay.com.cn
-0.0.0.0 h5.tv.mi.com
 0.0.0.0 h5.ptmi.gitv.tv
-0.0.0.0 ptmi.gitv.tv
+0.0.0.0 h5.tv.mi.com
 0.0.0.0 hotupgrade.hpplay.cn
 0.0.0.0 hpplay.cdn.cibn.cc
 0.0.0.0 image.hpplay.cn
@@ -197,19 +191,19 @@
 0.0.0.0 ip.ptqy.gitv.tv
 0.0.0.0 ironsrc.com
 0.0.0.0 is-gateway.supersonicads.com
-0.0.0.0 iwstat.tudou.com
 0.0.0.0 iws.corel.com
+0.0.0.0 iwstat.tudou.com
 0.0.0.0 iyes.youku.com
 0.0.0.0 jellyfish.pandora.xiaomi.com
 0.0.0.0 js-ad.a.yximgs.com
 0.0.0.0 kuyun.com
 0.0.0.0 kwimgs.com
 0.0.0.0 leboapi.hpplay.com.cn
+0.0.0.0 log-api.pangolin-sdk-toutiao.com
 0.0.0.0 log.ad.xiaomi.com
 0.0.0.0 log.mmstat.com
 0.0.0.0 log.snssdk.com
 0.0.0.0 log.umsns.com
-0.0.0.0 log-api.pangolin-sdk-toutiao.com
 0.0.0.0 logonext.tv.kuyun.com
 0.0.0.0 logs.ironsrc.mobi
 0.0.0.0 lstat.youku.com
@@ -229,6 +223,7 @@
 0.0.0.0 mon.ad.xelements.cn
 0.0.0.0 monitor.bnc66.com
 0.0.0.0 mopub.com
+0.0.0.0 mpad.weixin.qq.com
 0.0.0.0 mpush-api.aliyun.com
 0.0.0.0 ms.applvn.com
 0.0.0.0 msg.qy.net
@@ -271,14 +266,17 @@
 0.0.0.0 payment.callback.youku.com
 0.0.0.0 payment.youku.com
 0.0.0.0 pd.ads.cn.miaozhen.com
+0.0.0.0 pgdt.gtimg.cn
 0.0.0.0 pglstatp-toutiao.com
 0.0.0.0 pic7.iqiyipic.com
 0.0.0.0 pin.hpplay.cn
 0.0.0.0 prod-ms.applovin.com
 0.0.0.0 ptgy.gitv.tv
+0.0.0.0 ptmi.gitv.tv
 0.0.0.0 puma-api.ptqy.gitv.tv
 0.0.0.0 px.ucweb.com
 0.0.0.0 pyk.cr-nielsen.com
+0.0.0.0 qlogo.cn
 0.0.0.0 qr.api.youku.com
 0.0.0.0 qr.bilibili.com
 0.0.0.0 qr.icntv.cn
@@ -303,10 +301,10 @@
 0.0.0.0 sayhi.360.cn
 0.0.0.0 scc.ssacdn.com
 0.0.0.0 scs.openspeech.cn
-0.0.0.0 sdk.ptqy.gitv.tv
 0.0.0.0 sdk-cache.video.ptqy.gitv.tv
-0.0.0.0 sdkconfig.ad.xiaomi.com
+0.0.0.0 sdk.ptqy.gitv.tv
 0.0.0.0 sdkauth.hpplay.cn
+0.0.0.0 sdkconfig.ad.xiaomi.com
 0.0.0.0 secure.chn.imrworldwide.com
 0.0.0.0 si.ptqy.gitv.tv
 0.0.0.0 sisulizer.com
@@ -350,7 +348,6 @@
 0.0.0.0 utk.baidu.com
 0.0.0.0 v.admaster.com.cn
 0.0.0.0 v2.reachmax.cn
-0.0.0.0 video.market.xiaomi.com
 0.0.0.0 view.adjust.com
 0.0.0.0 vip.api.youku.com
 0.0.0.0 vip.bz.mgtv.com
@@ -368,6 +365,7 @@
 0.0.0.0 vungle.com
 0.0.0.0 vv.play.aiseet.atianqi.com
 0.0.0.0 webapp.skysrt.com
+0.0.0.0 wechatad.com
 0.0.0.0 weixinbridge.com
 0.0.0.0 wgo.mmstat.com
 0.0.0.0 ws.mmstat.com

@@ -1,6 +1,6 @@
 # dnsmasq_ads_filter
 
-[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.2-green)](https://github.com/sutchan/dnsmasq_ads_filter)
+[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.4-green)](https://github.com/sutchan/dnsmasq_ads_filter)
 
 Router-level DNS-based ad blocking filter list with web management tool.
 
@@ -8,7 +8,7 @@ Router-level DNS-based ad blocking filter list with web management tool.
 
 This project provides a dnsmasq/hosts-based ad blocking solution that works at the DNS level. It includes:
 
-- **356+ blocked domains** - Comprehensive ad and tracking domain filter
+- **6766+ blocked domains** - Comprehensive ad and tracking domain filter
 - **Web management tool** - Generate custom filter lists via browser
 - **Multiple output formats** - Supports Dnsmasq and Hosts formats
 - **Single source workflow** - One domain list generates all output formats
@@ -16,24 +16,58 @@ This project provides a dnsmasq/hosts-based ad blocking solution that works at t
 
 ## Usage
 
-### Merlin Firmware (ASUS routers with Merlin)
+### Method 1: Dnsmasq Format
 
-**Path 1:** Software Center → DNS Settings → Custom dnsmasq
+For routers that support custom dnsmasq configuration.
 
-**Path 2:** Optional Internet → Custom dnsmasq
+#### Merlin Firmware (ASUS routers with Merlin)
+
+**Path:** Software Center → DNS Settings → Custom dnsmasq
 
 Copy all content from `dnsmasq.conf` and paste into the custom dnsmasq configuration.
 
-### Xiaomi Router / Other Routers with Custom Hosts Support
-
-Import `hosts.txt` into your router's ad blocking settings.
-This method works for all routers that support custom hosts files (Xiaomi, OpenWrt, ASUS, TP-Link, etc.).
-
-### OpenWrt
+#### OpenWrt
 
 ```bash
 curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsmasq.conf >> /etc/dnsmasq.conf
 ```
+
+### Method 2: Hosts Format
+
+For routers that support custom hosts files.
+
+#### Xiaomi Router
+
+**Path:** Settings → Advertising Blocking → Custom hosts
+
+Import `hosts.txt` into your router's ad blocking settings.
+
+#### ASUS Router (Stock Firmware)
+
+**Path:** Advanced Settings → LAN → DHCP Server → Custom hosts file
+
+#### TP-Link Router
+
+**Path:** Advanced → Network → Internet > Custom hosts
+
+#### OpenWrt
+
+```bash
+# Method 1: Via LuCI
+# Services → DNS and DHCP → Extra hosts fields
+
+# Method 2: Via CLI
+curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/hosts.txt >> /etc/hosts
+```
+
+#### Other Routers
+
+Most routers with custom hosts support can use the same method:
+
+1. Download `hosts.txt` from the repository
+2. Access your router's admin panel
+3. Navigate to DNS/hosts settings
+4. Import the hosts file
 
 ## Files
 

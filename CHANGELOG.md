@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4]
+
+### Changed
+- Updated output file descriptions to be router-agnostic (通用路由器支持)
+- Removed Xiaomi-specific references from generator.js
+- Standardized hosts file header descriptions
+
+### Fixed
+- Fixed SPEC.md and CHECKLIST.md to reflect current file structure
+- Fixed domain count in output file headers (6766 domains)
+- Removed duplicate app.js entries in CHECKLIST.md
+
+### Removed
+- Removed deprecated ui.js (split into ui-urls.js, ui-editor.js, ui-controls.js)
+
 ## [1.0.2] - 2026-03-14
 
 ### Changed
