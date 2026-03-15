@@ -1,4 +1,4 @@
-// assets/js/ui-controls.js v1.0.2
+// assets/js/ui-controls.js v1.0.3
 // UI control functions for DNS Ad Block List Generator
 
 function toggleTheme() {
@@ -24,8 +24,12 @@ function toggleSection(sectionId) {
 
 function toggleSettings() {
     const panel = document.getElementById('settings-panel');
+    const settingsBtn = document.querySelector('.settings-btn');
     if (panel) {
         panel.classList.toggle('collapsed');
+        if (settingsBtn) {
+            settingsBtn.classList.toggle('active');
+        }
     }
 }
 

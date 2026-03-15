@@ -37,6 +37,7 @@
 
 .editor-container {
     display: flex;
+    position: relative;
     border: 2px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
@@ -60,14 +61,8 @@
     user-select: none;
     min-width: 40px;
     border-right: 1px solid var(--border-color);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     white-space: pre;
-    scrollbar-width: none;
-}
-
-.editor-container .line-numbers::-webkit-scrollbar {
-    display: none;
 }
 
 .editor-container textarea {
@@ -101,10 +96,11 @@
 
 .output-container {
     display: flex;
+    position: relative;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     overflow: hidden;
-    background: #1e293b;
+    background: var(--bg-secondary);
     margin-bottom: 16px;
     height: 280px;
 }
@@ -114,35 +110,30 @@
 }
 
 .output-container .line-numbers {
-    background: #0f172a;
-    border-right: 1px solid #334155;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
     padding: 14px 8px;
-    color: #64748b;
+    color: var(--text-secondary);
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     font-size: 11px;
     line-height: 1.5;
     text-align: right;
     user-select: none;
     min-width: 36px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     white-space: pre;
-    scrollbar-width: none;
-}
-
-.output-container .line-numbers::-webkit-scrollbar {
-    display: none;
 }
 
 [data-theme="dark"] .output-container .line-numbers {
     background: #0f172a;
-    border-right-color: #1e293b;
+    border-right-color: #334155;
+    color: #64748b;
 }
 
 .output-preview {
     flex: 1;
     background: transparent;
-    color: #e2e8f0;
+    color: var(--text-primary);
     padding: 14px;
     border-radius: 0;
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;

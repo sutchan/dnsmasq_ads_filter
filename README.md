@@ -40,7 +40,7 @@ curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsma
 | File | Description |
 |------|-------------|
 | `dnsmasq.conf` | Main dnsmasq filter list (`address=/domain/0.0.0.0` format) |
-| `hosts.txt` | Hosts file for Xiaomi router (`0.0.0.0 domain` format) |
+| `hosts.txt` | Hosts file for routers (`0.0.0.0 domain` format) |
 | `manager.html` | Web interface for managing and generating filter lists |
 | `domains.txt` | Unified domain list (one domain per line, source of truth) |
 

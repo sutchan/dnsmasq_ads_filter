@@ -20,7 +20,9 @@ function updateLineNumbers() {
     }
     lineNumbers.textContent = html;
     lineNumbers.style.lineHeight = lineHeight + 'px';
-    lineNumbers.style.height = Math.max(lines * lineHeight, textarea.clientHeight) + 'px';
+    lineNumbers.style.height = 'auto';
+    const contentHeight = lines * lineHeight;
+    lineNumbers.style.minHeight = Math.max(contentHeight, textarea.clientHeight) + 'px';
 }
 
 function updateOutputLineNumbers() {
@@ -36,7 +38,9 @@ function updateOutputLineNumbers() {
     }
     outputLineNumbers.textContent = html;
     outputLineNumbers.style.lineHeight = lineHeight + 'px';
-    outputLineNumbers.style.height = Math.max(lines * lineHeight, outputPreview.clientHeight) + 'px';
+    outputLineNumbers.style.height = 'auto';
+    const contentHeight = lines * lineHeight;
+    outputLineNumbers.style.minHeight = Math.max(contentHeight, outputPreview.clientHeight) + 'px';
 }
 
 function syncScroll() {
@@ -44,7 +48,7 @@ function syncScroll() {
     const lineNumbers = document.getElementById('lineNumbers');
     if (!textarea || !lineNumbers) return;
     const scrollTop = textarea.scrollTop;
-    lineNumbers.scrollTop = scrollTop;
+    lineNumbers.style.transform = `translateY(-${scrollTop}px)`;
 }
 
 function syncOutputScroll() {
@@ -52,7 +56,7 @@ function syncOutputScroll() {
     const outputLineNumbers = document.getElementById('outputLineNumbers');
     if (!outputPreview || !outputLineNumbers) return;
     const scrollTop = outputPreview.scrollTop;
-    outputLineNumbers.scrollTop = scrollTop;
+    outputLineNumbers.style.transform = `translateY(-${scrollTop}px)`;
 }
 
 function clearAll() {

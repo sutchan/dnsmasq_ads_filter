@@ -1,42 +1,49 @@
-// assets/css/utilities.css v1.0.2
+// assets/css/utilities.css v1.0.3
 // Utility Classes - Buttons, Toast, Helpers
 
 .btn {
-    padding: 8px 16px;
+    padding: 12px 24px;
     border: none;
     border-radius: var(--radius-sm);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
 }
 
 .btn-sm {
-    padding: 6px 12px;
-    font-size: 0.75rem;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    min-height: 38px;
 }
 
 .btn-primary {
     background: var(--accent-color);
     color: white;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
 }
 
 .btn-primary:hover {
     background: var(--accent-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
 }
 
 .btn-success {
     background: var(--success-color);
     color: white;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .btn-success:hover {
     background: #059669;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
 }
 
 .btn-outline {
@@ -48,6 +55,7 @@
 .btn-outline:hover {
     background: var(--bg-secondary);
     border-color: var(--accent-color);
+    transform: translateY(-1px);
 }
 
 .btn { flex: 1; justify-content: center; }

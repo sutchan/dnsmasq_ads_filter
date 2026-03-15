@@ -1,4 +1,4 @@
-// assets/css/layout.css v1.0.2
+// assets/css/layout.css v1.0.3
 // Layout and Container Styles
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,6 +29,10 @@ h1 {
     font-size: 1.75rem;
     font-weight: 600;
     color: var(--text-primary);
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .header-actions {
@@ -45,9 +49,33 @@ h1 {
 .panel {
     background: var(--bg-panel);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     padding: 28px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.panel:hover::before {
+    opacity: 1;
+}
+
+.panel:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
 }
 
 .section-header {
@@ -68,7 +96,7 @@ h1 {
 .section-header .header-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     flex-shrink: 0;
 }
 
@@ -92,10 +120,12 @@ h1 {
     gap: 4px;
     color: var(--accent-color);
     text-decoration: none;
+    transition: var(--transition);
 }
 
 .footer-link:hover {
     text-decoration: underline;
+    transform: translateX(2px);
 }
 
 .footer-version {

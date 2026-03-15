@@ -53,7 +53,7 @@ function generateRules() {
         dnsmasqContent += `# ===============================================\n\n`;
 
         hostsContent += `# ===============================================\n`;
-        hostsContent += `# ${settings.projectName} - Xiaomi Router Hosts Block List\n`;
+        hostsContent += `# ${settings.projectName} - Hosts Ad Block List\n`;
         hostsContent += `# ===============================================\n`;
         hostsContent += `#\n`;
         hostsContent += `# Description: Router-level ad blocking hosts file\n`;
@@ -65,7 +65,7 @@ function generateRules() {
             hostsContent += `# Whitelist: ${processedWhitelist.length} domains\n`;
         }
         hostsContent += `#\n`;
-        hostsContent += `# Usage: Import to Xiaomi router ad blocking settings\n`;
+        hostsContent += `# Usage: Import to router ad blocking settings\n`;
         hostsContent += `#\n`;
         hostsContent += `# Project: ${projectUrl}\n`;
         hostsContent += `#\n`;

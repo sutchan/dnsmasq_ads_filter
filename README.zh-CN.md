@@ -39,7 +39,7 @@ curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsma
 | 文件 | 说明 |
 |------|------|
 | `dnsmasq.conf` | 主 dnsmasq 过滤列表（`address=/domain/0.0.0.0` 格式） |
-| `hosts.txt` | 小米路由器 hosts 文件（`0.0.0.0 domain` 格式） |
+| `hosts.txt` | 路由器 hosts 文件（`0.0.0.0 domain` 格式） |
 | `manager.html` | Web 管理界面，用于管理和生成过滤清单 |
 | `domains.txt` | 统一域名列表（每行一个域名，数据源） |
 
