@@ -1,4 +1,4 @@
-// assets/js/app.js v1.0.2
+// assets/js/app.js v1.0.3
 // Main entry point for DNS Ad Block List Generator
 
 (function init() {
@@ -32,6 +32,7 @@
                 document.getElementById('sourceInput').value = t;
                 parseSource();
                 updateLineNumbers();
+                document.querySelector('.preset-tag[onclick*="builtin"]')?.classList.add('active');
             }
         })
         .catch(() => {});

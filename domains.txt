@@ -16,10 +16,10 @@
 # @example.com=0.0.0.0 # 自定义 DNS 指向
 #
 
-!api.io.mi.com #影响米家互联的使用。
-!connectivitycheck.gstatic.com #影响 GooglePlay
-!XX.market.mi-img.com #影响MIUI小部件
-!XX.market.xiaomi.com #影响MIUI小部件
++api.io.mi.com #影响米家互联的使用。
++connectivitycheck.gstatic.com #影响 GooglePlay
++XX.market.mi-img.com #影响MIUI小部件
++XX.market.xiaomi.com #影响MIUI小部件
 
 gdt.qq.com
 pgdt.gtimg.cn

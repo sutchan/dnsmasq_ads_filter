@@ -1,4 +1,4 @@
-// assets/js/parser.js v1.0.2
+// assets/js/parser.js v1.0.3
 // Domain parsing logic for DNS Ad Block List Generator
 
 function parseSource() {
@@ -65,6 +65,15 @@ function parseSource() {
             domains.push(domain);
         }
     }
+
+    const whitelistSet = new Set(whitelist.map(w => w.replace(/^\*\./, '')));
+    const customDnsSet = new Set(customDns.map(c => c.domain.replace(/^\*\./, '')));
+    const excludeSet = new Set([...whitelistSet, ...customDnsSet]);
+
+    domains = domains.filter(d => !excludeSet.has(d.replace(/^\*\./, '')));
+
+    const uniqueWhitelist = [...new Set(whitelist)];
+    whitelist = uniqueWhitelist;
 
     document.getElementById('domainCount').textContent = domains.length + commentCount;
     document.getElementById('validCount').textContent = domains.length;

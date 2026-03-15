@@ -145,7 +145,7 @@ function loadPreset(name, evt) {
     const presetUrls = {
         'adguard': 'https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt',
         'easylist': 'https://raw.githubusercontent.com/easylist/easylist/master/easylist/easylist_adservers.txt',
-        'xiaomi': 'dnsmasq.conf',
+        'builtin': 'domains.txt',
         'neohosts': 'https://raw.githubusercontent.com/neoHosts/neoHosts/master/data/hosts/basic'
     };
 
@@ -154,8 +154,8 @@ function loadPreset(name, evt) {
         document.getElementById('urlInput').value = url;
         fetchFromUrl();
     } else {
-        if (name === 'xiaomi') {
-            fetch('dnsmasq.conf').then(r => r.text()).then(t => {
+        if (name === 'builtin') {
+            fetch('domains.txt').then(r => r.text()).then(t => {
                 document.getElementById('sourceInput').value = t;
                 parseSource();
             }).catch(() => {
