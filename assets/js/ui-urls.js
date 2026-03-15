@@ -54,6 +54,10 @@ function validateUrl(url) {
 }
 
 async function validateAllUrls() {
+    const total = urlList.length;
+    let validCount = 0;
+    let invalidCount = 0;
+
     for (let i = 0; i < urlList.length; i++) {
         const item = urlList[i];
         item.status = 'loading';
@@ -64,16 +68,18 @@ async function validateAllUrls() {
         if (result.valid) {
             item.status = 'success';
             item.valid = true;
+            validCount++;
         } else {
             item.status = 'error';
             item.valid = false;
+            invalidCount++;
         }
 
         renderUrlList();
     }
 
     saveUrlList();
-    showToast(t('toastValidated'));
+    showToast(`${t('toastValidatedUrl')}: ${validCount}/${total}`);
 }
 
 async function fetchAllUrls() {
@@ -119,6 +125,21 @@ function loadUrlList() {
             urlList = [];
         }
     }
+}
+
+function saveDomains() {
+    const content = document.getElementById('sourceInput').value;
+    localStorage.setItem('domainsBackup', content);
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'domains.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    showToast(t('toastSaved'));
 }
 
 async function fetchFromUrl() {

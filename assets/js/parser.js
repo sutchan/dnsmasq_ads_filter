@@ -1,4 +1,4 @@
-// assets/js/parser.js v1.0.3
+// assets/js/parser.js v1.0.4
 // Domain parsing logic for DNS Ad Block List Generator
 
 function parseSource() {
@@ -11,35 +11,45 @@ function parseSource() {
     let commentCount = 0;
 
     for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed) continue;
+        let rawLine = line.trim();
+        if (!rawLine) continue;
 
-        if (trimmed.startsWith('#')) {
-            commentCount++;
+        const hashIndex = rawLine.indexOf('#');
+        if (hashIndex > 0) {
+            rawLine = rawLine.substring(0, hashIndex).trim();
+        }
+        if (!rawLine) continue;
+
+        if (rawLine.startsWith('#')) {
+            const commentContent = rawLine.substring(1).trim();
+            if (commentContent && isValidDomain(commentContent)) {
+                domains.push(commentContent.toLowerCase());
+                commentCount++;
+            }
             continue;
         }
 
-        let domain = trimmed;
+        let domain = rawLine;
 
-        if (trimmed.startsWith('0.0.0.0 ') || trimmed.startsWith('127.0.0.1 ')) {
-            domain = trimmed.replace(/^(0\.0\.0\.0|127\.0\.0\.1)\s+/, '');
+        if (rawLine.startsWith('0.0.0.0 ') || rawLine.startsWith('127.0.0.1 ')) {
+            domain = rawLine.replace(/^(0\.0\.0\.0|127\.0\.0\.1)\s+/, '');
         }
 
-        if (trimmed.startsWith('address=/')) {
-            const match = trimmed.match(/address=\/([^\/]+)\//);
+        if (rawLine.startsWith('address=/')) {
+            const match = rawLine.match(/address=\/([^\/]+)\//);
             if (match) domain = match[1];
         }
 
-        if (trimmed.startsWith('+')) {
-            domain = trimmed.substring(1).trim().toLowerCase().replace(/^\*\./, '');
+        if (rawLine.startsWith('+')) {
+            domain = rawLine.substring(1).trim().toLowerCase().replace(/^\*\./, '');
             if (domain && isValidDomain(domain)) {
                 whitelist.push(domain);
             }
             continue;
         }
 
-        if (trimmed.startsWith('!')) {
-            domain = trimmed.substring(1).trim().split('#')[0].trim().toLowerCase().replace(/^\*\./, '');
+        if (rawLine.startsWith('!')) {
+            domain = rawLine.substring(1).trim().split('#')[0].trim().toLowerCase().replace(/^\*\./, '');
             if (domain && isValidDomain(domain)) {
                 domains.push(domain);
                 commentCount++;
@@ -47,8 +57,8 @@ function parseSource() {
             continue;
         }
 
-        if (trimmed.startsWith('@')) {
-            const match = trimmed.substring(1).trim().match(/^([^=]+)=(.+)$/);
+        if (rawLine.startsWith('@')) {
+            const match = rawLine.substring(1).trim().match(/^([^=]+)=(.+)$/);
             if (match) {
                 const dnsDomain = match[1].toLowerCase().replace(/^\*\./, '');
                 const dnsIp = match[2].trim();
@@ -90,6 +100,7 @@ function sortDomains() {
     
     const headerComments = [];
     const bodyComments = [];
+    const specialLines = [];
     const domainsList = [];
     
     let inHeader = true;
@@ -100,6 +111,12 @@ function sortDomains() {
         if (!trimmed) continue;
         
         const isComment = trimmed.startsWith('#');
+        const isSpecial = trimmed.startsWith('+') || trimmed.startsWith('!') || trimmed.startsWith('@');
+        
+        if (isSpecial) {
+            specialLines.push(line);
+            continue;
+        }
         
         if (inHeader && isComment) {
             headerComments.push(line);
@@ -118,8 +135,8 @@ function sortDomains() {
     }
     
     const sortedDomains = [...domainsList].sort((a, b) => {
-        const aClean = a.trim().replace(/^(0\.0\.0\.0|127\.0\.0\.1|address=\/|\+|\!|@)/, '').toLowerCase();
-        const bClean = b.trim().replace(/^(0\.0\.0\.0|127\.0\.0\.1|address=\/|\+|\!|@)/, '').toLowerCase();
+        const aClean = a.trim().replace(/^(0\.0\.0\.0|127\.0\.0\.1|address=\/)/, '').toLowerCase();
+        const bClean = b.trim().replace(/^(0\.0\.0\.0|127\.0\.0\.1|address=\/)/, '').toLowerCase();
         return aClean.localeCompare(bClean);
     });
     
@@ -128,6 +145,7 @@ function sortDomains() {
     const result = [
         ...headerComments,
         ...sortedDomains,
+        ...specialLines,
         ...sortedBodyComments
     ];
     

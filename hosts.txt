@@ -6,7 +6,8 @@
 #
 # Version: 1.0.2
 # Update: 2026.03.15
-# Domains: 360 unique domains
+# Domains: 366 unique domains
+# Whitelist: 4 domains
 #
 # Usage: Import to router ad blocking settings
 #
@@ -167,11 +168,13 @@
 0.0.0.0 et.tanx.com
 0.0.0.0 extlog.snssdk.com
 0.0.0.0 file.xmpush.xiaomi.com
+0.0.0.0 finder.video.qq.com
 0.0.0.0 fix.hpplay.cn
 0.0.0.0 g.dtv.cn.miaozhan.com
 0.0.0.0 g.dtv.cn.miaozhen.com
 0.0.0.0 g.pandora.xiaomi.com
 0.0.0.0 gallery.pandora.xiaomi.com
+0.0.0.0 game.weixin.qq.com
 0.0.0.0 gdt.qq.com
 0.0.0.0 gifshow.com
 0.0.0.0 googleads.g.doubleclick.net
@@ -215,6 +218,7 @@
 0.0.0.0 metok.sys.miui.com
 0.0.0.0 miaozhen.com
 0.0.0.0 milink.pandora.xiaomi.com
+0.0.0.0 minigame.qq.com
 0.0.0.0 misc.in.duokanbox.com
 0.0.0.0 misc.pandora.xiaomi.com
 0.0.0.0 mishop.pandora.xiaomi.com
@@ -276,7 +280,6 @@
 0.0.0.0 puma-api.ptqy.gitv.tv
 0.0.0.0 px.ucweb.com
 0.0.0.0 pyk.cr-nielsen.com
-0.0.0.0 qlogo.cn
 0.0.0.0 qr.api.youku.com
 0.0.0.0 qr.bilibili.com
 0.0.0.0 qr.icntv.cn
@@ -305,6 +308,7 @@
 0.0.0.0 sdk.ptqy.gitv.tv
 0.0.0.0 sdkauth.hpplay.cn
 0.0.0.0 sdkconfig.ad.xiaomi.com
+0.0.0.0 search.weixin.qq.com
 0.0.0.0 secure.chn.imrworldwide.com
 0.0.0.0 si.ptqy.gitv.tv
 0.0.0.0 sisulizer.com
@@ -368,9 +372,18 @@
 0.0.0.0 wechatad.com
 0.0.0.0 weixinbridge.com
 0.0.0.0 wgo.mmstat.com
+0.0.0.0 wq.123789.net.cn
 0.0.0.0 ws.mmstat.com
+0.0.0.0 wxa.wxs.qq.com
+0.0.0.0 wxapp.tc.qq.com
 0.0.0.0 wxsnsdy.tc.qq.com
 0.0.0.0 xiaomi-dtv.m.cn.miaozhen.com
 0.0.0.0 yhqdashi.com
 0.0.0.0 yk-ssp-ad.cp31.ott.cibntv.net
 0.0.0.0 yximgs.com
+
+# Whitelist (allow these domains)
+# Whitelisted: api.io.mi.com
+# Whitelisted: connectivitycheck.gstatic.com
+# Whitelisted: xx.market.mi-img.com
+# Whitelisted: xx.market.xiaomi.com

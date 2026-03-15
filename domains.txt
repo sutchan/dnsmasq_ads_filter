@@ -21,6 +21,13 @@
 +XX.market.mi-img.com #影响MIUI小部件
 +XX.market.xiaomi.com #影响MIUI小部件
 
+finder.video.qq.com       # 视频号广告
+search.weixin.qq.com      # 搜一搜广告
+wxa.wxs.qq.com
+wq.123789.net.cn          # 部分小游戏跳转中转
+wxapp.tc.qq.com
+minigame.qq.com
+game.weixin.qq.com
 gdt.qq.com
 pgdt.gtimg.cn
 ad.weixin.qq.com

@@ -84,8 +84,6 @@
                     </div>
                     <div class="url-actions">
                         <button class="btn btn-sm" onclick="addUrl()">➕ 添加URL</button>
-                        <button class="btn btn-sm" onclick="validateAllUrls()">✓ 校验URL</button>
-                        <button class="btn btn-sm" onclick="saveDomains()">💾 保存</button>
                         <button class="btn btn-sm" onclick="fetchAllUrls()">🌐 获取全部</button>
                     </div>
                     <div class="url-list" id="urlList"></div>
@@ -110,6 +108,8 @@
                     <button class="btn btn-outline" onclick="clearAll()">🗑️ 清空</button>
                     <button class="btn btn-outline" onclick="sortDomains()">↕️ 排序</button>
                     <button class="btn btn-primary" onclick="parseSource()" data-i18n="parseBtn">解析域名</button>
+                    <button class="btn btn-outline" onclick="validateAllUrls()">✓ 校验URL</button>
+                    <button class="btn btn-outline" onclick="saveDomains()">💾 保存</button>
                 </div>
             </section>
 
