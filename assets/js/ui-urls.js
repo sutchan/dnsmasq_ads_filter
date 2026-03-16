@@ -1,4 +1,4 @@
-// assets/js/ui-urls.js v1.0.2
+// assets/js/ui-urls.js v1.0.5
 // URL management functions for DNS Ad Block List Generator
 
 function addUrl() {
@@ -127,9 +127,34 @@ function loadUrlList() {
     }
 }
 
-function saveDomains() {
+let fileHandle = null;
+
+async function saveDomains() {
     const content = document.getElementById('sourceInput').value;
     localStorage.setItem('domainsBackup', content);
+    
+    if ('showSaveFilePicker' in window) {
+        try {
+            if (!fileHandle) {
+                fileHandle = await window.showSaveFilePicker({
+                    suggestedName: 'domains.txt',
+                    types: [{
+                        description: 'Text Files',
+                        accept: { 'text/plain': ['.txt'] }
+                    }]
+                });
+            }
+            const writable = await fileHandle.createWritable();
+            await writable.write(content);
+            await writable.close();
+            showToast(t('toastSaved'));
+            return;
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                console.error('File save error:', err);
+            }
+        }
+    }
     
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
