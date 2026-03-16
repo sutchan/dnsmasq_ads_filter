@@ -1,6 +1,6 @@
 # dnsmasq_ads_filter
 
-[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.5-green)](https://github.com/sutchan/dnsmasq_ads_filter)
+[![English](https://img.shields.io/badge/language-English-blue)](README.en.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.md) [![Version](https://img.shields.io/badge/version-1.0.6-green)](https://github.com/sutchan/dnsmasq_ads_filter)
 
 基于 DNS 的路由器广告过滤规则库，提供 Web 管理界面。
 

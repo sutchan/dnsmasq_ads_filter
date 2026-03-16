@@ -1,4 +1,4 @@
-// assets/css/utilities.css v1.0.5
+// assets/css/utilities.css v1.0.6
 // Utility Classes - Buttons, Toast, Helpers
 
 .btn {
@@ -34,7 +34,7 @@
 .btn-sm {
     padding: 10px 18px;
     font-size: 0.85rem;
-    min-height: 38px;
+    min-height: 44px;
 }
 
 .btn-primary {

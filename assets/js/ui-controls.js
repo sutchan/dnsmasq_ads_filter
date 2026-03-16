@@ -66,6 +66,20 @@ function updateLang() {
         }
     });
 
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (trans[key]) {
+            el.placeholder = trans[key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (trans[key]) {
+            el.title = trans[key];
+        }
+    });
+
     const usageToggle = document.getElementById('usageToggle');
     const usageGuide = document.getElementById('usageGuide');
     const usageToggleText = document.getElementById('usageToggleText');

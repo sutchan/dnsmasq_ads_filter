@@ -1,5 +1,5 @@
-// assets/css/components.css v1.0.5
-// UI Components - Buttons, Inputs, Form Elements
+/* assets/css/components.css v1.0.6 */
+/* UI Components - Buttons, Inputs, Form Elements */
 
 .icon-btn {
     width: 42px;
@@ -201,6 +201,12 @@
 
 .collapsed .collapse-icon {
     transform: rotate(-90deg);
+}
+
+.url-section {
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .url-section {

@@ -9,15 +9,15 @@
 | 核心功能 | 基于 dnsmasq/hosts 的路由器广告过滤 |
 | 目标用户 | 使用梅林/OpenWrt/小米/华硕/TP-Link 等路由器的用户 |
 | 项目地址 | https://github.com/sutchan/dnsmasq_ads_filter |
-| 当前版本 | v1.0.5 |
+| 当前版本 | v1.0.6 |
 | 拦截域名 | 6766+ |
 
 ## 2. 文件结构
 
 ```
 dnsmasq_ads_filter/
-├── README.md                      # 英文说明文档
-├── README.zh-CN.md                # 中文说明文档
+├── README.md                      # 中文说明文档（默认）
+├── README.en.md                   # 英文说明文档
 ├── domains.txt                    # 原始域名清单（唯一数据源）
 ├── dnsmasq.conf                  # Dnsmasq 过滤列表
 ├── hosts.txt                      # Hosts 文件
@@ -180,7 +180,7 @@ refactor: 优化规则生成逻辑
 
 ## 9. 版本管理
 
-使用 [SemVer](https://semver.org/) 格式: `v1.0.5`
+使用 [SemVer](https://semver.org/) 格式: `v1.0.6`
 
 | 版本类型 | 说明 |
 |----------|------|

@@ -24,7 +24,6 @@ function parseSource() {
             const commentContent = rawLine.substring(1).trim();
             if (commentContent && isValidDomain(commentContent)) {
                 domains.push(commentContent.toLowerCase());
-                commentCount++;
             }
             continue;
         }

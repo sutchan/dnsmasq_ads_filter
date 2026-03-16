@@ -1,4 +1,4 @@
-<!-- manager.html v1.0.5 -->
+<!-- manager.html v1.0.6 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://github.com/sutchan/dnsmasq_ads_filter">
     <meta property="og:image" content="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/preview.png">
     <meta name="twitter:card" content="summary_large_image">
-    <title>DNS广告过滤清单生成器 v1.0.5</title>
+    <title>DNS广告过滤清单生成器 v1.0.6</title>
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/components.css">
@@ -58,7 +58,7 @@
                     <h2 data-i18n="inputTitle">📥 输入域名清单</h2>
                     <button class="collapse-btn" onclick="toggleSection('url-section')">
                         <span class="collapse-icon">▼</span>
-                        <span>高级选项</span>
+                        <span data-i18n="advanced">高级选项</span>
                     </button>
                 </div>
 
@@ -79,37 +79,37 @@
 
                 <div class="url-section collapsed" id="url-section">
                     <div class="url-input-row">
-                        <input type="text" class="url-input" id="urlInput" placeholder="输入 URL 导入域名列表..." value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt">
+                        <input type="text" class="url-input" id="urlInput" data-i18n-placeholder="urlPlaceholder" placeholder="输入 URL 导入域名列表..." value="https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/domains.txt">
                         <button class="btn btn-primary" onclick="fetchFromUrl()" data-i18n="fetchBtn">获取</button>
                     </div>
                     <div class="url-actions">
-                        <button class="btn btn-sm" onclick="addUrl()">➕ 添加URL</button>
-                        <button class="btn btn-sm" onclick="fetchAllUrls()">🌐 获取全部</button>
+                        <button class="btn btn-sm" onclick="addUrl()" data-i18n="addUrl">➕ 添加URL</button>
+                        <button class="btn btn-sm" onclick="fetchAllUrls()" data-i18n="fetchAllUrls">🌐 获取全部</button>
                     </div>
                     <div class="url-list" id="urlList"></div>
 
                     <div class="preset-section">
-                        <span class="preset-label" data-i18n="preset">预设源:</span>
+                        <span class="preset-label" data-i18n="presetLabel">预设源:</span>
                         <div class="preset-tags">
-                            <span class="preset-tag active" onclick="loadPreset('builtin', event)">内置数据</span>
-                            <span class="preset-tag" onclick="loadPreset('adguard', event)">AdGuard</span>
-                            <span class="preset-tag" onclick="loadPreset('easylist', event)">EasyList</span>
-                            <span class="preset-tag" onclick="loadPreset('neohosts', event)">NeoHosts</span>
+                            <span class="preset-tag active" onclick="loadPreset('builtin', event)" data-i18n="builtinAd">内置数据</span>
+                            <span class="preset-tag" onclick="loadPreset('adguard', event)" data-i18n="adguard">AdGuard</span>
+                            <span class="preset-tag" onclick="loadPreset('easylist', event)" data-i18n="easylist">EasyList</span>
+                            <span class="preset-tag" onclick="loadPreset('neohosts', event)" data-i18n="neohosts">NeoHosts</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="editor-container">
                     <div class="line-numbers" id="lineNumbers"></div>
-                    <textarea id="sourceInput" placeholder="# 输入域名，每行一个&#10;ad.example.com&#10;ads.example.com&#10;# + 开头为白名单&#10;# @domain=ip 为自定义DNS" oninput="handleSourceInput()"></textarea>
+                    <textarea id="sourceInput" data-i18n-placeholder="inputPlaceholder" placeholder="# 输入域名，每行一个&#10;ad.example.com&#10;ads.example.com&#10;# + 开头为白名单&#10;# @domain=ip 为自定义DNS" oninput="handleSourceInput()"></textarea>
                 </div>
 
                 <div class="editor-actions">
-                    <button class="btn btn-outline" onclick="clearAll()">🗑️ 清空</button>
-                    <button class="btn btn-outline" onclick="sortDomains()">↕️ 排序</button>
+                    <button class="btn btn-outline" onclick="clearAll()" data-i18n="clearBtn">🗑️ 清空</button>
+                    <button class="btn btn-outline" onclick="sortDomains()" data-i18n="sortBtn">↕️ 排序</button>
                     <button class="btn btn-primary" onclick="parseSource()" data-i18n="parseBtn">解析域名</button>
-                    <button class="btn btn-outline" onclick="validateAllUrls()">✓ 校验URL</button>
-                    <button class="btn btn-outline" onclick="saveDomains()">💾 保存</button>
+                    <button class="btn btn-outline" onclick="validateAllUrls()" data-i18n="validateBtn">✓ 校验URL</button>
+                    <button class="btn btn-outline" onclick="saveDomains()" data-i18n="saveBtn">💾 保存</button>
                 </div>
             </section>
 
@@ -121,7 +121,7 @@
                             <button class="format-tab active" onclick="setFormat('hosts')">Hosts</button>
                             <button class="format-tab" onclick="setFormat('dnsmasq')">Dnsmasq</button>
                         </div>
-                        <button class="settings-btn" onclick="toggleSettings()" title="设置">
+                        <button class="settings-btn" onclick="toggleSettings()" data-i18n-title="settingsTitle" title="设置">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="3"></circle>
                                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -133,12 +133,12 @@
                 <div class="settings-panel collapsed" id="settings-panel">
                     <div class="settings-grid">
                         <div class="settings-item">
-                            <label>项目名称</label>
+                            <label data-i18n="projectName">项目名称</label>
                             <input type="text" id="projectNameInput" value="dnsmasq_ads_filter" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
-                            <label>版本号</label>
-                            <input type="text" id="versionInput" value="1.0.4" onchange="updateSettings()">
+                            <label data-i18n="version">版本号</label>
+                            <input type="text" id="versionInput" value="1.0.6" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
                             <label data-i18n="ipV4">IPv4</label>
@@ -152,34 +152,34 @@
                     <div class="options-row">
                         <label class="checkbox-item">
                             <input type="checkbox" id="addHeader" checked onchange="generateRules()">
-                            <span>头部注释</span>
+                            <span data-i18n="headerComment">头部注释</span>
                         </label>
                         <label class="checkbox-item">
                             <input type="checkbox" id="blockIPv6" onchange="generateRules()">
-                            <span>阻止 IPv6</span>
+                            <span data-i18n="blockIPv6">阻止 IPv6</span>
                         </label>
                         <label class="checkbox-item">
                             <input type="checkbox" id="dedupDomains" checked onchange="generateRules()">
-                            <span>自动去重</span>
+                            <span data-i18n="dedup">自动去重</span>
                         </label>
                         <label class="checkbox-item">
                             <input type="checkbox" id="removeWildcard" checked onchange="generateRules()">
-                            <span>移除通配符</span>
+                            <span data-i18n="removeWildcard">移除通配符</span>
                         </label>
                     </div>
                 </div>
 
-                <div class="merge-info" id="mergeInfo">点击"生成规则"查看输出</div>
+                <div class="merge-info" id="mergeInfo" data-i18n="mergeInfo">点击"生成规则"查看输出</div>
 
                 <div class="output-container">
                     <div class="line-numbers" id="outputLineNumbers"></div>
-                    <div class="output-preview" id="outputPreview">// 生成的规则将显示在这里</div>
+                    <div class="output-preview" id="outputPreview" data-i18n="previewPlaceholder">// 生成的规则将显示在这里</div>
                 </div>
 
                 <div class="output-actions">
-                    <button class="btn btn-success" onclick="generateRules()">🔄 生成规则</button>
-                    <button class="btn btn-primary" onclick="downloadOutput()">📥 下载</button>
-                    <button class="btn btn-outline" onclick="copyOutput()">📋 复制</button>
+                    <button class="btn btn-success" onclick="generateRules()" data-i18n="generateBtn">🔄 生成规则</button>
+                    <button class="btn btn-primary" onclick="downloadOutput()" data-i18n="downloadBtn">📥 下载</button>
+                    <button class="btn btn-outline" onclick="copyOutput()" data-i18n="copyBtn">📋 复制</button>
                 </div>
             </section>
         </main>
@@ -229,7 +229,7 @@
                         <line x1="10" y1="14" x2="21" y2="3"></line>
                     </svg>
                 </a>
-                <span class="footer-version">v1.0.5</span>
+                <span class="footer-version">v1.0.6</span>
             </div>
         </footer>
     </div>

@@ -1,4 +1,4 @@
-// assets/css/styles.css v1.0.5
+// assets/css/styles.css v1.0.6
 // Main CSS Entry Point
 
 .app-footer {
@@ -38,17 +38,22 @@
 }
 
 .usage-guide {
-    display: none;
-    padding: 16px;
-    margin-bottom: 16px;
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-bottom: 0;
+    padding: 0 16px;
+    transition: all 0.3s ease;
 }
 
 .usage-guide.visible {
-    display: block;
-    animation: fadeIn 0.3s ease;
+    max-height: 500px;
+    opacity: 1;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
 @keyframes fadeIn {
