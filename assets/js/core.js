@@ -1,4 +1,4 @@
-// assets/js/core.js v1.0.3
+// assets/js/core.js v1.0.5
 // Core variables and configuration for DNS Ad Block List Generator
 
 let domains = [];

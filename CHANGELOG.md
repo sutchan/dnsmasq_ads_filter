@@ -5,10 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6]
+
+### Changed
+- Enhanced UI design with gradient backgrounds and smooth animations
+- Improved panel hover effects with gradient top border
+- Redesigned buttons with gradient backgrounds and enhanced shadows
+- Added input focus states with accent glow
+- Updated color scheme for better visual hierarchy
+
 ## [1.0.5]
 
 ### Added
 - Save button now uses File System Access API to save directly to project directory
+
+### Changed
+- Synchronized all file version numbers to v1.0.5
+- Updated SPEC.md version references
+- Updated README version badges
+- Updated output file headers (dnsmasq.conf, hosts.txt)
+
+### Fixed
+- Fixed version inconsistency across project files
+- Verified code robustness and updated documentation
 
 ## [1.0.4]
 

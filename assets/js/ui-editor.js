@@ -1,4 +1,4 @@
-// assets/js/ui-editor.js v1.0.3
+// assets/js/ui-editor.js v1.0.5
 // Editor functions for DNS Ad Block List Generator
 
 function handleSourceInput() {
