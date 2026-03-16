@@ -13,7 +13,7 @@ const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
 
 let settings = {
     projectName: 'dnsmasq_ads_filter',
-    version: '1.0.2',
+    version: '1.0.5',
     ipv4: '0.0.0.0',
     ipv6: '::',
     dnsmasqFilename: 'dnsmasq.conf',

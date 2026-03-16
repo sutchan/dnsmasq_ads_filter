@@ -1,4 +1,4 @@
-// assets/css/layout.css v1.0.3
+// assets/css/layout.css v1.0.4
 // Layout and Container Styles
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -10,12 +10,17 @@ body {
     min-height: 100vh;
     padding: 32px;
     transition: background-color 0.3s, color 0.3s;
+    background-image: 
+        radial-gradient(circle at 20% 50%, var(--accent-light) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
 }
 
 .container { max-width: 1000px; margin: 0 auto; }
 
 .app-header {
     margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-main {
@@ -27,12 +32,13 @@ body {
 
 h1 {
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
-    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, var(--accent-color) 0%, #8b5cf6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 .header-actions {
@@ -64,18 +70,26 @@ h1 {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+    background: linear-gradient(90deg, var(--accent-color), #8b5cf6, var(--success-color));
+    background-size: 200% 100%;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .panel:hover::before {
     opacity: 1;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .panel:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
 }
 
 .section-header {
@@ -84,13 +98,18 @@ h1 {
     align-items: center;
     margin-bottom: 20px;
     gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border-color);
 }
 
 .section-header h2 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .section-header .header-actions {

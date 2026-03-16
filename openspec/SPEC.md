@@ -9,7 +9,7 @@
 | 核心功能 | 基于 dnsmasq/hosts 的路由器广告过滤 |
 | 目标用户 | 使用梅林/OpenWrt/小米/华硕/TP-Link 等路由器的用户 |
 | 项目地址 | https://github.com/sutchan/dnsmasq_ads_filter |
-| 当前版本 | v1.0.4 |
+| 当前版本 | v1.0.5 |
 | 拦截域名 | 6766+ |
 
 ## 2. 文件结构
@@ -180,7 +180,7 @@ refactor: 优化规则生成逻辑
 
 ## 9. 版本管理
 
-使用 [SemVer](https://semver.org/) 格式: `v1.0.4`
+使用 [SemVer](https://semver.org/) 格式: `v1.0.5`
 
 | 版本类型 | 说明 |
 |----------|------|

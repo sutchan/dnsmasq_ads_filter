@@ -1,17 +1,17 @@
-// assets/css/components.css v1.0.4
+// assets/css/components.css v1.0.5
 // UI Components - Buttons, Inputs, Form Elements
 
 .icon-btn {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--border-color);
+    width: 42px;
+    height: 42px;
+    border: 1.5px solid var(--border-color);
     background: var(--bg-panel);
     border-radius: var(--radius-sm);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 18px;
 }
 
@@ -19,8 +19,8 @@
     background: var(--accent-color);
     border-color: var(--accent-color);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
 }
 
 .lang-switch {
@@ -71,31 +71,32 @@
 
 .url-input-row {
     display: flex;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .url-input {
     flex: 1;
-    padding: 10px 14px;
-    border: 1px solid var(--border-color);
+    padding: 14px 18px;
+    border: 1.5px solid var(--border-color);
     border-radius: var(--radius-sm);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     background: var(--bg-secondary);
     color: var(--text-primary);
-    transition: border-color 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .url-input:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px var(--accent-light);
 }
 
 .url-actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .url-list {
@@ -145,25 +146,33 @@
 
 .preset-tags {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
 .preset-tag {
-    padding: 8px 16px;
+    padding: 10px 18px;
     background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    font-size: 0.8rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .preset-tag:hover {
+    background: var(--accent-light);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.preset-tag.active {
     background: var(--accent-color);
     border-color: var(--accent-color);
     color: white;
-    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 .collapse-btn {
@@ -307,26 +316,29 @@
 }
 
 .format-tab {
-    padding: 8px 18px;
+    padding: 10px 20px;
     border: none;
     background: transparent;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 500;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     color: var(--text-secondary);
+    position: relative;
+    overflow: hidden;
 }
 
 .format-tab.active {
-    background: var(--accent-color);
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
     color: white;
-    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .format-tab:hover:not(.active) {
     color: var(--text-primary);
-    background: var(--bg-panel);
+    background: var(--bg-secondary);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {

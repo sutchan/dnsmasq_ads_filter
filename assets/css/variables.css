@@ -1,13 +1,13 @@
-// assets/css/variables.css v1.0.3
+// assets/css/variables.css v1.0.4
 // CSS Variables and Theme Definitions
 
 :root {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #e2e8f0;
     --bg-panel: #ffffff;
     --text-primary: #1e293b;
     --text-secondary: #64748b;
-    --border-color: #94a3b8;
+    --border-color: #cbd5e1;
     --accent-color: #6366f1;
     --accent-hover: #4f46e5;
     --accent-light: rgba(99, 102, 241, 0.1);

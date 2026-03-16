@@ -1,4 +1,4 @@
-<!-- manager.html v1.0.5 -->
+<!-- manager.html v1.0.6 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -49,23 +49,8 @@
                     </button>
                 </div>
             </div>
-            <p class="subtitle" data-i18n="subtitle">从单一域名清单生成多种格式的路由器过滤规则</p>
+            <p class="subtitle" data-i18n="subtitle">从域名清单生成 Hosts 或 Dnsmasq 格式的路由器过滤规则</p>
         </header>
-
-        <div class="stats-compact" id="stats-bar">
-            <div class="stat-badge">
-                <span class="stat-value" id="domainCount">0</span>
-                <span class="stat-label" data-i18n="domainCount">域名</span>
-            </div>
-            <div class="stat-badge">
-                <span class="stat-value" id="validCount">0</span>
-                <span class="stat-label" data-i18n="validCount">有效</span>
-            </div>
-            <div class="stat-badge">
-                <span class="stat-value" id="commentCount">0</span>
-                <span class="stat-label" data-i18n="commentCount">注释</span>
-            </div>
-        </div>
 
         <main class="main-content">
             <section class="panel input-section" id="input-panel">
@@ -75,6 +60,21 @@
                         <span class="collapse-icon">▼</span>
                         <span>高级选项</span>
                     </button>
+                </div>
+
+                <div class="stats-compact" id="stats-bar">
+                    <div class="stat-badge">
+                        <span class="stat-value" id="domainCount">0</span>
+                        <span class="stat-label" data-i18n="domainCount">域名</span>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="stat-value" id="validCount">0</span>
+                        <span class="stat-label" data-i18n="validCount">有效</span>
+                    </div>
+                    <div class="stat-badge">
+                        <span class="stat-value" id="commentCount">0</span>
+                        <span class="stat-label" data-i18n="commentCount">注释</span>
+                    </div>
                 </div>
 
                 <div class="url-section collapsed" id="url-section">
@@ -120,7 +120,6 @@
                         <div class="format-tabs">
                             <button class="format-tab active" onclick="setFormat('hosts')">Hosts</button>
                             <button class="format-tab" onclick="setFormat('dnsmasq')">Dnsmasq</button>
-                            <button class="format-tab" onclick="setFormat('both')">混合</button>
                         </div>
                         <button class="settings-btn" onclick="toggleSettings()" title="设置">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

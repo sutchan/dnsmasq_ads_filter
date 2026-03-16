@@ -1,10 +1,10 @@
-// assets/js/i18n.js v1.0.2
+// assets/js/i18n.js v1.0.5
 // Internationalization (i18n) translations for DNS Ad Block List Generator
 
 const i18n = {
     zh: {
         title: '🛡️ DNS广告过滤清单生成器',
-        subtitle: '从单一域名清单生成多种格式的路由器过滤规则',
+        subtitle: '从域名清单生成 Hosts 或 Dnsmasq 格式的路由器过滤规则',
         domainCount: '域名总数',
         validCount: '有效域名',
         commentCount: '注释行',
@@ -86,7 +86,7 @@ const i18n = {
     },
     en: {
         title: '🛡️ DNS Ad Blocklist Generator',
-        subtitle: 'Convert domain lists into router filter rules for Dnsmasq, Hosts & AdBlock formats',
+        subtitle: 'Convert domain lists into Hosts or Dnsmasq format router filter rules',
         domainCount: 'Total Domains',
         validCount: 'Valid Domains',
         commentCount: 'Comment Lines',

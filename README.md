@@ -1,6 +1,6 @@
 # dnsmasq_ads_filter
 
-[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.4-green)](https://github.com/sutchan/dnsmasq_ads_filter)
+[![English](https://img.shields.io/badge/language-English-blue)](README.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.zh-CN.md) [![Version](https://img.shields.io/badge/version-1.0.5-green)](https://github.com/sutchan/dnsmasq_ads_filter)
 
 Router-level DNS-based ad blocking filter list with web management tool.
 
