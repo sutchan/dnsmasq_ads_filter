@@ -1,3 +1,4 @@
+# 项目地址：https://github.com/sutchan/dnsmasq_ads_filter
 # 原始域名清单
 # 格式：每行一个域名，# 开头为注释
 # 此文件为唯一数据源，通过 manager.html 生成其他格式
