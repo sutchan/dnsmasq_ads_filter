@@ -24,6 +24,7 @@ function parseSource() {
             const commentContent = rawLine.substring(1).trim();
             if (commentContent && isValidDomain(commentContent)) {
                 domains.push(commentContent.toLowerCase());
+                commentCount++;
             }
             continue;
         }
@@ -84,7 +85,7 @@ function parseSource() {
     const uniqueWhitelist = [...new Set(whitelist)];
     whitelist = uniqueWhitelist;
 
-    document.getElementById('domainCount').textContent = domains.length + commentCount;
+    document.getElementById('domainCount').textContent = domains.length;
     document.getElementById('validCount').textContent = domains.length;
     document.getElementById('commentCount').textContent = commentCount;
 

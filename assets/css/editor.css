@@ -169,6 +169,7 @@
     font-size: 0.85rem;
     color: var(--text-secondary);
     margin-bottom: 16px;
+    text-align: left;
 }
 
 @media (max-width: 768px) {

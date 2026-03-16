@@ -317,7 +317,7 @@ body {
 
 .merge-info {
     padding: 16px;
-    text-align: center;
+    text-align: left;
     color: var(--text-secondary);
     font-size: 0.9rem;
     background: var(--bg-secondary);
