@@ -16,25 +16,11 @@
 # !ad.example.com      # 注释域名：显示用
 # @example.com=0.0.0.0 # 自定义 DNS 指向
 #
-
 +api.io.mi.com #影响米家互联的使用。
 +connectivitycheck.gstatic.com #影响 GooglePlay
 +XX.market.mi-img.com #影响MIUI小部件
 +XX.market.xiaomi.com #影响MIUI小部件
 
-finder.video.qq.com       # 视频号广告
-search.weixin.qq.com      # 搜一搜广告
-wxa.wxs.qq.com
-wq.123789.net.cn          # 部分小游戏跳转中转
-wxapp.tc.qq.com
-minigame.qq.com
-game.weixin.qq.com
-gdt.qq.com
-pgdt.gtimg.cn
-ad.weixin.qq.com
-mpad.weixin.qq.com
-wechatad.com
-gdt.qq.com/getads
 3dns-2.adobe.com
 3dns-3.adobe.com
 4009997658.com
@@ -52,17 +38,30 @@ activate-sea.adobe.com
 activate-sjc0.adobe.com
 activate.adobe.com
 activate.wip3.adobe.com
+ad-api.bilibili.com
+ad-pc.iqiyi.com
+ad-static.iqiyi.com
 ad.88765.com
+ad.bestv.com.cn
+ad.bilibili.com
 ad.cctv.com
+ad.cmvideo.cn           # 中国移动广告+支付共用
 ad.cntv.cn
+ad.coocaa.com
 ad.doubleclick.net
+ad.ffalcon.com
+ad.hisense.com
 ad.hpplay.cn
 ad.ihuman.com
 ad.iqiyi.com
+ad.m.taobao.com           # 阿里妈妈（部分 BesTV 使用）
+ad.mgtv.com
 ad.mi.com
+ad.miguvideo.com
 ad.qq.com
 ad.tencentmusic.com
 ad.toutiao.com
+ad.video.qq.com           # 腾讯视频广告
 ad.weixin.qq.com
 ad.xelements.cn
 ad.xiaomi.com
@@ -89,12 +88,15 @@ adobe-dns-2.adobe.com
 adobe-dns-3.adobe.com
 adping.qq.com
 adplay.tudou.com
+ads-union.jd.com
 ads.95516.com
 ads.api.vungle.com
+ads.bestv.com.cn
 ads.cn.miaozhen.com
+ads.mgtv.com
+ads.migu.cn
 ads.serving-sys.cn
 ads.union.jd.com
-ads-union.jd.com
 adsclick.qq.com
 adsfile.qq.com
 adsh.wagbridge.taobao.alimama.com
@@ -111,7 +113,9 @@ adstats.tencentmusic.com
 adv.sec.miui.com
 advertising.com
 adx.tv.mi.com
+adx.youku.com             # 优酷广告联盟
 affise.com
+afp.iqiyi.com           # 广告与支付混合平台
 afp.qiyi.com
 alert.kuyun.com
 ali-ad.a.yximgs.com
@@ -119,8 +123,16 @@ alog.umeng.com
 amdc.m.taobao.com
 analytics.rayjump.com
 android.bugly.qq.com
+api-ad.bestv.cn
+api-ad.hisense.com
+api-ad.mgtv.com
+api-ad.miguvideo.com
+api-pay.mgtv.com
 api.ad.xiaomi.com
+api.bestv.com.cn/payment/qrcode
+api.cloud.huawei.com
 api.cupid.ptqy.gitv.tv
+api.dangbei.net/pay/qrcode
 api.fd.mob.com
 api.hpplay.com.cn
 api.kingdata.ksyun.com
@@ -153,20 +165,33 @@ bar.baidu.com
 bdbus-turbonet.baidu.com
 bds.snssdk.com
 bdsp.x.jd.com
+beacon.bestv.com.cn
+beacon.bilibili.com
+beacon.cctv.cn
+beacon.coocaa.com
+beacon.ffalcon.com
+beacon.iqiyi.com        # 信标追踪
+beacon.mgtv.com
+beacon.migu.cn
 blackhole.m.jd.com
 bss.pandora.xiaomi.com
 c.l.qq.com
 callback.ad.xiaomi.com
+cctv-ad.cdn.cctv.cn     # 广告资源 CDN
 cctv.adsunion.com
 cdn.hpplay.com.cn
 centertime.ksyun.com
 chartboost.com
+cm.bilibili.com           # 商业广告接口
 cm.cn.miaozhen.com
 cm.ipinyou.com
 cmonitor.iqiyi.com
+collect.data.qq.com
+com.hisense.service.ad      # ADB 包名（非域名）
 conf.hpplay.cn
 config.kuyun.com
 config.unityads.unitychina.cn
+connectivitycheck.platform.hicloud.com
 coreldrawchina.com
 cpro.baidu.com
 cupid.ptqy.gitv.tv
@@ -182,29 +207,37 @@ dl.cupid.ptqy.gitv.tv
 dm.bytedance.com
 dm.pstatp.com
 dm.toutiao.com
+dnkeeper.platform.dbankcloud.com
 dvb.pandora.xiaomi.com
 ef-dongfeng.tanx.com
 errlog.umeng.com
 et.tanx.com
 extlog.snssdk.com
 file.xmpush.xiaomi.com
+finder.video.qq.com       # 视频号广告
 fix.hpplay.cn
 g.dtv.cn.miaozhan.com
 g.dtv.cn.miaozhen.com
 g.pandora.xiaomi.com
+galaxy.ad.iqiyi.com     # “银河”合作广告通道（较少见）
 gallery.pandora.xiaomi.com
+game.weixin.qq.com
+gdt.qq.com
+gdt.qq.com/getads
 gifshow.com
 googleads.g.doubleclick.net
+grs.dbankcloud.com
 gs.getui.com
 gslb.hpplay.cn
 gvod.aiseejapp.atianqi.com
 h-adashx.ut.taobao.com
 h5.hpplay.com.cn
-h5.tv.mi.com
 h5.ptmi.gitv.tv
-ptmi.gitv.tv
+h5.tv.mi.com
 hotupgrade.hpplay.cn
 hpplay.cdn.cibn.cc
+hwid-drcn.platform.hicloud.com
+i0.hdslb.com              # 广告图片 CDN（谨慎！正常视频也走此域）
 image.hpplay.cn
 imdns.hpplay.cn
 imp.ad.xelements.cn
@@ -212,30 +245,44 @@ init.supersonicads.com
 ip.ptqy.gitv.tv
 ironsrc.com
 is-gateway.supersonicads.com
-iwstat.tudou.com
 iws.corel.com
+iwstat.tudou.com
 iyes.youku.com
 jellyfish.pandora.xiaomi.com
 js-ad.a.yximgs.com
 kuyun.com
 kwimgs.com
 leboapi.hpplay.com.cn
+log-api.pangolin-sdk-toutiao.com
 log.ad.xiaomi.com
+log.bestv.com.cn
+log.bilibili.com
+log.cctv.cn
+log.coocaa.com
+log.ffalcon.com
+log.hisense.com
+log.iqiyi.com           # 播放日志上报
+log.mgtv.com
+log.migu.cn
 log.mmstat.com
 log.snssdk.com
+log.tbs.qq.com
 log.umsns.com
-log-api.pangolin-sdk-toutiao.com
+logbak.hicloud.com
 logonext.tv.kuyun.com
 logs.ironsrc.mobi
 lstat.youku.com
+m.pcv.iqiyi.com         # 移动支付中转（TV 端也调用）
 m.reachmax.cn
 ma.baidu.com
 mairuanwang.com
 makeding.com
 mc.corel.com
 metok.sys.miui.com
+mgtv-ad.cdn.mgtv.com
 miaozhen.com
 milink.pandora.xiaomi.com
+minigame.qq.com
 misc.in.duokanbox.com
 misc.pandora.xiaomi.com
 mishop.pandora.xiaomi.com
@@ -244,8 +291,10 @@ mobads.baidu.com
 mon.ad.xelements.cn
 monitor.bnc66.com
 mopub.com
+mpad.weixin.qq.com
 mpush-api.aliyun.com
 ms.applvn.com
+msg.iqiyi.com           # 消息推送（含广告通知）
 msg.qy.net
 mtt.taobao.com
 networksdk.ssacdn.com
@@ -255,6 +304,7 @@ nielsen.com
 norma-external-collect.meizu.com
 nstat.tudou.com
 o2o.api.xiaomi.com
+oauth-login-drcn.platform.dbankcloud.com
 omgmta.play.aiseet.atianqi.com
 open.e.kuaishou.cn
 open.e.kuaishou.com
@@ -263,6 +313,14 @@ optimus-ads.amap.com
 origin-mc.corel.com
 ota.ptqy.gitv.tv
 outcome-ssp.supersonicads.com
+p1.bestvimg.com
+p1.ffalconimg.com
+p1.hisensead.com
+p1.mgtvimg.com
+p1.migupic.com
+p2.bestvimg.com
+p2.mgtvimg.com
+p2.migupic.com
 p2v.tudou.com
 pagead2.googleadservices.com
 pandora.mi.com
@@ -271,11 +329,16 @@ pangolin-sdk-toutiao-b.com
 pangolin.snssdk.com
 pay.ad.xiaomi.com
 pay.api.youku.com
+pay.bestv.com.cn
 pay.bilibili.com
+pay.dangbei.net
 pay.hd.sohu.com
+pay.huawei.com
 pay.icntv.help
 pay.icntv.xyz
 pay.iqiyi.com
+pay.mgtv.com
+pay.migu.cn
 pay.mobile.youku.com
 pay.tv.qq.com
 pay.tv.sohu.com
@@ -284,13 +347,18 @@ pay.zmengzhu.com
 paycallback.iqiyi.com
 paycode.iqiyi.com
 payment.callback.youku.com
+payment.dbankcloud.cn   # 华为应用市场支付
 payment.youku.com
 pd.ads.cn.miaozhen.com
+pgdt.gtimg.cn
 pglstatp-toutiao.com
+pic1.iqiyi.com
+pic2.iqiyi.com
 pic7.iqiyipic.com
 pin.hpplay.cn
 prod-ms.applovin.com
 ptgy.gitv.tv
+ptmi.gitv.tv
 puma-api.ptqy.gitv.tv
 px.ucweb.com
 pyk.cr-nielsen.com
@@ -298,6 +366,7 @@ qr.api.youku.com
 qr.bilibili.com
 qr.icntv.cn
 qr.iqiyi.com
+qr.mioffice.cn          # 小米系常用（生成微信/支付宝扫码页）
 qr.sohu.com
 qr.tv.qq.com
 qr.youku.com
@@ -312,16 +381,18 @@ rp.hpplay.cn
 rp.mobile.youku.com
 rt.applovin.com
 rtb.ads.cn.miaozhen.com
+s1.hdslb.com
 s2.zdmimg.com
 s3-fe-scm.pglstatp-toutiao.com
 s3a.pstatp.com
 sayhi.360.cn
 scc.ssacdn.com
 scs.openspeech.cn
-sdk.ptqy.gitv.tv
 sdk-cache.video.ptqy.gitv.tv
-sdkconfig.ad.xiaomi.com
+sdk.ptqy.gitv.tv
 sdkauth.hpplay.cn
+sdkconfig.ad.xiaomi.com
+search.weixin.qq.com      # 搜一搜广告
 secure.chn.imrworldwide.com
 si.ptqy.gitv.tv
 sisulizer.com
@@ -350,6 +421,7 @@ tosv.byted.org
 trace.rtbasia.com
 tracking.miui.com
 tv.aiseet.atianqi.com
+tv.api.iqiyi.com        # TV 端内容 + 广告混合接口
 tvapi.kuyun.com
 tvapp.hpplay.cn
 tx-ad.a.yximgs.com
@@ -361,10 +433,12 @@ umengcloud.com
 union.gdtimg.com
 unityads.unity3d.com
 unityads.unitychina.cn
+upfile-drcn.platform.hicloud.com
 upgrade.mishop.pandora.xiaomi.com
 utk.baidu.com
 v.admaster.com.cn
 v2.reachmax.cn
+videocontent-dra.himovie.hicloud.com
 view.adjust.com
 vip.api.youku.com
 vip.bz.mgtv.com
@@ -373,6 +447,7 @@ vip.ktcp.icntv.cn
 vip.ktcp.icntv.top
 vip.log.mgtv.com
 vip.tv.qq.com
+vip.video.xiaomi.com
 vip.youku.com
 vip.zmengzhu.com
 vipauth.hpplay.cn
@@ -382,9 +457,13 @@ vt.ipinyou.com
 vungle.com
 vv.play.aiseet.atianqi.com
 webapp.skysrt.com
+wechatad.com
 weixinbridge.com
 wgo.mmstat.com
+wq.123789.net.cn          # 部分小游戏跳转中转
 ws.mmstat.com
+wxa.wxs.qq.com
+wxapp.tc.qq.com
 wxsnsdy.tc.qq.com
 xiaomi-dtv.m.cn.miaozhen.com
 yhqdashi.com

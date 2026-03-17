@@ -11,8 +11,8 @@
 ## 文档完整性
 
 - [ ] `README.md` 存在且内容完整
-- [ ] `README.zh-CN.md` 存在且内容完整
-- [ ] 两个 README 文件互相链接正确
+- [ ] `README.en.md` 存在且英文内容完整
+- [ ] `README.md` 与 `README.en.md` 互相链接正确
 - [ ] `CHANGELOG.md` 变更记录完整
 - [ ] `openspec/SPEC.md` 规范文档完整
 - [ ] `openspec/TASKS.md` 任务清单完整

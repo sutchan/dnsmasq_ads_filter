@@ -13,11 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redesigned buttons with gradient backgrounds and enhanced shadows
 - Added input focus states with accent glow
 - Updated color scheme for better visual hierarchy
-
-## [1.0.5]
+- Comment lines (#domain and !domain syntax) no longer counted in domain count
 
 ### Added
 - Save button now uses File System Access API to save directly to project directory
+
+## [1.0.5]
 
 ### Changed
 - Synchronized all file version numbers to v1.0.5

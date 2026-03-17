@@ -19,6 +19,15 @@ function addUrl() {
     }
 
     urlList.push({ url, status: 'pending' });
+    
+    urlList.sort((a, b) => {
+        const prefixA = /^[\+\!\@]/.test(a.url);
+        const prefixB = /^[\+\!\@]/.test(b.url);
+        if (prefixA && !prefixB) return -1;
+        if (!prefixA && prefixB) return 1;
+        return 0;
+    });
+    
     renderUrlList();
     saveUrlList();
 }
@@ -27,6 +36,19 @@ function removeUrl(index) {
     urlList.splice(index, 1);
     renderUrlList();
     saveUrlList();
+}
+
+function sortUrls() {
+    urlList.sort((a, b) => {
+        const prefixA = /^[\+\!\@]/.test(a.url);
+        const prefixB = /^[\+\!\@]/.test(b.url);
+        if (prefixA && !prefixB) return -1;
+        if (!prefixA && prefixB) return 1;
+        return 0;
+    });
+    renderUrlList();
+    saveUrlList();
+    showToast(t('toastSorted'));
 }
 
 function renderUrlList() {
@@ -120,6 +142,15 @@ function loadUrlList() {
     if (saved) {
         try {
             urlList = JSON.parse(saved);
+            
+            urlList.sort((a, b) => {
+                const prefixA = /^[\+\!\@]/.test(a.url);
+                const prefixB = /^[\+\!\@]/.test(b.url);
+                if (prefixA && !prefixB) return -1;
+                if (!prefixA && prefixB) return 1;
+                return 0;
+            });
+            
             renderUrlList();
         } catch (e) {
             urlList = [];
@@ -188,30 +219,32 @@ async function fetchFromUrl() {
 }
 
 function loadPreset(name, evt) {
+    document.querySelectorAll('.preset-tag').forEach(tag => tag.classList.remove('active'));
+    if (evt && evt.target) evt.target.classList.add('active');
+    
+    if (name === 'builtin') {
+        fetch('domains.txt').then(r => r.text()).then(t => {
+            document.getElementById('sourceInput').value = t;
+            parseSource();
+            updateLineNumbers();
+        }).catch(() => {
+            showToast(t('toastPresetFailed'), true);
+        });
+        showToast(t('toastLoadPreset'));
+        return;
+    }
+    
     const presetUrls = {
         'adguard': 'https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt',
         'easylist': 'https://raw.githubusercontent.com/easylist/easylist/master/easylist/easylist_adservers.txt',
-        'builtin': 'domains.txt',
         'neohosts': 'https://raw.githubusercontent.com/neoHosts/neoHosts/master/data/hosts/basic'
     };
-
+    
     const url = presetUrls[name];
     if (url) {
         document.getElementById('urlInput').value = url;
         fetchFromUrl();
-    } else {
-        if (name === 'builtin') {
-            fetch('domains.txt').then(r => r.text()).then(t => {
-                document.getElementById('sourceInput').value = t;
-                parseSource();
-            }).catch(() => {
-                showToast(t('toastPresetFailed'), true);
-            });
-        }
     }
-
-    document.querySelectorAll('.preset-tag').forEach(tag => tag.classList.remove('active'));
-    if (evt && evt.target) evt.target.classList.add('active');
-
+    
     showToast(t('toastLoadPreset'));
 }

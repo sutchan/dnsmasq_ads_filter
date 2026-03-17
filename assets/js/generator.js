@@ -31,9 +31,9 @@ function generateRules() {
 
     if (addHeader) {
         const totalDomains = processedDomains.length + customDns.length;
-        dnsmasqContent += `# ===============================================\n`;
+        dnsmasqContent += `# =====================================\n`;
         dnsmasqContent += `# ${settings.projectName} - Dnsmasq Ad Block List\n`;
-        dnsmasqContent += `# ===============================================\n`;
+        dnsmasqContent += `# =====================================\n`;
         dnsmasqContent += `#\n`;
         dnsmasqContent += `# Description: Router-level ad blocking filter\n`;
         dnsmasqContent += `#\n`;
@@ -50,11 +50,11 @@ function generateRules() {
         dnsmasqContent += `#\n`;
         dnsmasqContent += `# Project: ${projectUrl}\n`;
         dnsmasqContent += `#\n`;
-        dnsmasqContent += `# ===============================================\n\n`;
+        dnsmasqContent += `# =====================================\n\n`;
 
-        hostsContent += `# ===============================================\n`;
+        hostsContent += `# =====================================\n`;
         hostsContent += `# ${settings.projectName} - Hosts Ad Block List\n`;
-        hostsContent += `# ===============================================\n`;
+        hostsContent += `# =====================================\n`;
         hostsContent += `#\n`;
         hostsContent += `# Description: Router-level ad blocking hosts file\n`;
         hostsContent += `#\n`;
@@ -69,7 +69,7 @@ function generateRules() {
         hostsContent += `#\n`;
         hostsContent += `# Project: ${projectUrl}\n`;
         hostsContent += `#\n`;
-        hostsContent += `# ===============================================\n\n`;
+        hostsContent += `# =====================================\n\n`;
     }
 
     processedDomains.forEach(domain => {

@@ -84,6 +84,7 @@
                     </div>
                     <div class="url-actions">
                         <button class="btn btn-sm" onclick="addUrl()" data-i18n="addUrl">➕ 添加URL</button>
+                        <button class="btn btn-sm" onclick="sortUrls()" data-i18n="sortUrlBtn">⇅ 前缀优先</button>
                         <button class="btn btn-sm" onclick="fetchAllUrls()" data-i18n="fetchAllUrls">🌐 获取全部</button>
                     </div>
                     <div class="url-list" id="urlList"></div>
@@ -108,7 +109,7 @@
                     <button class="btn btn-outline" onclick="clearAll()" data-i18n="clearBtn">🗑️ 清空</button>
                     <button class="btn btn-outline" onclick="sortDomains()" data-i18n="sortBtn">↕️ 排序</button>
                     <button class="btn btn-primary" onclick="parseSource()" data-i18n="parseBtn">解析域名</button>
-                    <button class="btn btn-outline" onclick="validateAllUrls()" data-i18n="validateBtn">✓ 校验URL</button>
+                    <button class="btn btn-outline" onclick="dedupeDomains()" data-i18n="dedupeBtn">🔄 去重</button>
                     <button class="btn btn-outline" onclick="saveDomains()" data-i18n="saveBtn">💾 保存</button>
                 </div>
             </section>
@@ -142,7 +143,7 @@
                         </div>
                         <div class="settings-item">
                             <label data-i18n="ipV4">IPv4</label>
-                            <input type="text" id="ipv4Input" value="0.0.0.0" onchange="updateSettings()">
+                            <input type="text" id="ipv4Input" value="127.0.0.1" onchange="updateSettings()">
                         </div>
                         <div class="settings-item">
                             <label data-i18n="ipV6">IPv6</label>

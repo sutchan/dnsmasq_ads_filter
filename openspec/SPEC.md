@@ -10,7 +10,7 @@
 | 目标用户 | 使用梅林/OpenWrt/小米/华硕/TP-Link 等路由器的用户 |
 | 项目地址 | https://github.com/sutchan/dnsmasq_ads_filter |
 | 当前版本 | v1.0.6 |
-| 拦截域名 | 6766+ |
+| 拦截域名 | 422+ (本地) / 6766+ (含预设源) |
 
 ## 2. 文件结构
 
@@ -107,7 +107,7 @@ address=/domain/::
 | 功能 | 说明 |
 |------|------|
 | URL 导入 | 从远程 URL 获取域名列表 |
-| 预设源 | AdGuard、EasyList、NeoHosts、小米广告 |
+| 预设源 | AdGuard、EasyList、NeoHosts、本地（小米） |
 | 手动编辑 | 直接在文本框编辑域名 |
 | 本地加载 | 加载本地 domains.txt 文件 |
 
@@ -127,8 +127,8 @@ address=/domain/::
 | 设置项 | 默认值 |
 |--------|--------|
 | 项目名称 | dnsmasq_ads_filter |
-| 版本号 | 1.0.5 |
-| IPv4 目标 IP | 0.0.0.0 |
+| 版本号 | 1.0.6 |
+| IPv4 目标 IP | 127.0.0.1 |
 | IPv6 目标 IP | :: |
 | 添加头部注释 | 开启 |
 | 阻止 IPv6 | 开启 |
@@ -215,9 +215,9 @@ manager.html (纯静态，无需服务器)
     │   └── utilities.css         ← 工具类
     │
     └── 预设源 URL
-        ├── AdGuard DNS Filter
-        ├── EasyList
-        └── NeoHosts
+        ├── AdGuard DNS Filter (https://adguardteam.github.io/AdGuardSDNSFilter/)
+        ├── EasyList (https://easylist.to/easylist/)
+        └── NeoHosts (https://github.com/neo-forte/neo-forte)
 ```
 
 ## 11. 浏览器兼容性
