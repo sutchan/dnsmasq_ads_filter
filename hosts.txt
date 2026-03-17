@@ -1,17 +1,17 @@
 # =====================================
-# dnsmasq_ads_filter - Hosts Ad Block List
+# DNS Shield - Hosts Ad Block List
 # =====================================
 #
 # Description: Router-level ad blocking hosts file
 #
-# Version: 1.0.5
+# Version: 1.0.6
 # Update: 2026.03.17
 # Domains: 445 unique domains
 # Whitelist: 4 domains
 #
 # Usage: Import to router ad blocking settings
 #
-# Project: https://github.com/sutchan/dnsmasq_ads_filter
+# Project: https://github.com/sutchan/dns-shield
 #
 # =====================================
 

@@ -9,10 +9,10 @@ let currentFormat = 'hosts';
 let outputContent = { dnsmasq: '', hosts: '' };
 let isLangZh = true;
 
-const projectUrl = 'https://github.com/sutchan/dnsmasq_ads_filter';
+const projectUrl = 'https://github.com/sutchan/dns-shield';
 
 let settings = {
-    projectName: 'dnsmasq_ads_filter',
+    projectName: 'DNS Shield',
     version: '1.0.5',
     ipv4: '127.0.0.1',
     ipv6: '::',

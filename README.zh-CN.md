@@ -1,6 +1,6 @@
-# dnsmasq_ads_filter
+# DNS Shield - 路由器级广告防护
 
-[![English](https://img.shields.io/badge/language-English-blue)](README.en.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.md) [![Version](https://img.shields.io/badge/version-1.0.6-green)](https://github.com/sutchan/dnsmasq_ads_filter)
+[![English](https://img.shields.io/badge/language-English-blue)](README.en.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.md) [![Version](https://img.shields.io/badge/version-1.0.6-green)](https://github.com/sutchan/dns-shield)
 
 基于 DNS 的路由器广告过滤规则库，提供 Web 管理界面。
 
@@ -8,7 +8,7 @@
 
 本项目提供基于 dnsmasq/hosts 的广告过滤解决方案，包含：
 
-- **6766+ 拦截域名** - 全面的广告和追踪域名过滤
+- **422+ 拦截域名** - 本地广告和追踪域名过滤（使用预设源可扩展至 6766+）
 - **Web 管理工具** - 通过浏览器生成自定义过滤清单
 - **多种输出格式** - 支持 Dnsmasq 和 Hosts 格式
 - **单一数据源工作流** - 一个域名清单生成所有输出格式
@@ -29,7 +29,7 @@
 #### OpenWrt
 
 ```bash
-curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsmasq.conf >> /etc/dnsmasq.conf
+curl -sL https://raw.githubusercontent.com/sutchan/dns-shield/main/dnsmasq.conf >> /etc/dnsmasq.conf
 ```
 
 ### 方式二：Hosts 格式
@@ -57,7 +57,7 @@ curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsma
 # 服务 → DNS 和 DHCP → 额外 hosts 字段
 
 # 方式二：通过命令行
-curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/hosts.txt >> /etc/hosts
+curl -sL https://raw.githubusercontent.com/sutchan/dns-shield/main/hosts.txt >> /etc/hosts
 ```
 
 #### 其他路由器
@@ -113,4 +113,4 @@ MIT License
 
 ---
 
-[English Version](README.md)
+[English Version](README.en.md)

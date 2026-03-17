@@ -1,21 +1,21 @@
-# dnsmasq_ads_filter 项目规范
+# DNS Shield 项目规范
 
 ## 1. 项目概述
 
 | 属性 | 值 |
 |------|-----|
-| 项目名称 | dnsmasq_ads_filter |
+| 项目名称 | DNS Shield |
 | 项目类型 | DNS 广告过滤规则库 |
 | 核心功能 | 基于 dnsmasq/hosts 的路由器广告过滤 |
 | 目标用户 | 使用梅林/OpenWrt/小米/华硕/TP-Link 等路由器的用户 |
-| 项目地址 | https://github.com/sutchan/dnsmasq_ads_filter |
+| 项目地址 | https://github.com/sutchan/dns-shield |
 | 当前版本 | v1.0.6 |
 | 拦截域名 | 422+ (本地) / 6766+ (含预设源) |
 
 ## 2. 文件结构
 
 ```
-dnsmasq_ads_filter/
+dns-shield/
 ├── README.md                      # 中文说明文档（默认）
 ├── README.en.md                   # 英文说明文档
 ├── domains.txt                    # 原始域名清单（唯一数据源）
@@ -126,7 +126,7 @@ address=/domain/::
 
 | 设置项 | 默认值 |
 |--------|--------|
-| 项目名称 | dnsmasq_ads_filter |
+| 项目名称 | DNS Shield |
 | 版本号 | 1.0.6 |
 | IPv4 目标 IP | 127.0.0.1 |
 | IPv6 目标 IP | :: |

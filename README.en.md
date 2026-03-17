@@ -1,6 +1,6 @@
-# dnsmasq_ads_filter
+# DNS Shield
 
-[![English](https://img.shields.io/badge/language-English-blue)](README.en.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.md) [![Version](https://img.shields.io/badge/version-1.0.6-green)](https://github.com/sutchan/dnsmasq_ads_filter)
+[![English](https://img.shields.io/badge/language-English-blue)](README.en.md) [![中文](https://img.shields.io/badge/language-中文-red)](README.md) [![Version](https://img.shields.io/badge/version-1.0.6-green)](https://github.com/sutchan/dns-shield)
 
 Router-level DNS-based ad blocking filter list with web management tool.
 
@@ -9,31 +9,10 @@ Router-level DNS-based ad blocking filter list with web management tool.
 This project provides a dnsmasq/hosts-based ad blocking solution that includes:
 
 - **422+ blocked domains** - Local ad and tracking domain filter (can expand to 6766+ with preset sources)
-- **Ad Blocking** - Filter mainstream ad domains, App ads, Web ads
-- **Payment QR Code Blocking** - Block payment QR code redirect links (WeChat/Alipay)
-- **Tracking Protection** - Block data collection and user tracking
 - **Web management tool** - Generate custom filter lists via browser
 - **Multiple output formats** - Supports Dnsmasq and Hosts formats
 - **Single source workflow** - One domain list generates all output formats
 - **Router compatible** - Works with Merlin, OpenWrt, Xiaomi, ASUS, TP-Link, and more
-
-## Features
-
-### Ad Blocking
-- **Video Ads**: Ads from Youku, iQiyi, Tencent Video, etc.
-- **App Ads**: In-app advertisements, push notifications
-- **Web Ads**: Banner ads, pop-ups, affiliate ads
-- **Targeted Ads**: Baidu, ByteDance ad delivery domains
-
-### Payment QR Code Blocking (Core Feature)
-- **WeChat Ads**: Search ads, WeChat Channels ads, Mini Program ads
-- **QQ Ads**: QQ group ads, QQ Browser ads
-- **Payment Redirects**: Block payment QR code intermediate redirect pages
-- **Mini Program Ads**: WeChat Mini Program ads, QQ Mini Program ads
-
-### Tracking Protection
-- **Data Collection**: Block analytics, statistics, tracking domains
-- **User Tracking**: Prevent behavioral analysis and interest-based tracking
 
 ## Usage
 
@@ -50,7 +29,7 @@ Copy all content from `dnsmasq.conf` and paste into the custom dnsmasq configura
 #### OpenWrt
 
 ```bash
-curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/dnsmasq.conf >> /etc/dnsmasq.conf
+curl -sL https://raw.githubusercontent.com/sutchan/dns-shield/main/dnsmasq.conf >> /etc/dnsmasq.conf
 ```
 
 ### Method 2: Hosts Format
@@ -78,7 +57,7 @@ Import `hosts.txt` into your router's ad blocking settings.
 # Services → DNS and DHCP → Extra hosts fields
 
 # Method 2: Via CLI
-curl -sL https://raw.githubusercontent.com/sutchan/dnsmasq_ads_filter/main/hosts.txt >> /etc/hosts
+curl -sL https://raw.githubusercontent.com/sutchan/dns-shield/main/hosts.txt >> /etc/hosts
 ```
 
 #### Other Routers
@@ -121,15 +100,6 @@ domains.txt (Source of Truth)
    ↓                         ↓
 dnsmasq.conf              hosts.txt
 ```
-
-## Domain Format Guide
-
-| Format | Description | Example |
-|--------|-------------|---------|
-| Plain domain | Blacklist, block resolution | `ad.example.com` |
-| `+` prefix | Whitelist, allow resolution | `+api.example.com` |
-| `!` prefix | Comment domain | `!comment.example.com` |
-| `@` prefix | Custom DNS target | `@example.com=127.0.0.1` |
 
 ## Contribution
 
